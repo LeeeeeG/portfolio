@@ -1,0 +1,3611 @@
+<!DOCTYPE html>
+<!-- saved from url=(0023)https://www.mmca.go.kr/ -->
+<html lang="ko" class="OL pc mdBrowser JS"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	
+	<title>국립현대미술관</title>
+	<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+	<meta http-equiv="Expires" content="Mon, 06 Jan 1990 00:00:01 GMT">
+	<meta http-equiv="Expires" content="-1">
+	<meta http-equiv="Pragma" content="no-cache">
+	<meta http-equiv="Cache-Control" content="no-cache">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="viewport" content="width=device-width, viewport-fit=cover">
+	<meta name="author" content="국립현대미술관">
+	<meta name="keyword" content="국립현대미술관">
+	<meta name="description" content="국립현대미술관 홈페이지">
+	<meta name="format-detection" content="telephone=no">
+	<link rel="shortcut icon" href="https://www.mmca.go.kr/asset/images/common/favicon.ico" type="image/x-icon">
+	<link rel="stylesheet" href="./국립현대미술관_files/package.css">
+	<!-- jquery -->
+	<script src="./국립현대미술관_files/jquery.min.js.다운로드"></script>
+	<script src="./국립현대미술관_files/jquery-ui.min.js.다운로드"></script>
+	
+	<script src="./국립현대미술관_files/jquery.ui.touch-punch.min.js.다운로드"></script>
+	
+	<script src="./국립현대미술관_files/scrollbar.js.다운로드"></script>
+	<!-- swiper -->
+	<script src="./국립현대미술관_files/swiper.js.다운로드"></script>
+	<!--slick -->
+	<link rel="stylesheet" type="text/css" href="./국립현대미술관_files/slick.css">
+	<script type="text/javascript" src="./국립현대미술관_files/slick.min.js.다운로드"></script>
+	<script src="./국립현대미술관_files/clipboard.min.js.다운로드"></script> <!-- 210114 URL 복사를 위해 추가 -->
+	<!-- webfont js -->
+	<script src="./국립현대미술관_files/webfont.min.js.다운로드"></script>
+	<!-- common js -->
+	<script defer="" src="./국립현대미술관_files/common.js.다운로드"></script>
+	<!--[if lt IE 9]>
+		<script src="/asset/js/html5shiv.min.js"></script>
+	<![endif]-->
+	<script src="./국립현대미술관_files/util.js.다운로드" type="text/javascript"></script>
+	
+<script type="text/javascript">
+	
+	var curWidth = $(window).width();
+	
+	var mobileKey = 'PC';
+	
+	//document.oncontextmenu = function (e) {return false;}	//우클릭 방지
+	$(document).ready(function(){
+		//history.replaceState({}, null, location.pathname);
+		//window.history.pushState(null, null, "/");
+	});
+	//010A00000000000(언어01,1뎁스01,2뎁스001,3뎁스001,4뎁스001, 5뎁스01)
+	/*
+	 * @param 이동URL
+	 * @param 메뉴ID
+	 * @param 메뉴DEPTH
+	*/
+	function fn_menuChange(url, menuId, depth){
+		
+		if(menuId == '0030002150'){
+			alert('코로나 19 상황으로 멤버십 신규 가입이 일시 중단되었습니다.');
+			return;
+		}
+		
+		if(menuId == '0030002130'){
+			alert('코로나 19 상황으로 멤버십 선물하기가 불가합니다.');
+			return;
+		}
+		
+		$.ajax({
+			  url:  '/log/ajaxInsMenuLog.do',
+			  data: 'menuId='+menuId+'&depth='+depth,
+			  type : "POST",
+			  dataType: 'json',
+			  success: function(data) { 
+				  
+					document.headForm.menuId.value = menuId;
+					document.headForm.action = url;
+					document.headForm.target = "_self";
+				   	document.headForm.submit();
+			},
+			error: function(request,status,error){
+			    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			}
+		});
+	}
+	
+	function alertReady(){
+		alert("해당 페이지는 아직 준비 중입니다.");
+	}
+
+	/*즐겨찾기 좋아요 담기 설정*/
+	//즐겨찾기 및 좋아요
+	function fn_commonInsAjaxFavorNGood(v, key){
+		
+		if("" == null || "" == "" || "" == undefined){
+			alert('로그인 후 이용 해주세요.');
+			return;
+		}
+		
+		var copyUrl = $("#urlCopy").data("clipboard-text");
+		var memgUrl = "";
+		if(typeof copyUrl != "undefined" || copyUrl != null || copyUrl != "") {
+			var tmpUrl = copyUrl.split("/");
+			
+			for(var i=3; i<tmpUrl.length; i++) {
+				memgUrl += "/";
+				memgUrl += tmpUrl[i];
+			}
+		}
+		
+		var form = {
+				"memgId" : key	//상세화면 key
+				,"memgOriginCd" : v//01:즐겨찾기, 02:좋아요
+				,"memgMenuId" : $("#menuId").val()
+				,"memgCd" :$("#memgCd").val()
+				,"memgUrl" : memgUrl
+		};
+		
+		$.ajax({
+			url:  "/common/ajaxInsFavorNGood.do",
+			dataType: 'json',
+			data: form,
+			contentType: "application/x-www-form-urlencoded;charset=utf-8",
+			success: function(data) {
+				
+				if(data.rtnCode == '0'){
+					if(v == '01'){
+						$("#btnFavor").addClass('active').find("i").text("스크랩 완료");
+					}else{
+						$("#btnGood").addClass('active').find("i").text("좋아요 추가 완료");
+					}
+					alert('추가 하였습니다.');
+				}else if(data.rtnCode == '1'){
+					if(v == '01'){
+						$("#btnFavor").removeClass('active').find("i").text("스크랩 하기");
+					}else{
+						$("#btnGood").removeClass('active').find("i").text("좋아요 추가");
+					}
+					alert('제외 하였습니다.');
+				}else if(data.rtnCode == '10'){
+					if(v == "01"){
+						$("#btnFavor").attr('class','btn btnIcon btnFavor');
+					}else{
+						$("#btnGood").attr('class','btn btnIcon btnGood');
+					}
+					alert('로그인 후 이용 해주세요.');
+					return;
+				}
+			}
+		})
+	}
+
+	//즐겨찾기 및 좋아요 초기 셋팅
+	function fn_commonSelectAjaxFavorNGood(key){
+
+		var form = {
+				"memgId" : key	//상세화면 key
+				,"memgMenuId" : $("#menuId").val()
+				,"memgCd" :$("#memgCd").val()
+		};
+		
+		$.ajax({
+			url:  "/common/ajaxSelectMemGoodMemberInfo.do",
+			dataType: 'json',
+			data: form,
+			contentType: "application/x-www-form-urlencoded;charset=utf-8",
+			success: function(data) {
+				
+				if(data.rtnCode == '0'){
+					var favorNGoodMap = data.favorNGoodMap;
+
+					if((favorNGoodMap.memgFavor*1) > 0){
+						$("#btnFavor").addClass('active');
+					}else{
+						$("#btnFavor").removeClass('active');
+					}
+					
+					if((favorNGoodMap.memgGood*1) > 0){
+						$("#btnGood").addClass('active');
+					}else{
+						$("#btnGood").removeClass('active');
+					}
+					
+				}
+			}
+		})
+	}
+
+	//담기처리
+	function fn_commonInsAjaxDigitalCura(v, key, title, url){
+		
+		if("" == null || "" == "" || "" == undefined){
+			$("#btnBookmark").attr('class','btn btnIcon btnBookmark');
+			alert('로그인 후 이용 해주세요.');
+			fn_menuChange('/member/loginForm.do','0010000000');
+			return;
+		}
+		var form = {
+				"commonId" : key	//상세화면 key
+				,"dcmLangCd" : "01"
+				,"dcmUserCd" : "01"
+				,"dcmTp" : "99"
+				,"dcmTitle" : title
+				,"dcdUrl" : url
+				,"dcmDelYn" : "N"
+				,"memgCd" :$("#memgCd").val()
+				,"dcdCd" :v	//소장품:01, 동영상:02
+				,"dcdId" :$("#dcdIdKey").val()
+				,"menuId" : $("#menuId").val()
+		};
+		
+		$.ajax({
+			url:  "/common/ajaxInsDigitalCura.do",
+			dataType: 'json',
+			data: form,
+			contentType: "application/x-www-form-urlencoded;charset=utf-8",
+			success: function(data) {
+				
+				if(data.rtnCode == '0'){
+					alert('추가 하였습니다.');
+					$("#btnBookmark").addClass('active');
+					$("#dcdIdKey").val(data.dcdId);
+				}else if(data.rtnCode == '1'){
+					alert('제거 하였습니다.');
+					$("#btnBookmark").removeClass('active');
+					$("#dcdIdKey").val("");
+				}else if(data.rtnCode == '10'){
+					alert('로그인 후 이용 해주세요.');
+					return;
+				}
+			}
+		})
+	}
+
+	//담기 초기 셋팅
+	function fn_commonSelectAjaxDigitalCura(v, key){
+
+		var form = {
+				"commonId" : key	//상세화면 key
+				,"memgCd" :$("#memgCd").val()
+				,"dcdCd" :v	//소장품:01, 동영상:02
+				,"menuId" : $("#menuId").val()//menuId가 없어서 임의로 처리
+		};
+		
+		$.ajax({
+			url:  "/common/ajaxSelectDigitalCuraInfo.do",
+			dataType: 'json',
+			data: form,
+			contentType: "application/x-www-form-urlencoded;charset=utf-8",
+			success: function(data) {
+				
+				if(data.rtnCode == '0'){
+					var dtlDcdId = data.dtlDcdId;
+					
+					if(dtlDcdId != ""){
+						$("#btnBookmark").addClass('active');
+						$("#dcdIdKey").val(dtlDcdId);
+					}else{
+						$("#btnFavor").removeClass('active');
+						$("#dcdIdKey").val("");
+					}
+				}
+			}
+		})
+	}
+	/*즐겨찾기 좋아요 담기 설정*/
+	
+function snsShare(gubunNum, detailUrl) {
+	var href = "";
+	var msg = "";  
+	var url = encodeURIComponent("http://" + "www.mmca.go.kr" + detailUrl);
+
+	if (gubunNum == 'twitter') {
+		href = "http://twitter.com/share?url=" + url + "&text="
+				+ encodeURI(msg);
+	} else if (gubunNum == 'facebook') {
+		href = "http://www.facebook.com/sharer.php?u=" + url + "&t="
+				+ encodeURI(msg) + "&src=sp";
+	} else if (gubunNum == 'me2day') {
+		href = "http://me2day.net/posts/new?new_post[body]=%22"
+				+ encodeURI(msg) + "%22:" + url + "&new_post[tags]="
+				+ encodeURI("국립현대미술관");
+	} else if(gubunNum == 'kakao'){
+		href = "https://story.kakao.com/share?url=" + url;
+	} else if(gubunNum == 'naver'){
+		href = "https://share.naver.com/web/shareView?url=" + url+ "&title=" + encodeURI("국립현대미술관");
+	}
+	window.open(href, gubunNum);
+}
+	
+//브라우저 체크(IE 버전, 엣지, 스윙 브라우저)
+function CheckBrowsers(){
+	/*if(navigator.userAgent.toLowerCase().match(/windows/i)){
+	}else */
+	
+	if(navigator.userAgent.toLowerCase().match(/android/i)){
+		return 503;
+	}else if(navigator.userAgent.toLowerCase().match(/iphone|ipad|ipod/i)){
+		return 504;
+	}else if(navigator.userAgent.toLowerCase().match(/mac/i)){
+		return 505;
+	}
+	if(navigator.userAgent.toLowerCase().indexOf("swing") > -1 ){
+		return 501;
+	}else if(navigator.userAgent.toLowerCase().indexOf("edge") > -1){
+		return 502;
+	}else if(navigator.userAgent.toLowerCase().indexOf("trident") > -1 ){
+		var trident = navigator.userAgent.match(/Trident\/(\d.\d)/i);
+		switch (trident[1]) {
+			case "8.0" :
+				return 11;
+			case "7.0" :
+				return 11;
+			case "6.0" :
+				return 10;
+			case "5.0" :
+				return 9;
+			case "4.0" :
+				return 8;
+			default :
+				return 11;
+		}
+	}else if(navigator.appVersion.toLowerCase().indexOf("msie 6") > -1){
+		return 6;
+	}else if(navigator.appVersion.toLowerCase().indexOf("msie 7") > -1){
+		return 7;
+	}else if(navigator.appVersion.toLowerCase().indexOf("w-browser") > -1){
+		return "W-Browser";
+	}else if(navigator.userAgent.toLowerCase().indexOf("chrome") > -1 && navigator.vendor.toLowerCase().indexOf("google") > -1
+		&& navigator.userAgent.toLowerCase().indexOf("opr") <= -1 && navigator.userAgent.toLowerCase().indexOf("x64") > -1){
+		return "Chrome64";
+	}else if(navigator.userAgent.toLowerCase().indexOf("chrome") > -1 && navigator.vendor.toLowerCase().indexOf("google") > -1
+		&& navigator.userAgent.toLowerCase().indexOf("opr") <= -1){
+		return "Chrome";
+	}else if(navigator.userAgent.toLowerCase().indexOf("mozilla") > -1 && navigator.userAgent.toLowerCase().indexOf("firefox") > -1
+		&& navigator.userAgent.toLowerCase().indexOf("opr") <= -1){
+		return "Firefox";
+	}else if(navigator.userAgent.toLowerCase().indexOf("mozilla") > -1 && navigator.userAgent.toLowerCase().indexOf("safari") > -1
+		&& navigator.userAgent.toLowerCase().indexOf("opr") <= -1){
+		return "Safari";
+	}else if(navigator.userAgent.toLowerCase().indexOf("mozilla") > -1 && navigator.userAgent.toLowerCase().indexOf("opr") > -1){
+		return "Opera";
+	}else{
+		return 100;
+	}			  
+}
+
+function fn_logout(){
+	
+	if(confirm("로그아웃 하시겠습니까?")){
+		location.href = "/member/logout.do";
+	}
+}
+
+function winOpen(){
+	window.open($("#selectLangCd").val(),'_self')
+}
+
+$(document).ready(function(){
+	setTimeout(function(){
+		$("#btnFavor.active i").text("스크랩 완료");
+		$("#btnGood.active i").text("좋아요 추가 완료");
+	},200);
+})
+</script><link rel="stylesheet" href="./국립현대미술관_files/spoqa.css" media="all">
+</head>
+<body>
+	<form name="headForm" method="post">
+		<input type="hidden" name="menuId">
+		<input type="hidden" name="langCd" id="langCd" value="01">
+	</form>
+	<a href="https://www.mmca.go.kr/#gnb" class="skipToContent">주메뉴 바로가기</a>
+	<a href="https://www.mmca.go.kr/#content" class="skipToContent">본문 바로가기</a>
+	<!-- wrap -->
+	<div id="wrap" class="wrap" style="padding-top: 206px;">
+		<!-- noticeBannerWrap -->
+		
+		<!-- //noticeBannerWrap -->
+		<!-- header -->
+		<div id="header" class="header">
+			<div class="inner">
+				<!-- logo -->
+				<h1 class="logo">
+					<a href="https://www.mmca.go.kr/">
+						<span class="he">MMCA 국립현대미술관 National Museum of Modern and Contemporary Art, Korea</span>
+					</a>
+				</h1>
+				<!-- //logo -->
+				<!-- gnb -->
+				<nav id="gnb" class="gnb" aria-label="메인 메뉴">
+					<!-- mobGnbHead -->
+					<!-- <div class="mobGnbHead">
+						<div class="logoImg"><img src="/asset/images/common/bg_logo_full.svg" alt="국립현대미술관"></div>
+						<div class="mobHeadUtil">
+							<button type="button" class="btnSearchOpen" aria-haspopup="dialog" aria-label="검색열기"><i class="icon"></i></button>
+							<button type="button" class="btnMobClose" aria-label="메뉴닫기"><i class="icon"></i></button>
+						</div>
+					</div> -->
+					
+<div class="mobGnbHead">
+	<div class="logoImg">
+		<a href="https://www.mmca.go.kr/">
+			<img src="./국립현대미술관_files/bg_logo_full.svg" alt="MMCA 국립현대미술관 National Museum of Modern and Contemporary Art, Korea">
+		</a>
+	</div>
+	<div class="mobHeadUtil">
+		<button type="button" class="btnSearchOpen" aria-haspopup="dialog" aria-label="검색열기"><i class="icon"></i></button>
+		<button type="button" class="btnMobClose" aria-label="메뉴닫기"><i class="icon"></i></button>
+	</div>
+</div>
+
+					<!-- //mobGnbHead -->
+					<h2 class="he">메인 메뉴</h2>
+					<!-- gnbList -->
+					<ul class="gnbList">
+						<li>
+							<a href="javascript:fn_menuChange(&#39;/visitingInfo/seoulInfo.do&#39;, &#39;01A000100000000&#39;, &#39;1&#39;);">관람·참여<i class="icon togglePlus"></i></a>
+							<div class="sub" style="display: none;">
+								<ul>
+									<li><a href="javascript:fn_menuChange(&#39;/visitingInfo/seoulInfo.do&#39;, &#39;01A000101000000&#39;, &#39;2&#39;);">서울</a></li>
+									<li><a href="javascript:fn_menuChange(&#39;/visitingInfo/gwacheonInfo.do&#39;, &#39;01A000102000000&#39;, &#39;2&#39;);">과천</a></li>
+									<li><a href="javascript:fn_menuChange(&#39;/visitingInfo/deoksugungInfo.do&#39;, &#39;01A000103000000&#39;, &#39;2&#39;);">덕수궁</a></li>
+									<li><a href="javascript:fn_menuChange(&#39;/visitingInfo/cheongjuInfo.do&#39;, &#39;01A000104000000&#39;, &#39;2&#39;);">청주</a></li>
+									<li><a href="javascript:fn_menuChange(&#39;/visitingInfo/childArtMuseumInfo.do&#39;, &#39;01A000107000000&#39;, &#39;2&#39;);">어린이미술관</a></li>
+									<li><a href="javascript:fn_menuChange(&#39;/events/eventsList.do&#39;, &#39;01A000110000000&#39;, &#39;2&#39;);">이벤트</a></li>
+									<li><a href="javascript:fn_menuChange(&#39;/visitingInfo/introductionReserve.do&#39;, &#39;01A000108000000&#39;, &#39;2&#39;);">통합예약</a></li>
+									
+									<li><a href="javascript:fn_menuChange(&#39;/visitingInfo/guideTimeTableList.do&#39;, &#39;01A000109000000&#39;, &#39;2&#39;);" class="ft400">전시해설</a></li>
+									<li><a href="javascript:fn_menuChange(&#39;/artStudio/artStudioMain.do&#39;, &#39;01A000105000000&#39;, &#39;2&#39;);" class="ft400">레지던시</a></li>
+									<li><a href="javascript:fn_menuChange(&#39;/about/governmentArtBank.do&#39;, &#39;01A000106000000&#39;, &#39;2&#39;);" class="ft400">미술은행</a></li>
+									<!-- <li><a href="javascript:alertReady();">통합예약</a></li> -->
+								</ul>
+							</div>
+						</li>
+						<li>
+							<a href="javascript:fn_menuChange(&#39;/exhibitions/progressList.do&#39;, &#39;01B000200000000&#39;, &#39;1&#39;);">전시<i class="icon togglePlus"></i></a>
+							<div class="sub" style="display: none;">
+								<ul>
+									<li><a href="javascript:fn_menuChange(&#39;/exhibitions/progressList.do&#39;, &#39;01B000201000000&#39;, &#39;2&#39;);">현재전시</a></li>
+									<li><a href="javascript:fn_menuChange(&#39;/exhibitions/futureProgressList.do&#39;, &#39;01B000202000000&#39;, &#39;2&#39;);">예정전시</a></li>
+									<li><a href="javascript:fn_menuChange(&#39;/exhibitions/pastProgressList.do&#39;, &#39;01B000203000000&#39;, &#39;2&#39;);">과거전시</a></li>
+								</ul>
+							</div>
+						</li>
+						<li>
+							<a href="javascript:fn_menuChange(&#39;/educations/eduIntro.do&#39;, &#39;01C000300000000&#39;, &#39;1&#39;);">교육<i class="icon togglePlus"></i></a>
+							<div class="sub" style="display: none;">
+								<ul>
+									<li><a href="javascript:fn_menuChange(&#39;/educations/eduIntro.do&#39;, &#39;01C000301000000&#39;, &#39;2&#39;);">미술관교육소개</a></li>
+									<li><a href="javascript:fn_menuChange(&#39;/educations/eduChildList.do&#39;, &#39;01C000302000000&#39;, &#39;2&#39;);">어린이</a></li>
+									<li><a href="javascript:fn_menuChange(&#39;/educations/eduYouthList.do&#39;, &#39;01C000303000000&#39;, &#39;2&#39;);">청소년</a></li>
+									<li><a href="javascript:fn_menuChange(&#39;/educations/eduTeacherList.do&#39;, &#39;01C000307000000&#39;, &#39;2&#39;);">교사</a></li>
+									<li><a href="javascript:fn_menuChange(&#39;/educations/eduAdultList.do&#39;, &#39;01C000304000000&#39;, &#39;2&#39;);">성인</a></li>
+									<li><a href="javascript:fn_menuChange(&#39;/educations/eduDataList.do&#39;, &#39;01C000305000000&#39;, &#39;2&#39;);">교육자료실</a></li>
+									<li><a href="javascript:fn_menuChange(&#39;/educations/eduParticipation.do&#39;, &#39;01C000306000000&#39;, &#39;2&#39;);">참여신청</a></li>
+								</ul>
+							</div>
+						</li>
+						<li>
+							<a href="javascript:fn_menuChange(&#39;/collections/collectionsList.do&#39;, &#39;01D000400000000&#39;, &#39;1&#39;);">소장품<i class="icon togglePlus"></i></a>
+							<div class="sub" style="display: none;">
+								<ul>
+									<li><a href="javascript:fn_menuChange(&#39;/collections/collectionsList.do&#39;, &#39;01D000401000000&#39;, &#39;2&#39;);">소장품 검색</a></li>
+									<li><a href="javascript:fn_menuChange(&#39;/collections/curationList.do&#39;, &#39;01D000402000000&#39;, &#39;2&#39;);">소장품 탐색</a></li>
+									<li><a href="javascript:fn_menuChange(&#39;/collections/conservation.do&#39;, &#39;01D000403000000&#39;, &#39;2&#39;);">보존과학</a></li>
+								</ul>
+							</div>
+						</li>
+						<li>
+							<a href="javascript:fn_menuChange(&#39;/bookArchive/bookArchiveMain.do&#39;, &#39;01E000500000000&#39;, &#39;1&#39;);">미술연구<i class="icon togglePlus"></i></a>
+							<div class="sub" style="display: none;">
+								<ul>
+									<li><a href="javascript:fn_menuChange(&#39;/bookArchive/bookArchiveMain.do&#39;, &#39;01E000501000000&#39;, &#39;2&#39;);">도서와 아카이브</a></li>
+									<li><a href="javascript:fn_menuChange(&#39;/artResearch/researchProList.do&#39;, &#39;01E000503000000&#39;, &#39;2&#39;);">연구</a></li>
+									<li><a href="javascript:fn_menuChange(&#39;/artResearch/publicationList.do?pubFlag=1&#39;, &#39;01E000502000000&#39;, &#39;2&#39;);">발간자료</a></li>
+								</ul>
+							</div>
+						</li>
+						<li>
+							<a href="javascript:fn_menuChange(&#39;/digitals/digitalMain.do&#39;, &#39;01F000600000000&#39;, &#39;1&#39;);">디지털미술관<i class="icon togglePlus"></i></a>
+							<div class="sub" style="display: none;">
+								<ul>
+									<li><a href="javascript:fn_menuChange(&#39;/digitals/digitalMain.do&#39;, &#39;01F000601000000&#39;, &#39;2&#39;);">메인</a></li>
+									<li><a href="javascript:fn_menuChange(&#39;/digitals/digitalMovList.do&#39;, &#39;01F000602000000&#39;, &#39;2&#39;);">맞춤검색</a></li>
+									<li><a href="javascript:fn_menuChange(&#39;/digitals/digitalExhGuideList.do&#39;, &#39;01F000603000000&#39;, &#39;2&#39;)">오디오가이드</a></li>
+									<li><a href="javascript:fn_menuChange(&#39;/digitals/digitalCuraList.do&#39;, &#39;01F000604000000&#39;, &#39;2&#39;);">이용자갤러리</a></li>
+								</ul>
+							</div>
+						</li>
+						<!-- <li>
+							<a href="javascript:fn_menuChange('/contents.do', '01G000000000000', '1');">국립현대미술관<i class="icon togglePlus"></i></a>
+							<div class="sub">
+								<ul>
+									<li><a href="javascript:fn_menuChange('/contents.do', '01G000100000000', '2');">인사말</a></li>
+									<li><a href="javascript:fn_menuChange('/contents.do', '01G000200000000', '2');">연혁</a></li>
+									<li><a href="javascript:fn_menuChange('/contents.do', '01G000300000000', '2');">조직과 미션</a></li>
+									<li><a href="javascript:fn_menuChange('/contents.do', '01G000400000000', '2');">4관 및 하부관리기구</a></li>
+									<li><a href="javascript:fn_menuChange('/contents.do', '01G000500000000', '2');">MI</a></li>
+								</ul>
+							</div>
+						</li>
+						<li>
+							<a href="javascript:fn_menuChange('/contents.do', '01H000000000000', '1');">알림·참여<i class="icon togglePlus"></i></a>
+							<div class="sub">
+								<ul>
+									<li><a href="javascript:fn_menuChange('/contents.do', '01H000100000000', '2');">새소식</a></li>
+									<li><a href="javascript:fn_menuChange('/contents.do', '01H000200000000', '2');">채용</a></li>
+									<li><a href="javascript:fn_menuChange('/contents.do', '01H000300000000', '2');">보도자료</a></li>
+									<li><a href="javascript:fn_menuChange('/contents.do', '01H000400000000', '2');">기증안내</a></li>
+									<li><a href="javascript:fn_menuChange('/contents.do', '01H000500000000', '2');">시설대관·복제신청</a></li>
+									<li><a href="javascript:fn_menuChange('/contents.do', '01H000600000000', '2');">자원봉사</a></li>
+									<li><a href="javascript:fn_menuChange('/contents.do', '01H000700000000', '2');">후원</a></li>
+								</ul>
+							</div>
+						</li>
+						<li>
+							<a href="javascript:fn_menuChange('/contents.do', '01I000000000000', '1');">협력망<i class="icon togglePlus"></i></a>
+							<div class="sub">
+								<ul>
+									<li><a href="javascript:fn_menuChange('/contents.do', '01I000100000000', '2');">미술관소개</a></li>
+									<li><a href="javascript:fn_menuChange('/contents.do', '01I000200000000', '2');">소통공간</a></li>
+									<li><a href="javascript:fn_menuChange('/contents.do', '01I000300000000', '2');">전시</a></li>
+								</ul>
+							</div>
+						</li>
+						<li>
+							<a href="javascript:fn_menuChange('/contents.do', '01J000000000000', '1');">멤버십<i class="icon togglePlus"></i></a>
+							<div class="sub">
+								<ul>
+									<li><a href="javascript:fn_menuChange('/contents.do', '01J000100000000', '2');">혜택</a></li>
+									<li><a href="javascript:fn_menuChange('/contents.do', '01J000200000000', '2');">프로그램</a></li>
+									<li><a href="javascript:fn_menuChange('/contents.do', '01J000300000000', '2');">라운지</a></li>
+									<li><a href="javascript:fn_menuChange('/contents.do', '01J000400000000', '2');">제휴할인</a></li>
+									<li><a href="javascript:fn_menuChange('/contents.do', '01J000500000000', '2');">MMCA프렌즈</a></li>
+									<li><a href="javascript:fn_menuChange('/contents.do', '01J000600000000', '2');">회원가입</a></li>
+									<li><a href="javascript:fn_menuChange('/contents.do', '01J000700000000', '2');">아이디찾기</a></li>
+									<li><a href="javascript:fn_menuChange('/contents.do', '01J000700000000', '2');">비밀번호찾기</a></li>
+									<li><a href="javascript:fn_menuChange('/contents.do', '01J000700000000', '2');">로그인</a></li>
+								</ul>
+							</div>
+						</li>
+						<li>
+							<a href="javascript:fn_menuChange('/contents.do', '01K000000000000', '1');">민원<i class="icon togglePlus"></i></a>
+							<div class="sub">
+								<ul>
+									<li><a href="javascript:fn_menuChange('/contents.do', '01K000100000000', '2');">국민신문고</a></li>
+									<li><a href="javascript:fn_menuChange('/contents.do', '01K000200000000', '2');">정보공개</a></li>
+									<li><a href="javascript:fn_menuChange('/contents.do', '01K000300000000', '2');">이용약관</a></li>
+									<li><a href="javascript:fn_menuChange('/contents.do', '01K000400000000', '2');">개인정보처리방침</a></li>
+									<li><a href="javascript:fn_menuChange('/contents.do', '01K000500000000', '2');">저작권정책</a></li>
+									<li><a href="javascript:fn_menuChange('/contents.do', '01K000600000000', '2');">불편부조리신고</a></li>
+									<li><a href="javascript:fn_menuChange('/contents.do', '01K000700000000', '2');">사이트맵</a></li>
+								</ul>
+							</div>
+						</li> -->
+					</ul>
+					<!-- //gnbList -->
+					
+					<!-- utilWrap -->
+					<div class="utilWrap moVer">
+						<ul>
+							<li><a href="https://www.mmca.go.kr/artResearch/newsLetterList.do">뉴스레터</a></li>
+							<li><a href="https://www.mmca.go.kr/artResearch/publicationList.do">소식지</a></li>
+							<li><a href="https://www.mmca.go.kr/pr/newsList.do">새소식</a></li>
+							<li><a href="https://www.mmcashop.co.kr/" target="_blank" title="새창">온라인숍</a></li>
+						</ul>
+					</div>
+					<!-- //utilWrap -->
+					
+					<!-- utilWrap -->
+					<div class="utilWrap">
+						<ul>
+						
+							
+								<li class="joinWrap">
+									<a href="https://www.mmca.go.kr/member/memberFourteenOverForm.do" role="button">
+										MMCA<br> 
+										회원가입
+									</a>
+								</li>
+							   <li><a href="https://www.mmca.go.kr/member/loginForm.do">로그인</a></li> &nbsp;
+							
+							
+							
+							
+							
+							<li class="selectWrap">
+								<span class="ctg">LANGUAGES : </span>
+								<select class="selectBox" title="언어선택" id="selectLangCd"><!-- 2022-04-13 -->
+ 									<option value="/">한국어</option>
+									<option value="/eng">ENGLISH</option>
+ 									<option value="/chn">中文</option>
+									<option value="/jpn">日本語</option>  
+								</select>
+									<!-- <option value="/main.do">한국어</option>
+									<option value="/eng/engMain.do">영어</option>
+									<option value="/chn/chnMain.do">중국어</option>
+									<option value="/jpn/jpnMain.do">일본어</option> -->
+								<button type="button" class="btn" title="선택된 언어로 화면 전환" onclick="winOpen()">이동</button>
+							</li>
+							
+							
+						</ul>
+					</div>
+					<!-- //utilWrap -->
+				<div class="gnbBg"></div></nav>
+				<!-- //gnb -->
+				<!-- btnUtil -->
+				<div class="btnUtil">
+					<button type="button" class="btnSearchOpen" aria-haspopup="dialog" aria-label="검색열기">
+						<i class="icon"></i>
+					</button>
+					<button type="button" class="btnMobOpen" aria-label="메뉴열기">
+						<i class="icon"></i>
+					</button>
+				</div>
+				<!-- //btnUtil -->
+				<!-- totalSearchWrap -->
+				<div class="totalSearchWrap">
+					<form id="totalSearchForm" name="totalSearchForm" method="post">
+						<input type="hidden" id="selectSection" value="TOTAL">
+						<input type="hidden" id="section" name="section" value="">
+						<div class="inner">
+							<div class="searchLayer">
+								<input type="text" class="input" placeholder="검색어를 입력하세요." id="q" name="q" onkeypress="if(event.keyCode == 13)totalSearch();return;" autocomplete="off" style="ime-mode:active" title="검색어 입력">
+								<button type="submit" class="btn border01" onclick="javascript:totalSearch();">검색</button>
+								<button type="button" class="btnSearchClose" aria-label="검색닫기"><i class="icon"></i></button>
+							</div>
+						</div>
+					</form>
+					<script>
+						//통합검색실행
+						function totalSearch(){
+							mbChk = "PC";
+							
+							var form = document.totalSearchForm;
+							var q = form.q.value;
+							
+							if(($.trim(q) == "*" || $.trim(q).length < 1)){
+								alert("검색어를 입력해 주십시오.");
+								return;
+							}
+							form.action = "/search/totalSearch.do";
+							form.submit();	
+						}
+						
+						//자동완성 키워드선택
+						function autoSearch(autoId){
+							$("#q").val($("#"+autoId).val());
+							
+							if(mbChk == "PC"){
+								totalSearch();
+							}else{
+								mbTotalSearch();
+							}
+						}
+					</script>
+				</div>
+				<!-- //totalSearchWrap -->
+			</div>
+		</div>
+		<!-- //header -->
+
+<!-- header end -->
+<script type="text/javascript">
+	$(document).ready(function(){
+		
+		$("#defClose").click(function(){
+			couponCloseDef();
+		});
+		
+		var winWidth = $(window).width(),
+			mobileWidth = 940;
+
+		// noticeSticky
+		//open
+		function noticeStickyOpen(){
+			var $noticeSticky = $('.wrap').find('.noticeSticky');
+			$noticeSticky.addClass('active');
+		}
+		noticeStickyOpen();
+
+		//close
+		function noticeStickyClose(){
+			var $noticeSticky = $('.wrap').find('.noticeSticky'),
+				$closeBtn = $noticeSticky.find('.btnClose');
+			$closeBtn.on('click', function(){
+				$noticeSticky.removeClass('active');
+			});
+		}
+		//noticeStickyClose();
+
+		//슬라이드 영역 전체 수정 2021-11-12
+		//main Slide01 (전시예약 최상단) //모바일 off swiper.destroy();
+		var $mainSlider01 = undefined;
+		function mainSlide01() {
+			if ( winWidth > mobileWidth && $mainSlider01 == undefined ) {
+				$mainSlider01 = new Swiper( '.mainSlide01Js', {
+					observer: true,
+					observeParents: true,
+					slidesPerView: "auto",
+					speed : 500,
+					spaceBetween : 44,
+					loopFillGroupWithBlank : false,
+					watchOverflow: true,
+					breakpoints: {
+						940: {
+							slidesPerView: 1,
+							//autoHeight : true,
+							spaceBetween : 15,
+							// centeredSlides: true,
+						},
+				
+						540: {
+							slidesPerView: 1.2,
+							spaceBetween: 5,
+						},
+					}
+				});
+			} else if ( winWidth < mobileWidth && $mainSlider01 != undefined ) {
+				$mainSlider01.destroy();
+				$mainSlider01 = undefined;
+			}
+		}
+		mainSlide01();
+
+		//main Slide02 (전시)
+		function mainSlide02() {
+			var	swiper = new Swiper( '.mainSlide02Js', {
+				observer: true,
+				observeParents: true,
+				slidesPerView: "auto",
+				autoplay: false,
+				speed : 500,
+				spaceBetween : 44,
+				loopFillGroupWithBlank : false,
+				watchOverflow: true,
+				navigation: {
+					nextEl: ".swiper-button-next",
+					prevEl: ".swiper-button-prev",
+				},
+				breakpoints: {
+					940: {
+						slidesPerView: 1,
+						//autoHeight : true,
+						spaceBetween : 15,
+						centeredSlides: true,
+					},
+				}
+			});
+		}
+		mainSlide02();
+
+		//main Slide03 (디지털미술관)
+		function mainSlide03() {
+			var	swiper = new Swiper( '.mainSlide03Js', {
+				observer: true,
+				observeParents: true,
+				slidesPerView: 3,
+				autoplay: false,
+				speed : 500,
+				spaceBetween : 44,
+				loopFillGroupWithBlank : false,
+				watchOverflow: true,
+				navigation: {
+					nextEl: ".swiper-button-next",
+					prevEl: ".swiper-button-prev",
+				},
+				breakpoints: {
+					940: {
+						slidesPerView: 1,
+						//autoHeight : true,
+						spaceBetween : 15,
+						centeredSlides: true,
+					},
+				}
+			});
+		}
+		mainSlide03();
+
+		//main Slide04 (소장품) 
+		/*var $mainSlider04 = undefined;*/
+		function mainSlide04() {
+			$mainSlider04 = new Swiper( '.mainSlide04Js', {
+				observer: true,
+				observeParents: true,
+				slidesPerView: "auto",
+				autoplay: false,
+				speed : 500,
+				spaceBetween : 44,
+				loopFillGroupWithBlank : false,
+				watchOverflow: true,
+				navigation: {
+					nextEl: ".swiper-button-next",
+					prevEl: ".swiper-button-prev",
+				},
+			});
+			/*if ( winWidth > mobileWidth && $mainSlider04 == undefined ) {
+
+			}else if ( winWidth < mobileWidth && $mainSlider04 != undefined ) {
+				$mainSlider04.destroy();
+				$mainSlider04 = undefined;
+			}*/
+		}
+		mainSlide04();
+
+		//main Slide05 (뉴스레터) 
+		/*var $mainSlider05 = undefined;*/
+		function mainSlide05() {
+			$mainSlider05 = new Swiper( '.mainSlide05Js', {
+				observer: true,
+				observeParents: true,
+				slidesPerView: "auto",
+				autoplay: false,
+				speed : 500,
+				spaceBetween : 44,
+				loopFillGroupWithBlank : false,
+				watchOverflow: true,
+				navigation: {
+					nextEl: ".swiper-button-next",
+					prevEl: ".swiper-button-prev",
+				},
+			});
+			/*if ( winWidth > mobileWidth && $mainSlider05 == undefined ) {
+
+			}else if ( winWidth < mobileWidth && $mainSlider05 != undefined ) {
+				$mainSlider05.destroy();
+				$mainSlider05 = undefined;
+			}*/
+		}
+		mainSlide05();
+
+		//window resize
+		$(window).on('resize', function () {
+			winWidth = $(window).width();
+			mainSlide01();
+			mainSlide02();
+			mainSlide03();
+			mainSlide04();
+			mainSlide05();
+		});
+		
+		var w = 490;   
+	 	var h = 520;
+
+	 	var LeftPosition=(screen.width-w)/2;
+	 	var TopPosition=(screen.height-h)/2;
+		
+		var cookiedata = document.cookie;
+		var defPopCookiedata = getCookie('defClose');
+		
+		var mainDefaultPopup = "";
+		
+		if(mainDefaultPopup != null && mainDefaultPopup != ''){
+			//일반팝업
+			if(cookiedata.indexOf("defClose=Y")<0){
+				
+				$("#defaultPopup").show();
+				
+				/* var pop =  window.open("", "mainDefaultPopup", "top="+TopPosition+", left="+LeftPosition+", width="+w+", height="+h+",toolbar=no,status=no,directories=no,scrollbars=no,location=no,resizable=no,border=0,menubar=no");
+				
+				pop.focus();
+			 	
+			 	document.mainForm.target = "mainDefaultPopup";
+			 	document.mainForm.action = "/main/mainDefaultPopup.do";
+			 	document.mainForm.submit(); */
+			}else{
+				$("#defaultPopup").hide();
+			}
+		}
+		
+		//왼쪽팝업
+		if(cookiedata.indexOf("close=Y")<0){
+			$("#leftPop").show();
+		}else{
+			$("#leftPop").hide();
+		}
+		
+		$("#close").click(function(){
+			couponClose();
+		});
+		
+		var cookiedata2 = document.cookie;
+		var defPopCookiedata2 = getCookie('mainTopResvClose');
+		
+		if(defPopCookiedata2 == 'Y'){
+			$("#mainTopResvDiv").hide()
+		}
+		
+		
+		
+	});//document ready
+	
+	//쿠키 가져오기
+	var getCookie = function (cname){
+		var name = cname + "=";
+		var ca = document.cookie.split('; ');
+		for(var i=0; i<ca.length; i++){
+			var c = ca[i];
+			while(c.charAt(0)==' ') c = c.substring(1);
+			if(c.indexOf(name)!=-1) return c.substring(name.length,c.length);
+		}
+		return "";
+	}
+	
+	//24시간 쿠키 설정
+	var setCookie = function (cname, cvalue, exdays){
+		var todayDate = new Date();
+		todayDate.setTime(todayDate.getTime() + (exdays*24*60*60*1000));
+		var expires = "expires=" + todayDate.toUTCString();
+		document.cookie = cname + "=" + cvalue + "; " + expires;
+	}
+	
+	var couponClose = function(){
+		if($("input[name='leftPopChk']").is(":checked") == true){
+			setCookie("close","Y",1);
+		}
+		$("#leftPop").hide();
+	}
+	
+	var couponCloseDef = function(){
+		if($("input[name='defPopChk']").is(":checked") == true){
+			setCookie("defClose","Y",1);
+		}
+		$("#defaultPopup").hide();
+	}
+	
+	function fn_searchExhPlaCd(val){
+		fn_getList(val);
+	}
+	
+	//데이터 조회
+	function fn_getList(val){
+	
+		var searchExhPlaCd = val;
+
+		var htmlText = "";
+		
+		$("#listDiv").empty();
+		
+		var param;
+		//exhFlag > 1: 현재전시, 2:예정전시, 3:과거전시
+		param = "searchExhPlaCd=" + searchExhPlaCd + "&exhFlag=1&sort=1";
+		
+		$.ajax({
+					url : "/exhibitions/AjaxExhibitionList.do",
+					data : param,
+					dataType : 'json',
+					Type : 'post',
+					//contentType : "application/x-www-form-urlencoded;charset=utf-8",
+					success : function(data) {
+
+						//페이지가 있는경우
+						var paginationInfo = data.paginationInfo;
+						
+						//목록을 가져와서 html에 넣어준다.
+						var exhibitionsList = data.exhibitionsList;
+						
+						/////////////관구분 html///////////////
+						var exhPlaCdHtml = ""
+
+						if (exhibitionsList != "") {
+							for ( var i = 0; i < exhibitionsList.length; i++) {
+
+								var exhTitle = exhibitionsList[i].exhTitle;
+								exhTitle = exhTitle.replace(/</gi, "&lt;");
+								exhTitle = exhTitle.replace(/>/gi, "&gt;");
+								
+								var exhStDt = exhibitionsList[i].exhStDt;
+								var exhEdDt = exhibitionsList[i].exhEdDt;
+								
+								htmlText += "<div class=\"swiper-slide\">";
+								htmlText += "	<a href=\"#\" onclick=\"javascript:fn_Detail('" + exhibitionsList[i].exhId + "')\">";
+								htmlText += "	<div>";
+								htmlText += "		<figure>";
+								htmlText += "			<img src=\""+exhibitionsList[i].exhThumbImg+"\" alt=\"" + exhibitionsList[i].exhTitle + "\">";
+								htmlText += "		</figure>";
+								htmlText += "		<div class=\"info\">";
+								htmlText += "			<span class=\"ctg\">" + exhibitionsList[i].exhPlaNm + "</span>";
+								htmlText += "				<p class=\"tit\">" + exhibitionsList[i].exhTitle + "</p>";
+								htmlText += "					<span class=\"txt\">" + exhibitionsList[i].exhStDt + "~" + exhibitionsList[i].exhEdDt + "</span>";
+								htmlText += "					<button type=\"button\" class=\"btn btnIcon\" aria-label=\"듣기\">";
+								htmlText += "						<i class=\"icon headphon\"></i>";
+								htmlText += "					</button>";
+								htmlText += "		</div>";
+								htmlText += "	</div>";
+								htmlText += "	</a>";
+								htmlText += "</div>";
+								
+							}
+						}
+						htmlText += "</ul>";
+
+						$("#listDiv").html(htmlText);
+						
+						//전체
+						$("[id^='exhPlacd']").removeClass("active").find("a .hide").remove();
+						$("#exhPlacd"+val).addClass("active").find("a").append("<span class='hide'>선택됨</span>");
+						var title = $("#exhPlacd"+val).text().replace("선택됨","");
+						$("h3.hide").text(title);
+
+						/* if(val == ""){
+							$("#exhPlacd").attr('class','active');
+							$("#exhPlacd130").attr('class','');
+							$("#exhPlacd110").attr('class','');
+							$("#exhPlacd120").attr('class','');
+							$("#exhPlacd150").attr('class','');
+						}else if(val == "130"){ //서울
+							$("#exhPlacd").attr('class','');
+							$("#exhPlacd130").attr('class','active');
+							$("#exhPlacd110").attr('class','');
+							$("#exhPlacd120").attr('class','');
+							$("#exhPlacd150").attr('class','');
+						}else if(val == "110"){ //과천
+							$("#exhPlacd").attr('class','');
+							$("#exhPlacd130").attr('class','');
+							$("#exhPlacd110").attr('class','active');
+							$("#exhPlacd120").attr('class','');
+							$("#exhPlacd150").attr('class','');
+						}else if(val == "120"){ //덕수궁
+							$("#exhPlacd").attr('class','');
+							$("#exhPlacd130").attr('class','');
+							$("#exhPlacd110").attr('class','');
+							$("#exhPlacd120").attr('class','active');
+							$("#exhPlacd150").attr('class','');
+						}else if(val == "150"){ //청주
+							$("#exhPlacd").attr('class','');
+							$("#exhPlacd130").attr('class','');
+							$("#exhPlacd110").attr('class','');
+							$("#exhPlacd120").attr('class','');
+							$("#exhPlacd150").attr('class','active');
+						} */
+						
+					}
+				});
+		
+		
+	} 
+	function fn_Detail(exhId) {
+		document.mainForm.exhId.value = exhId;
+		document.mainForm.action = "/exhibitions/exhibitionsDetail.do?exhFlag=1";
+		document.mainForm.submit();
+	}
+	
+	function fn_NewsLetterInfo(nlId){
+		$("#nlId").val(nlId);
+		document.mainForm.target = "_self";
+		document.mainForm.action = "/artResearch/newsLetterInfo.do";
+	   	document.mainForm.submit();
+	}	
+	
+	function openInNewTab(url) {
+	    var win = window.open(url, '_blank');
+	    win.focus();
+	}
+	
+	function fn_closeMainTopResv(){
+		if($("#mainTopResvChk").is(":checked")){
+			setCookie("mainTopResvClose","Y",1)
+		}
+	}
+	
+	function fn_digitalExhGuideDetail(exhId){
+		document.mainForm.exhId.value = exhId;
+		document.mainForm.target = "_self";
+		document.mainForm.action = "/digitals/digitalExhGuideDetail.do";
+		document.mainForm.submit();
+	}
+	
+	function fn_mainDefPopupDetail(val){
+		document.mainForm.target = "_self";
+		document.mainForm.action = val;
+	   	document.mainForm.submit();
+	}
+	
+</script>
+	<form name="mainForm" method="post">
+		<input type="hidden" name="exhId">
+		<input type="hidden" name="nlId" id="nlId">
+		
+	</form>
+		<!-- container -->
+		<div class="container">
+			<!-- content -->
+			<main id="content" class="content main">
+				<div class="inner">
+					
+						<!-- mainSection -->
+						<div class="mainSection notiBnrSection" id="mainTopResvDiv">
+							<div>
+								<strong class="tit">국립현대미술관 관람 예약 바로가기</strong>
+								<ul class="info">
+								<li>화요일-일요일 10:00-18:00 (월요일 서울 개관)</li>
+								<li>서울·덕수궁:수요일, 토요일 야간개장 10:00-21:00</li>
+							</ul>
+							</div>
+							<div class="btnWrap">
+								<button type="button" class="btn bg01" onclick="openInNewTab(&#39;https://www.kguide.kr/mmca001/&#39;)" title="새창 열림">전시 관람 예약하기</button>
+<!-- 								<button type="button" class="btn bg01" onclick="javascript:location.href='/visitingInfo/bookReserve.do'">디지털 정보실 예약하기</button> -->
+							</div>
+							<div class="bottom">
+								
+									<!-- <label class="checkbox">
+										<input type="checkbox" id="mainTopResvChk" name="mainTopResvChk">
+										<i></i>
+										<span>오늘 하루 보지 않기</span>
+									</label> -->
+									
+								<button type="button" class="closeBtn" aria-label="공지사항 닫기" onclick="fn_closeMainTopResv()">
+									<span>닫기</span><i class="icon del"></i>
+								</button>
+							</div>
+						</div>
+						<!-- //mainSection -->
+					
+					
+					<!-- mainSection -->
+					<div class="mainSection mImgSection">
+						<!-- contSlideWrap -->
+						<div class="contSlideWrap">
+							<!-- mainSlide01 -->
+							<div class="contSlide mainSlide01 mainSlide01Js swiper-container-initialized swiper-container-horizontal">
+								<div class="swiper-wrapper" style="transform: translate3d(0px, 0px, 0px);">
+									
+									
+										<div class="swiper-slide swiper-slide-active" style="margin-right: 44px;">
+											<div onclick="javascript:location.href=&#39;https://www.mmca.go.kr/exhibitions/exhibitionsDetail.do?exhFlag=1&amp;exhId=202202140001485&#39;">
+												<figure>
+													<img src="./국립현대미술관_files/2022050203083183614609.png" alt="히토 슈타이얼 - 데이터의 바다">
+													<img src="./국립현대미술관_files/2022050203083184219678.png" alt="히토 슈타이얼 - 데이터의 바다">
+												</figure>
+												<div class="info">
+													<div> 
+														<strong class="tit">히토 슈타이얼 - 데이터의 바다</strong>
+														<span>2022.04.29.-2022.09.18
+</span>
+													</div>
+													<!-- <a href="#" target="_blank"> -->
+													<button type="button" class="btn">전시 관람 예약하기</button><!-- </a> -->
+												</div>
+											</div>
+										</div>
+									
+										<div class="swiper-slide swiper-slide-next" style="margin-right: 44px;">
+											<div onclick="javascript:location.href=&#39;/exhibitions/exhibitionsDetail.do?exhId=202202160001494&#39;">
+												<figure>
+													<img src="./국립현대미술관_files/2022041109273277017513.png" alt="[서울] 나너의 기억">
+													<img src="./국립현대미술관_files/20220411093156098187.png" alt="[서울] 나너의 기억">
+												</figure>
+												<div class="info">
+													<div> 
+														<strong class="tit">[서울] 나너의 기억</strong>
+														<span>2022.04.08-2022.08.07</span>
+													</div>
+													<!-- <a href="#" target="_blank"> -->
+													<button type="button" class="btn">전시 관람 예약하기</button><!-- </a> -->
+												</div>
+											</div>
+										</div>
+									
+								</div>
+							<span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span></div>
+							<!-- //mainSlide01 -->
+						</div>
+						<!-- //contSlideeWrap -->
+					</div>
+					<!-- //mainSection -->
+					
+					
+					<!-- mainSection -->
+					<div class="mainSection placeSection">
+						<div class="titleWrap">
+							<h3>미술관</h3>
+						</div>
+						<div class="boardType01">
+							<ul>
+								<li>
+									<div class="boardInner">
+										<figure>
+											<a href="https://www.mmca.go.kr/visitingInfo/seoulInfo.do">
+												
+												<img src="./국립현대미술관_files/img_place02_off.jpg" alt="서울" class="imgOff">
+											</a>
+										</figure>
+										<div class="info">
+											<p class="tit">서울</p>
+											<span class="ctg fontR">
+												
+													
+													
+														월요일,화요일,목요일,금요일,일요일 10:00–18:00<br>
+														수요일, 토요일 야간개장 10:00–21:00
+													
+												
+											</span>
+											<div class="flagWrap">
+												<span class="flag"><a href="https://www.mmca.go.kr/exhibitions/progressList.do">전시</a></span>
+												<span class="flag"><a href="https://www.mmca.go.kr/exhibitions/progressList.do">필름앤비디오</a></span>
+												<span class="flag"><a href="https://www.mmca.go.kr/exhibitions/progressList.do">다원예술</a></span>
+												<span class="flag"><a href="https://www.mmca.go.kr/educations/eduParticipation.do">교육</a></span>
+												<span class="flag"><a href="https://www.mmca.go.kr/events/eventsList.do">이벤트</a></span>
+											</div>
+										</div>
+									</div>
+								</li>
+								<li>
+									<div class="boardInner">
+										<figure>
+											<a href="https://www.mmca.go.kr/visitingInfo/gwacheonInfo.do">
+												
+												<img src="./국립현대미술관_files/img_place01_off.jpg" alt="과천" class="imgOff">
+											</a>
+										</figure>
+										<div class="info">
+											<p class="tit">과천</p>
+											<span class="ctg fontR">
+												
+													
+													
+														화요일–일요일(월요일 휴관), 10:00–18:00
+													
+												
+											</span>
+											<div class="flagWrap">
+												<span class="flag"><a href="https://www.mmca.go.kr/exhibitions/progressList.do">전시</a></span>
+												<span class="flag"><a href="https://www.mmca.go.kr/educations/eduParticipation.do">교육</a></span>
+												<span class="flag"><a href="https://www.mmca.go.kr/visitingInfo/childArtMuseumInfo.do">어린이미술관</a></span>
+												<span class="flag"><a href="https://www.mmca.go.kr/events/eventsList.do">이벤트</a></span>
+											</div>
+										</div>
+									</div>
+								</li>
+								<li>
+									<div class="boardInner">
+										<figure>
+											<a href="https://www.mmca.go.kr/visitingInfo/deoksugungInfo.do">
+												
+													<span class="flag">휴관</span>
+												
+												<img src="./국립현대미술관_files/img_place03_off.jpg" alt="덕수궁" class="imgOff">
+											</a>
+										</figure>
+										<div class="info">
+											<p class="tit">덕수궁</p>
+											<span class="ctg fontR">
+												
+													
+														오늘은 휴관일 입니다.
+													
+													
+												
+											</span>
+											<div class="flagWrap">
+												<span class="flag"><a href="https://www.mmca.go.kr/exhibitions/progressList.do">전시</a></span>
+											</div>
+										</div>
+									</div>
+								</li>
+								<li>
+									<div class="boardInner">
+										<figure>
+											<a href="https://www.mmca.go.kr/visitingInfo/cheongjuInfo.do">
+												
+												<img src="./국립현대미술관_files/img_place04_off.jpg" alt="청주" class="imgOff">
+											</a>
+											
+										</figure>
+										<div class="info">
+											<p class="tit">청주</p>
+											<span class="ctg fontR">
+												
+													
+													
+														화요일–일요일(월요일 휴관), 10:00–18:00
+													
+												
+											</span>
+											<div class="flagWrap">
+												<span class="flag"><a href="https://www.mmca.go.kr/exhibitions/progressList.do">전시</a></span>
+												<span class="flag"><a href="https://www.mmca.go.kr/events/eventsList.do">이벤트</a></span>
+											</div>
+										</div>
+									</div>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<!-- //mainSection -->
+					
+					<!-- mainSection -->
+					<div class="mainSection todaySection fullSection">
+						<div class="mainInner">
+							<div class="titleWrap">
+								<h3>전시</h3>
+								<div class="tabList">
+									<ul role="tablist">
+										<li role="none presentation" id="exhPlacd" class="active">
+											<a href="javascript:fn_searchExhPlaCd(&#39;&#39;);" role="tab" aria-selected="true">전체<span class="hide">선택됨</span></a>
+										</li>
+										<li role="none presentation" id="exhPlacd130">
+											<a href="javascript:fn_searchExhPlaCd(&#39;130&#39;);" role="tab" aria-selected="false">서울</a>
+										</li>
+										<li role="none presentation" id="exhPlacd110">
+											<a href="javascript:fn_searchExhPlaCd(&#39;110&#39;);" role="tab" aria-selected="false">과천</a>
+										</li>
+										<li role="none presentation" id="exhPlacd120">
+											<a href="javascript:fn_searchExhPlaCd(&#39;120&#39;);" role="tab" aria-selected="false">덕수궁</a>
+										</li>
+										<li role="none presentation" id="exhPlacd150">
+											<a href="javascript:fn_searchExhPlaCd(&#39;150&#39;);" role="tab" aria-selected="false">청주</a>
+										</li>
+										<li role="none presentation" id="exhPlacd140">
+											<a href="javascript:fn_searchExhPlaCd(&#39;140&#39;);" role="tab" aria-selected="false">어린이미술관</a>
+										</li>
+					<!-- 					<li role="none presentation">
+											<a href="#" role="tab" aria-selected="false">레지던시</a>
+										</li>
+										<li role="none presentation">
+											<a href="#" role="tab" aria-selected="false">미술은행</a>
+										</li> -->
+									</ul>
+								</div>
+								<a href="https://www.mmca.go.kr/exhibitions/progressList.do" class="btnMore">모두 보기<i class="icon more"></i></a>
+							</div>
+							<!-- contSlideWrap -->
+							<h3 class="hide">전체</h3>
+							<div class="contSlideWrap">
+								<!-- mainSlide02 -->
+								<div class="contSlide mainSlide02 mainSlide02Js swiper-container-initialized swiper-container-horizontal">
+									<div class="swiper-wrapper" id="listDiv" style="transform: translate3d(0px, 0px, 0px);">
+										
+											<div class="swiper-slide swiper-slide-active" style="margin-right: 44px;">
+												<a href="https://www.mmca.go.kr/#" onclick="javascript:fn_Detail(&#39;202202140001485&#39;);">
+													<div>
+														<figure>
+															<img src="./국립현대미술관_files/2022042609440866011807.png" alt="히토 슈타이얼 - 데이터의 바다">
+														</figure>
+														<div class="info">
+															<span class="ctg">서울</span>
+															<p class="tit">히토 슈타이얼 - 데이터의 바다</p>
+															<span class="txt">2022-04-29~2022-09-18</span>
+														</div>
+													</div>
+												</a>
+												
+															<button type="button" class="btn btnIcon" aria-label="듣기" onclick="fn_digitalExhGuideDetail(&#39;202202140001485&#39;)">
+																<i class="icon headphon"></i> 오디오가이드
+															</button>
+													
+											</div>
+										
+											<div class="swiper-slide swiper-slide-next" style="margin-right: 44px;">
+												<a href="https://www.mmca.go.kr/#" onclick="javascript:fn_Detail(&#39;202204040001498&#39;);">
+													<div>
+														<figure>
+															<img src="./국립현대미술관_files/2022041302313099215442.png" alt="가면무도회">
+														</figure>
+														<div class="info">
+															<span class="ctg">과천</span>
+															<p class="tit">가면무도회</p>
+															<span class="txt">2022-04-13~2022-07-31</span>
+														</div>
+													</div>
+												</a>
+												
+															<button type="button" class="btn btnIcon" aria-label="듣기" onclick="fn_digitalExhGuideDetail(&#39;202204040001498&#39;)">
+																<i class="icon headphon"></i> 오디오가이드
+															</button>
+													
+											</div>
+										
+											<div class="swiper-slide" style="margin-right: 44px;">
+												<a href="https://www.mmca.go.kr/#" onclick="javascript:fn_Detail(&#39;202202160001494&#39;);">
+													<div>
+														<figure>
+															<img src="./국립현대미술관_files/2022032102450757019915.png" alt="나너의 기억">
+														</figure>
+														<div class="info">
+															<span class="ctg">서울</span>
+															<p class="tit">나너의 기억</p>
+															<span class="txt">2022-04-08~2022-08-07</span>
+														</div>
+													</div>
+												</a>
+												
+															<button type="button" class="btn btnIcon" aria-label="듣기" onclick="fn_digitalExhGuideDetail(&#39;202202160001494&#39;)">
+																<i class="icon headphon"></i> 오디오가이드
+															</button>
+													
+											</div>
+										
+											<div class="swiper-slide" style="margin-right: 44px;">
+												<a href="https://www.mmca.go.kr/#" onclick="javascript:fn_Detail(&#39;202201200001482&#39;);">
+													<div>
+														<figure>
+															<img src="./국립현대미술관_files/202202080738564591172.png" alt="MMCA 국제미술 소장품 기획전 «미술로, 세계로»">
+														</figure>
+														<div class="info">
+															<span class="ctg">청주</span>
+															<p class="tit">MMCA 국제미술 소장품 기획전 «미술로, 세계로»</p>
+															<span class="txt">2022-01-20~2022-06-12</span>
+														</div>
+													</div>
+												</a>
+												
+															<button type="button" class="btn btnIcon" aria-label="듣기" onclick="fn_digitalExhGuideDetail(&#39;202201200001482&#39;)">
+																<i class="icon headphon"></i> 오디오가이드
+															</button>
+													
+											</div>
+										
+											<div class="swiper-slide" style="margin-right: 44px;">
+												<a href="https://www.mmca.go.kr/#" onclick="javascript:fn_Detail(&#39;202102010001378&#39;);">
+													<div>
+														<figure>
+															<img src="./국립현대미술관_files/2022020807401029117755.png" alt="MMCA 과천프로젝트 2021: 예술버스쉼터_쓸모없는 건축과 유용한 조각에 대하여">
+														</figure>
+														<div class="info">
+															<span class="ctg">과천</span>
+															<p class="tit">MMCA 과천프로젝트 2021: 예술버스쉼터_쓸모없는 건축과 유용한 조각에 대하여</p>
+															<span class="txt">2021-12-15~2022-11-20</span>
+														</div>
+													</div>
+												</a>
+												
+											</div>
+										
+											<div class="swiper-slide" style="margin-right: 44px;">
+												<a href="https://www.mmca.go.kr/#" onclick="javascript:fn_Detail(&#39;202109300001469&#39;);">
+													<div>
+														<figure>
+															<img src="./국립현대미술관_files/2022012705453558619404.png" alt="원형정원 프로젝트: 달뿌리‒느리고 빠른 대화">
+														</figure>
+														<div class="info">
+															<span class="ctg">과천</span>
+															<p class="tit">원형정원 프로젝트: 달뿌리‒느리고 빠른 대화</p>
+															<span class="txt">2021-10-08~2023-12-17</span>
+														</div>
+													</div>
+												</a>
+												
+											</div>
+										
+										<!-- <div class="swiper-slide">
+											<div>
+												<figure>
+													<img src="/asset/images/@dummy/img_today02.jpg" alt="">
+												</figure>
+												<div class="info">
+													<span class="ctg">2청주 &middot; 퍼포먼스</span>
+													<p class="tit">젊은 모색 2021</p>
+													<span class="txt">2021.7.31.–2022.5.19.</span>
+													<button type="button" class="btn btnIcon" aria-label="듣기">
+														<i class="icon headphon"></i>
+													</button>
+												</div>
+											</div>
+										</div> -->
+									</div>
+									<div class="swiper-button-prev swiper-button-disabled" tabindex="0" role="button" aria-label="Previous slide" aria-disabled="true"></div>
+									<div class="swiper-button-next" tabindex="0" role="button" aria-label="Next slide" aria-disabled="false"></div>
+								<span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span><span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span></div>
+								<!-- //mainSlide02 -->
+							</div>
+							<!-- //contSlideWrap -->
+						</div>
+					</div>
+					<!-- //mainSection -->
+
+					<!-- mainSection -->
+					
+						<div class="mainSection collectSection">
+							<div class="titleWrap">
+								<h3>소장품</h3>
+								<a href="https://www.mmca.go.kr/collections/collectionsList.do" class="btnMore">모두 보기<i class="icon more"></i></a>
+							</div>
+							<!-- contSlideWrap -->
+							<div class="contSlideWrap">
+								<!-- mainSlide04 -->
+								<div class="contSlide mainSlide04 mainSlide04Js swiper-container-initialized swiper-container-horizontal">
+									<div class="swiper-wrapper" style="transform: translate3d(0px, 0px, 0px);">
+										
+											<div class="swiper-slide swiper-slide-active" style="margin-right: 44px;">
+												<a href="https://www.mmca.go.kr/collections/curationDetailPage.do?dcmId=202201200000022">
+													<figure>
+														<img src="./국립현대미술관_files/2022031405175011415508.jpg" alt="1910년대~1920년대">
+													</figure>
+													<div class="info">
+														<p class="ctg">국립현대미술관 소장품300</p>
+														
+														<span class="txt">1910년대~1920년대</span>
+													</div>
+												</a>
+											</div>
+										
+											<div class="swiper-slide swiper-slide-next" style="margin-right: 44px;">
+												<a href="https://www.mmca.go.kr/collections/curationDetailPage.do?dcmId=202201240000029">
+													<figure>
+														<img src="./국립현대미술관_files/2022031402123248813759.PNG" alt="1930년대~1940년대">
+													</figure>
+													<div class="info">
+														<p class="ctg">국립현대미술관 소장품300</p>
+														
+														<span class="txt">1930년대~1940년대</span>
+													</div>
+												</a>
+											</div>
+										
+											<div class="swiper-slide" style="margin-right: 44px;">
+												<a href="https://www.mmca.go.kr/collections/curationDetailPage.do?dcmId=202201240000030">
+													<figure>
+														<img src="./국립현대미술관_files/2022031402144668816596.PNG" alt="1950년대~1960년대">
+													</figure>
+													<div class="info">
+														<p class="ctg">국립현대미술관 소장품300</p>
+														
+														<span class="txt">1950년대~1960년대</span>
+													</div>
+												</a>
+											</div>
+										
+											<div class="swiper-slide" style="margin-right: 44px;">
+												<a href="https://www.mmca.go.kr/collections/curationDetailPage.do?dcmId=202201240000034">
+													<figure>
+														<img src="./국립현대미술관_files/2022031402132808117619.PNG" alt="1970년대~1980년대">
+													</figure>
+													<div class="info">
+														<p class="ctg">국립현대미술관 소장품300</p>
+														
+														<span class="txt">1970년대~1980년대</span>
+													</div>
+												</a>
+											</div>
+										
+									</div>
+									<div class="swiper-button-prev swiper-button-disabled" tabindex="0" role="button" aria-label="Previous slide" aria-disabled="true"></div>
+									<div class="swiper-button-next" tabindex="0" role="button" aria-label="Next slide" aria-disabled="false"></div>
+								<span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span><span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span></div>
+								<!-- //mainSlide04 -->
+							</div>
+							<!-- //contSlideWrap -->
+						</div>
+						<!-- //mainSection -->
+					
+
+					<!-- mainSection -->
+					
+						<div class="mainSection dgSection fullSection">
+							<div class="mainInner">
+								<div class="titleWrap">
+									<h3>디지털미술관</h3>
+									<a href="https://www.mmca.go.kr/digitals/digitalMain.do" class="btnMore">모두 보기<i class="icon more"></i></a>
+								</div>
+								<!-- contSlideeWrap -->
+								<div class="contSlideWrap">
+									<!-- mainSlide03 -->
+									<div class="contSlide mainSlide03 mainSlide03Js swiper-container-initialized swiper-container-horizontal">
+										<div class="swiper-wrapper" style="transform: translate3d(0px, 0px, 0px);">
+											
+												<div class="swiper-slide swiper-slide-active" style="width: 405.667px; margin-right: 44px;">
+													<a href="https://www.mmca.go.kr/digitals/digitalMovInfo.do?mbId=202205200000930">
+														<figure class="media">
+															<img src="./국립현대미술관_files/2022052001383701019341.png" alt="일상예찬｜집에서 만나는 미술관_김중현">
+														</figure>
+														<div class="info">
+															<span class="ctg">MMCA TV</span>
+															<p class="tit">일상예찬｜집에서 만나는 미술관_김중현</p>
+														</div>
+													</a>
+												</div>
+											
+												<div class="swiper-slide swiper-slide-next" style="width: 405.667px; margin-right: 44px;">
+													<a href="https://www.mmca.go.kr/digitals/digitalMovInfo.do?mbId=202204290000916">
+														<figure class="media">
+															<img src="./국립현대미술관_files/2022050202334809016167.jpg" alt="2022 국립현대미술관 미술은행 프로젝트 «공공»">
+														</figure>
+														<div class="info">
+															<span class="ctg">MMCA TV</span>
+															<p class="tit">2022 국립현대미술관 미술은행 프로젝트 «공공»</p>
+														</div>
+													</a>
+												</div>
+											
+												<div class="swiper-slide" style="width: 405.667px; margin-right: 44px;">
+													<a href="https://www.mmca.go.kr/digitals/digitalMovInfo.do?mbId=202204280000912">
+														<figure class="media">
+															<img src="./국립현대미술관_files/2022052309303564319989.png" alt="[오늘, 이 작품] 얀 방리에ㅣ복수ㅣ1988">
+														</figure>
+														<div class="info">
+															<span class="ctg">MMCA TV</span>
+															<p class="tit">[오늘, 이 작품] 얀 방리에ㅣ복수ㅣ1988</p>
+														</div>
+													</a>
+												</div>
+											
+										</div>
+										<div class="swiper-button-prev swiper-button-disabled swiper-button-lock" tabindex="0" role="button" aria-label="Previous slide" aria-disabled="true"></div>
+										<div class="swiper-button-next swiper-button-disabled swiper-button-lock" tabindex="0" role="button" aria-label="Next slide" aria-disabled="true"></div>
+									<span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span><span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span></div>
+									<!-- //mainSlide03 -->
+								</div>
+								<!-- //contSlideWrap -->
+							</div>
+						</div>
+						<!-- //mainSection -->
+					
+					
+					
+					<!-- 중간 배너 -->
+					<!-- <div class="mainSection midBannerSection">
+						<div class="midBanner">
+							<a href="https://artbank.go.kr/home/main.do"  target="_blank"> 
+								<img src="/upload/main_mid_banner_pc.jpg" alt="2022 국립현대미술관 미술은행/정부미술은행 작품 구입 공모 www.artbank.go.kr 접수 시작:3.25(금) 9:00 / 접수 마감 :4.5(화) 18:00" >
+							</a>
+						</div>
+					</div> -->
+					<!-- //탭 버튼 -->
+					<!-- 중간 배너 -->
+																						
+					<!-- mainSection -->
+					<div class="mainSection rshSection">
+						<div class="titleWrap">
+							<h3>MMCA 뉴스레터</h3>
+							<a href="https://www.mmca.go.kr/artResearch/newsLetterList.do" class="btnMore">모두 보기<i class="icon more"></i></a>
+						</div>
+						<!-- contSlideWrap -->
+						<div class="contSlideWrap">
+							<!-- mainSlide05 -->
+							<div class="contSlide mainSlide05 mainSlide05Js swiper-container-initialized swiper-container-horizontal">
+								<div class="swiper-wrapper" style="transform: translate3d(0px, 0px, 0px);">
+								
+									
+											<a href="javascript:void(0)" onclick="javascript:fn_NewsLetterInfo(&#39;202205130000778&#39;);" class="swiper-slide swiper-slide-active" style="margin-right: 44px;">
+													<figure>
+														<img src="./국립현대미술관_files/2022051301354496518970.png" alt="강남대로에서 만난 제주 푸른 숲 《공공×김보희》">
+													</figure>
+													<div class="info">
+														<p class="ctg">
+														<!-- 구분 -->
+														
+															
+															전시 포커스
+														
+															
+															
+														
+															
+															
+														
+															
+															
+														
+															
+															
+														
+															
+															
+														
+															
+														</p>
+														<span class="txt">강남대로에서 만난 제주 푸른 숲 《공공×김보희》</span>
+													</div>
+												</a>
+									
+											<a href="javascript:void(0)" onclick="javascript:fn_NewsLetterInfo(&#39;202205130000777&#39;);" class="swiper-slide swiper-slide-next" style="margin-right: 44px;">
+													<figure>
+														<img src="./국립현대미술관_files/2022051301351234211078.png" alt="《우리 집에서, 워치 앤 칠》 아시아 4개 미술관 온라인 좌담회">
+													</figure>
+													<div class="info">
+														<p class="ctg">
+														<!-- 구분 -->
+														
+															
+															
+														
+															
+															
+														
+															
+															미술관 플러스
+														
+															
+															
+														
+															
+															
+														
+															
+															
+														
+															
+														</p>
+														<span class="txt">《우리 집에서, 워치 앤 칠》 아시아 4개 미술관 온라인 좌담회</span>
+													</div>
+												</a>
+									
+											<a href="javascript:void(0)" onclick="javascript:fn_NewsLetterInfo(&#39;202205130000776&#39;);" class="swiper-slide" style="margin-right: 44px;">
+													<figure>
+														<img src="./국립현대미술관_files/202205130134368551620.png" alt="《프로젝트 해시태그 2022》, 최종 당선자는?">
+													</figure>
+													<div class="info">
+														<p class="ctg">
+														<!-- 구분 -->
+														
+															
+															
+														
+															
+															
+														
+															
+															미술관 플러스
+														
+															
+															
+														
+															
+															
+														
+															
+															
+														
+															
+														</p>
+														<span class="txt">《프로젝트 해시태그 2022》, 최종 당선자는?</span>
+													</div>
+												</a>
+									
+											<a href="javascript:void(0)" onclick="javascript:fn_NewsLetterInfo(&#39;202205130000775&#39;);" class="swiper-slide" style="margin-right: 44px;">
+													<figure>
+														<img src="./국립현대미술관_files/2022051301340532313455.png" alt="국립현대미술관과 LG유플러스 연간 제휴 협약 맺다">
+													</figure>
+													<div class="info">
+														<p class="ctg">
+														<!-- 구분 -->
+														
+															
+															
+														
+															
+															
+														
+															
+															미술관 플러스
+														
+															
+															
+														
+															
+															
+														
+															
+															
+														
+															
+														</p>
+														<span class="txt">국립현대미술관과 LG유플러스 연간 제휴 협약 맺다</span>
+													</div>
+												</a>
+									
+									
+								</div>
+								<div class="swiper-button-prev swiper-button-disabled" tabindex="0" role="button" aria-label="Previous slide" aria-disabled="true"></div>
+								<div class="swiper-button-next" tabindex="0" role="button" aria-label="Next slide" aria-disabled="false"></div>
+							<span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span><span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span></div>
+							<!-- //mainSlide05 -->
+						</div>
+						<!-- //contSlideWrap -->
+					</div>
+					<!-- //mainSection -->
+					
+					<!-- mainSection -->
+					<div class="mainSection linkSection">
+						<div class="boardType01">
+							<ul>
+								<li>
+									<figure>
+										<a href="https://artbank.go.kr/home/main.do" target="_blank">
+											<img src="./국립현대미술관_files/img_link01.jpg" alt="미술은행">
+										</a>
+									</figure>
+									<div class="info">
+										<p class="tit">미술은행</p>
+										<a href="https://artbank.go.kr/home/main.do" target="_blank" class="txtLink">더 알아보기</a>
+									</div>
+								</li>
+								<li>
+									<figure>
+										<a href="https://www.mmca.go.kr/artStudio/artStudioMain.do">
+											<img src="./국립현대미술관_files/img_link02.jpg" alt="레지던시">
+										</a>
+									</figure>
+									<div class="info">
+										<p class="tit">레지던시</p>
+										<a href="https://www.mmca.go.kr/artStudio/artStudioMain.do" class="txtLink">더 알아보기</a>
+									</div>
+								</li>
+								<li>
+									<figure>
+										<a href="https://www.mmca.go.kr/bookArchive/bookArchiveMain.do">
+											<img src="./국립현대미술관_files/img_link03.jpg" alt="도서와 아카이브">
+										</a>
+									</figure>
+									<div class="info">
+										<p class="tit">도서와 아카이브</p>
+										<a href="https://www.mmca.go.kr/bookArchive/bookArchiveMain.do" class="txtLink">더 알아보기</a>
+									</div>
+								</li>
+								<li>
+									<figure>
+										<a href="https://www.mmca.go.kr/visitingInfo/childArtMuseumInfo.do">
+											<img src="./국립현대미술관_files/img_link04.jpg" alt="어린이미술관">
+										</a>
+									</figure>
+									<div class="info">
+										<p class="tit">어린이미술관</p>
+										<a href="https://www.mmca.go.kr/visitingInfo/childArtMuseumInfo.do" class="txtLink">더 알아보기</a>
+									</div>
+								</li>
+
+							</ul>
+						</div>
+					</div>
+					<!-- //mainSection -->
+
+					<!-- mainSection -->
+					<!-- <div class="mainSection mbsSection">
+						<div>
+							<strong class="tit">MMCA 멤버십: 문화가 생활이 되는 MMCA 멤버십, 풍성한 혜택이 기다립니다.</strong>
+							<p>문의: 과천 02-2188-6144 / 서울 02-3701-9700 / 덕수궁 02-2022-0643</p>
+						</div>
+						<a href="javascript:fn_menuChange('/contents.do','0030002150','2');" class="btn">멤버십 가입 하기</a>
+					</div> -->
+					<!-- //mainSection -->
+					
+					
+					<!-- mainSection -->
+					<div class="mainSection noticeSection">
+						<div class="titleWrap">
+							<h3>새소식</h3>
+							<a href="https://www.mmca.go.kr/pr/newsList.do" class="btnMore">모두 보기<i class="icon more"></i></a>
+						</div>
+						<div class="noticeWrap">
+							<ul>
+								
+									<li>
+										<a href="https://www.mmca.go.kr/pr/newsDetail.do?bdCId=202205170008249">
+											백남준 ‘다다익선’ 3차 시험운전 알림
+										</a>
+									</li>
+								
+									<li>
+										<a href="https://www.mmca.go.kr/pr/newsDetail.do?bdCId=202205120008244">
+											2022년 ‹미술관소장품강좌› Q&amp;A를 위한 사전 설문조사
+										</a>
+									</li>
+								
+									<li>
+										<a href="https://www.mmca.go.kr/pr/newsDetail.do?bdCId=202205120008243">
+											2022년 미술관 협력사업 「공립미술관 추천작가-전문가 매칭 지원」 공모 안내
+										</a>
+									</li>
+								
+							</ul>
+						</div>
+					</div>
+					<!-- //mainSection -->
+					
+				</div>
+			</main>
+			<!-- //content -->
+			
+			
+			<div class="notice-pop mainLayerPopup active defaultPopup" id="defaultPopup" style="display: none;">
+				
+					
+					
+						<strong></strong>
+						<br><br><br>
+						<h4></h4>
+					
+				
+					
+				<div class="bottom">
+					<label class="checkbox" for="defPopChk">
+						<input type="checkbox" id="defPopChk" name="defPopChk">
+						<i></i>
+						<span>오늘 그만보기</span>
+					</label>
+					<button type="button" id="defClose" class="btnClose">닫기</button>
+				</div>
+			</div>
+			
+			
+			
+		</div>
+		<!-- //container -->
+		
+<!-- //wrap -->
+
+
+
+
+
+<!-- footer start -->	
+
+
+
+
+<script type="text/javaScript" defer="defer">	
+
+	$("#mailAddr").keydown(function (key) {
+        if(key.keyCode == 13) {
+        	newsletterPopCall();
+        	return false;
+        }
+    });
+	
+	function newsletterPopCall() {
+		var mailAddr = $("#mailAddr").val();
+		
+		if(!mailAddr) {
+			alert("이메일 주소를 입력하세요.");
+			return false;
+		}
+		
+		var regex=/^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;   
+		  
+		if(regex.test(mailAddr) === false) {  
+		    alert("잘못된 이메일 형식입니다.");  
+		    return false;  
+		} else {
+		
+			/* $('#popEmailAgree').bPopup({
+				positionStyle : 'fixed'
+			});
+			$("#newsletterAgree").focus(); */
+			feUI.dialog.__init('dialoSubscribe', 780, this);
+			$("#newsletterAgree").focus();
+		}
+	}
+	
+	function sendNews() {
+		
+		if($("#newsletterAgree").is(":checked")) {
+			
+			var mailAddr = $("#mailAddr").val();
+			
+			var param = "mailAddr=" + mailAddr;
+			
+			$.ajax({
+				  url:  "/member/newsletter.do",
+				  data: param,
+				  dataType: 'json',
+				  contentType: "application/x-www-form-urlencoded;charset=utf-8",
+				  success: function(data) {
+
+					  var obj = JSON.parse(data.newsLetter);
+					  
+					  if(obj.STATUS_CD == "0000") {
+						  kakaoPopCall();
+					  } else if(obj.STATUS_CD == "00001") {
+						  alert("이미 등록된 이메일입니다.");
+					  } else {
+						  //console.log(obj);
+						  alert("신청중 오류가 발생하였습니다.");
+					  }
+					  
+					  $("#newsLetterClose").click();
+				  }
+			});
+			
+		} else {
+			alert("개인정보 수집 및 활용에 동의해주십시요.");
+			return false;
+		}
+	}
+	
+	function kakaoPopCall() {
+		/* $('#popKakao').bPopup({
+			positionStyle : 'fixed'
+		}); */
+		feUI.dialog.__init('kakaoChanelPopup', 410, this);
+	}
+	
+	function goChannel() {
+		var url = "http://pf.kakao.com/_SjarK";
+		window.open(url, '_blank');
+		$("#kakaoClose").click();
+	}
+
+
+	</script>
+	
+	    <input type="hidden" id="srcPubTp" name="srcPubTp">
+	    
+		<!-- footer -->
+		<div id="footer" class="footer">
+			<div class="inner">
+				<!-- sectionWrap -->
+				<div class="sectionWrap">
+					<!-- footerSection01 -->
+					<div class="footerSection01">
+						<strong>MMCA 뉴스레터 구독 신청</strong>
+						<input type="email" class="input" title="이메일 주소" id="mailAddr" name="mailAddr" placeholder="이메일 주소를 입력하세요.">
+						<button type="submit" class="btn" onclick="newsletterPopCall();return false;">구독하기</button>
+						<ul class="linkList">
+							<li><a href="javascript:fn_menuChange(&#39;/artResearch/newsLetterList.do&#39;, &#39;01H000809000000&#39;, &#39;2&#39;);">MMCA 뉴스레터</a></li>
+							<li><a href="https://www.mmca.go.kr/artResearch/publicationList.do?searchSrcPubTp=15">소식지</a></li>
+							<li><a href="https://www.mmca.go.kr/membership/membershipIntroduction.do">멤버십</a></li>
+							<li><a href="https://www.mmcashop.co.kr/" target="_blank" title="새창">온라인숍</a></li>
+						</ul>
+					</div>
+					<!-- //footerSection01 -->
+					<!-- footerSection02 -->
+					<div class="footerSection02">
+						<div class="footerMenu">
+							<div class="item">
+								<strong>소셜</strong>
+								<ul>
+									<li><a href="https://www.instagram.com/mmcakorea" target="_blank">인스타그램</a></li>
+									<li><a href="https://www.youtube.com/user/MMCAKorea" target="_blank">유튜브</a></li>
+									<li><a href="https://www.facebook.com/mmcakorea" target="_blank">페이스북</a></li>
+									<li><a href="https://twitter.com/mmcakorea" target="_blank">트위터</a></li>
+									<li><a href="https://tv.naver.com/mmca" target="_blank">네이버</a></li>
+								</ul>
+							</div>
+							<div class="item">
+								<strong>법적고지</strong>
+								<ul>
+									<li><a href="https://www.mmca.go.kr/civil/memberAgreement.do">이용약관</a></li>
+									<li><a href="https://www.mmca.go.kr/civil/memberPolicy.do">개인정보처리방침</a></li>
+									<li><a href="https://www.mmca.go.kr/civil/copyright.do">저작권정책</a></li>
+									<li><a href="https://www.mmca.go.kr/civil/ePeople.do">국민신문고</a></li>
+									<li><a href="https://www.mmca.go.kr/civil/publicInfoSystem.do">정보공개</a></li>
+									<li><a href="https://www.mmca.go.kr/civil/corruptionReport.do">불편부조리신고</a></li>
+								</ul>
+							</div>
+							<div class="item">
+								<strong>참여</strong>
+								<ul>
+									<li><a href="https://www.mmca.go.kr/about/introduction.do">미술관 소개</a></li>
+									<li><a href="javascript:fn_menuChange(&#39;/pr/newsList.do&#39;, &#39;01H000801000000&#39;, &#39;2&#39;);">새소식</a></li>
+									<li><a href="javascript:fn_menuChange(&#39;/pr/employmentList.do&#39;, &#39;01H000803000000&#39;, &#39;2&#39;);">채용</a></li>
+									<li><a href="javascript:fn_menuChange(&#39;/pr/pressList.do&#39;, &#39;01H000802000000&#39;, &#39;2&#39;);">보도자료</a></li>
+									<li><a href="http://www.mmcafoundation.or.kr/page/support/intro" target="_blank" title="새창">후원</a></li>
+									<li><a href="https://www.mmca.go.kr/membership/mFriends.do">MMCA프렌즈</a></li>
+									<li><a href="https://www.mmca.go.kr/pr/volunteer.do">자원봉사</a></li>
+									<!--li><a href="/pr/collectionsGuideList.do">기증안내</a></li-->
+									<li><a href="https://www.mmca.go.kr/pr/museumPermission.do">시설대관·복제신청</a></li>
+									<!-- 
+									<li><a href="javascript:fn_menuChange('/cooperation/coopNetwork.do', '01I000900000000', '1');">미술관협력망</a></li>
+									
+									 -->
+									<li><a href="https://www.mmca.go.kr/pr/FAQ.do">FAQ</a></li>
+									<li><a href="https://www.mmca.go.kr/civil/siteMap.do">사이트맵</a></li>
+									<li><a href="http://www.mmcafoundation.or.kr/" target="_blank" title="새창">국립현대미술관 문화재단</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<!-- //footerSection02 -->
+				</div>
+				<!-- //sectionWrap -->
+			</div>
+			<!-- footerSection03 -->
+			<div class="footerSection03">
+				<div class="inner">
+					<div class="logo">
+						<img src="./국립현대미술관_files/bg_logo_full.svg" alt="MMCA 국립현대미술관 National Museum of Modern and Contemporary Art, Korea">
+					</div>
+					<address>
+						대표자: 윤범모, 사업자등록번호: 138‒83‒00313<br>
+						대표전화: (서울) <a href="tel:02%E2%80%923701%E2%80%929500">02‒3701‒9500</a>, (과천) <a href="tel:02%E2%80%922188%E2%80%926000">02‒2188‒6000</a>, (덕수궁) <a href="tel:02%E2%80%922022%E2%80%920600">02‒2022‒0600</a>, (청주) <a href="tel:043%E2%80%92261%E2%80%921400">043‒261‒1400</a><br>
+						© 2021 National Museum of Modern and Contemporary Art, Korea
+					</address>
+					<a class="wa" title="새창" href="http://www.wa.or.kr/board/list.asp?BoardID=0006" target="_blank">
+						<img alt="(사)한국장애인단체총연합회 한국웹접근성인증평가원 웹 접근성 우수사이트 인증마크(WA인증마크)" src="./국립현대미술관_files/wa.png">
+					</a>
+				</div>
+			</div>
+			<!-- //footerSection03 -->
+			
+		</div>
+		<!-- //footer -->
+		
+		
+		
+	<div class="dimmedLayer" style="display: none;"></div></div>
+	<!-- //wrap -->
+	<div class="btnFixed">
+		<button type="button" class="btnSmart" aria-label="스마트검색" aria-haspopup="dialog" onclick="feUI.dialog.__init(&#39;dialogSmart&#39;, 1430, this)">
+			스마트<br>검색
+		</button>
+		<button type="button" class="btnTop" aria-label="상단으로" style="display: none;">상단으로 이동</button>
+	</div>
+	<!-- smartsearch start -->	
+	
+
+
+
+
+<script type="text/javaScript" defer="defer">	
+$(document).on('change', 'input[name="ckContentType"], input[name="ckContentDType"]', function(){
+	fn_selectContentType();
+});
+/* $(document).on('change', 'input[name="ckContentDType"]', function(){
+	fn_selectContentType();
+}); */
+ 
+ $(document).ready(function(){
+	 $("#selResult").show();
+	$("#group1_1").show();
+	$("#group1_2").show();
+	$("#group1_3").show();
+	$("#group2_1").hide();
+	$("#group2_2").hide();
+	$("#group2_3").hide();
+	
+	//전시관람
+    $("input:radio[name=raWhat]").click(function(){
+    	fn_init();
+    	fn_selectSmart();
+    });
+    $("#firstTxt").html("전시관람이 궁금하셨군요");
+    
+    $("#ckWhen01").prop("checked",true);
+    $("#selSearch").html("<li>오늘</li>")
+    $("#paramWhen").val("오늘")
+    
+	
+    $('input:checkbox[name=ckPay], input:checkbox[name=ckWhere], input:checkbox[name=ckWhen]').on('click', function () {
+    	 fn_selectSmart();
+   	});
+	
+	//동적으로 생성되는 체크박스로 인해 동작하지 않는 객체 제외하고 위 $(document).on 사용
+    $('input:checkbox[name=ckContents]').on('click', function () {
+    //$('input:checkbox[name=ckContents], input:checkbox[name=ckContentType], input:checkbox[name=ckContentDType]').on('click', function () {
+    	 fn_selectSmart();
+   	});
+    
+    $('input:radio[name=raWhat]:input[value=exh]').attr("checked", true);
+});
+ 
+ function fn_raWhatInit(){
+	 //$("input:radio[name='raWhat']").prop("checked", false);
+	 //$('input:radio[name=raWhat]:input[value=exh]').attr("checked", true);
+	 //alert($("input:radio[id='exh']").val());
+	 $("input:radio[id='exh']").prop("checked", true);
+	 fn_selectSmart();
+ }
+
+function fn_init(){
+	//$("input:radio[name='raWhat']").prop("checked", false);
+	$("input:checkbox[name='ckPay']").prop("checked", false);
+	$("input:checkbox[name='ckWhere']").prop("checked", false);
+	$("input:checkbox[name='ckWhen']").prop("checked", false);
+	$("input:checkbox[name='ckContents']").prop("checked", false);
+	$("input:checkbox[name='ckContentType']").prop("checked", false);
+	$("input:checkbox[name='ckContentDType']").prop("checked", false);
+	
+	//$(':checkbox:checked').prop('checked',false);
+	//$(':radio:checked').prop('checked',false);
+	$("#selResult").show();
+	$("#smartListDiv").empty();
+	$("#smartPageDiv").empty();
+	$("#group1_1").show();
+	$("#group1_2").show();
+	$("#group1_3").show();
+	$("#group2_1").hide();
+	$("#group2_2").hide();
+	$("#group2_3").hide();
+	
+	arrContentTypeTitle = null;
+	arrContentTypeValue = null;
+	arrContentDTypeTitle = null;
+	arrContentDTypeValue = null;
+}
+
+function fn_re(){
+	window.open("https://www.kguide.kr/mmca001/","_blank");
+}
+function fn_selectSmart(){
+	$("#selResult").show();
+	var inputValue = $("input[name='raWhat']:checked").val();
+	if(inputValue == "exh"){
+		$("#firstTxt").html("전시관람이 궁금하셨군요");
+		
+		//조회조건 셋팅
+		$("#group1_1").show();
+		$("#group1_2").show();
+		$("#group1_3").show();
+		$("#group2_1").hide();
+		$("#group2_2").hide();
+		$("#group2_3").hide();
+		fn_setSearchCondition1();
+		//fn_SmartGetList1();
+	}else if(inputValue == "con"){
+		$("#firstTxt").html("콘텐츠검색이 궁금하셨군요");
+		//조회조건 셋팅
+		$("#group1_1").hide();
+		$("#group1_2").hide();
+		$("#group1_3").hide();
+		$("#group2_1").show();
+		$("#group2_2").show();
+		$("#group2_3").show();
+		fn_setSearchCondition2();
+		//fn_SmartGetList2();
+	}
+}
+
+//전시관람 조회조건 셋팅
+function fn_setSearchCondition1(){
+	var result = ""; //선택된 조회조건 값 
+	var arrPay = Array();
+	var cntPay= 0;
+	$("input[name='ckPay']:checked").each(function (i,val){
+		result +="<li>"+val.value+"</li>";
+		arrPay[cntPay] = val.value;
+		cntPay++;
+	});
+	$("#paramPay").val(arrPay);
+	
+	var arrWhere = Array();
+	var cntWhere= 0;
+	$("input[name='ckWhere']:checked").each(function (i,val){
+		if(val.value == "110"){
+			result +="<li>과천관</li>";
+		}
+		if(val.value == "120"){
+			result +="<li>덕수궁관</li>";
+		}
+		if(val.value == "130"){
+			result +="<li>서울관</li>";
+		}
+		if(val.value == "140"){
+			result +="<li>어린이미술관</li>";
+		}
+		if(val.value == "150"){
+			result +="<li>청주관</li>";
+		}
+		if(val.value == "999"){
+			result +="<li>기타</li>";
+		}
+		arrWhere[cntWhere] = val.value;
+		cntWhere++;
+	});
+	$("#paramWhere").val(arrWhere);
+	
+	var arrWhen = Array();
+	var cntWhen= 0;
+	$("input[name='ckWhen']:checked").each(function (i,val){
+		result +="<li>"+val.value+"</li>";
+		arrWhen[cntWhen] = val.value;
+		cntWhen++;
+	});
+	$("#paramWhen").val(arrWhen);
+	
+	$("#selSearch").html(result);
+	
+}
+
+var arrContentTypeTitle = null;
+var arrContentTypeValue = null;
+var arrContentDTypeTitle = null;
+var arrContentDTypeValue = null;
+
+//콘텐츠 검색 조회조건 셋팅
+function fn_setSearchCondition2(){
+	var resultHtml = ""; //선택된 조회조건 값 
+	var arrContents = Array();
+	var cntContents= 0;
+	$("input[name='ckContents']:checked").each(function (i,val){
+		if(val.value == "digital"){
+			resultHtml +="<li>디지털미술관</li>";
+		}
+		if(val.value == "collection"){
+			resultHtml +="<li>소장품</li>";
+		}
+		if(val.value == "newsletter"){
+			resultHtml +="<li>뉴스레터</li>";
+		}
+		if(val.value == "news"){
+			resultHtml +="<li>새소식</li>";
+		}
+		if(val.value == "publication"){
+			resultHtml +="<li>소식지</li>";
+		}
+		arrContents[cntContents] = val.value;
+		cntContents++;
+	});
+	//파라미터 조회조건
+	$("#paramContents").val(arrContents);
+	
+	//콘텐츠 카테고리에 따라 상세조건 변경
+	fn_setSearchCondition2_1();
+	
+	$("#selSearch").html(resultHtml);
+}
+
+function fn_selectContentType(){
+	var resultHtml = ""; //선택된 조회조건 값 
+	$("input[name='ckContents']:checked").each(function (i,val){
+		if(val.value == "digital"){
+			resultHtml +="<li>디지털미술관</li>";
+		}
+		if(val.value == "collection"){
+			resultHtml +="<li>소장품</li>";
+		}
+		if(val.value == "newsletter"){
+			resultHtml +="<li>뉴스레터</li>";
+		}
+		if(val.value == "news"){
+			resultHtml +="<li>새소식</li>";
+		}
+		if(val.value == "publication"){
+			resultHtml +="<li>소식지</li>";
+		}
+	});
+	
+	var inputValue = $("input[name='ckContentType']:checked").val();
+	for(var i = 0 ; i < arrContentTypeValue.length; i++){
+		if(arrContentTypeValue[i] == inputValue ){
+			resultHtml +="<li>"+arrContentTypeTitle[i]+"</li>";
+		}
+	}
+	
+	var inputValue2 = $("input[name='ckContentDType']:checked").val();
+	for(var i = 0 ; i < arrContentDTypeValue.length; i++){
+		if(arrContentDTypeValue[i] == inputValue2 ){
+			resultHtml +="<li>"+arrContentDTypeTitle[i]+"</li>";
+		}
+	}
+	$("#paramContentType").val(inputValue);
+	$("#paramContentDType").val(inputValue2);
+	$("#selSearch").html(resultHtml);
+}
+
+//콘텐츠 카테고리에 따라 상세조건 변경
+function fn_setSearchCondition2_1(){
+	arrContentTypeTitle = Array();
+	arrContentTypeValue = Array();
+	arrContentDTypeTitle = Array();
+	arrContentDTypeValue = Array();	
+	$("#contentTypeList").empty();
+	$("#contentDTypeList").empty();
+	var htmlText1 = "";
+	var htmlText2 = "";
+	var inputValue = $("input[name='ckContents']:checked").val();
+	if(inputValue == "digital"){
+		<!-- 미술 분야 -->
+		
+			arrContentDTypeTitle["0"] = "관장이 들려주는 소장품 이야기";
+			arrContentDTypeValue["0"] = "15";
+		
+			arrContentDTypeTitle["1"] = "큐레이터 전시 해설";
+			arrContentDTypeValue["1"] = "08";
+		
+			arrContentDTypeTitle["2"] = "강의 &amp; 학술토론";
+			arrContentDTypeValue["2"] = "09";
+		
+			arrContentDTypeTitle["3"] = "작품 &amp; 작가";
+			arrContentDTypeValue["3"] = "12";
+		
+			arrContentDTypeTitle["4"] = "청소년";
+			arrContentDTypeValue["4"] = "18";
+		
+			arrContentDTypeTitle["5"] = "어린이 미술관";
+			arrContentDTypeValue["5"] = "13";
+		
+			arrContentDTypeTitle["6"] = "수어 해설";
+			arrContentDTypeValue["6"] = "14";
+		
+			arrContentDTypeTitle["7"] = "음성해설";
+			arrContentDTypeValue["7"] = "16";
+		
+			arrContentDTypeTitle["8"] = "MMCA라이브";
+			arrContentDTypeValue["8"] = "17";
+		
+			arrContentDTypeTitle["9"] = "미술관 소식";
+			arrContentDTypeValue["9"] = "11";
+		
+			arrContentDTypeTitle["10"] = "VR";
+			arrContentDTypeValue["10"] = "20";
+		
+			arrContentDTypeTitle["11"] = "MMCA 작가와의 대화";
+			arrContentDTypeValue["11"] = "21";
+		
+			arrContentDTypeTitle["12"] = "도슨트에게 듣다";
+			arrContentDTypeValue["12"] = "22";
+		
+			arrContentDTypeTitle["13"] = "오늘, 이 작품";
+			arrContentDTypeValue["13"] = "23";
+		
+		
+		arrContentTypeTitle = ['영상','인기콘텐츠','최신콘텐츠','오디오가이드','이용자갤러리'];
+		arrContentTypeValue = ['02','04','05','06','07'];
+		for(var i = 0 ; i < arrContentTypeTitle.length ; i ++){
+			htmlText1 += "<li>";
+			htmlText1 += "		<label class=\"checkbox\">";
+			htmlText1 += "			<input type=\"checkbox\" name=\"ckContentType\" id=\"ckContentType"+i+"\" value=\""+arrContentTypeValue[i]+"\" onclick=\"clickCheck(this,'2');digitalSetDTypeList('"+i+"')\">";
+			htmlText1 += "			<i></i>";
+			htmlText1 += "			<span>"+arrContentTypeTitle[i]+"</span>";
+			htmlText1 += "		</label>";
+			htmlText1 += "</li>";
+		}
+		/* for(var i = 0 ; i < arrContentDTypeTitle.length ; i ++){
+			htmlText2 += "<li>";
+			htmlText2 += "		<label class=\"checkbox\">";
+			htmlText2 += "			<input type=\"checkbox\" name=\"ckContentDType\" id=\"ckContentType"+i+"\" value=\""+arrContentDTypeValue[i]+"\" onclick=\"clickCheck(this,'3')\">";
+			htmlText2 += "			<i></i>";
+			htmlText2 += "			<span>"+arrContentDTypeTitle[i]+"</span>";
+			htmlText2 += "		</label>";
+			htmlText2 += "</li>";
+		} */
+		
+	}else if(inputValue == "collection"){
+		<!-- 미술 분야 -->
+		
+			arrContentDTypeTitle["0"] = "한국화";
+			arrContentDTypeValue["0"] = "WFDKO";
+		
+			arrContentDTypeTitle["1"] = "회화";
+			arrContentDTypeValue["1"] = "WFDPA";
+		
+			arrContentDTypeTitle["2"] = "조각";
+			arrContentDTypeValue["2"] = "WFDSC";
+		
+			arrContentDTypeTitle["3"] = "공예";
+			arrContentDTypeValue["3"] = "WFDCR";
+		
+			arrContentDTypeTitle["4"] = "뉴미디어";
+			arrContentDTypeValue["4"] = "WFDNM";
+		
+			arrContentDTypeTitle["5"] = "건축";
+			arrContentDTypeValue["5"] = "WFDAR";
+		
+			arrContentDTypeTitle["6"] = "디자인";
+			arrContentDTypeValue["6"] = "WFDDE";
+		
+			arrContentDTypeTitle["7"] = "드로잉&middot;판화";
+			arrContentDTypeValue["7"] = "WFDDP";
+		
+			arrContentDTypeTitle["8"] = "사진";
+			arrContentDTypeValue["8"] = "WFDPH";
+		
+			arrContentDTypeTitle["9"] = "서예";
+			arrContentDTypeValue["9"] = "WFDCA";
+		
+		
+		arrContentTypeTitle = ['고화질','전시중','오디오가이드','기증품'];
+		arrContentTypeValue = ['01','02','03','04'];
+		for(var i = 0 ; i < arrContentTypeTitle.length ; i ++){
+			htmlText1 += "<li>";
+			htmlText1 += "		<label class=\"checkbox\">";
+			htmlText1 += "			<input type=\"checkbox\" name=\"ckContentType\" id=\"ckContentType01\" value=\""+arrContentTypeValue[i]+"\" onclick=\"clickCheck(this,'2')\">";
+			htmlText1 += "			<i></i>";
+			htmlText1 += "			<span>"+arrContentTypeTitle[i]+"</span>";
+			htmlText1 += "		</label>";
+			htmlText1 += "</li>";
+		}
+		for(var i = 0 ; i < arrContentDTypeTitle.length ; i ++){
+			htmlText2 += "<li>";
+			htmlText2 += "		<label class=\"checkbox\">";
+			htmlText2 += "			<input type=\"checkbox\" name=\"ckContentDType\" id=\"ckContentType"+i+"\" value=\""+arrContentDTypeValue[i]+"\" onclick=\"clickCheck(this,'3')\">";
+			htmlText2 += "			<i></i>";
+			htmlText2 += "			<span>"+arrContentDTypeTitle[i]+"</span>";
+			htmlText2 += "		</label>";
+			htmlText2 += "</li>";
+		}
+	}else if(inputValue == "newsletter" || inputValue == "publication"){
+		arrContentTypeTitle = ['일주일','한달','전체'];
+		arrContentTypeValue = ['01','02','ALL'];
+		for(var i = 0 ; i < arrContentTypeTitle.length ; i ++){
+			htmlText1 += "<li>";
+			htmlText1 += "		<label class=\"checkbox\">";
+			htmlText1 += "			<input type=\"checkbox\" name=\"ckContentType\" id=\"ckContentType"+i+"\" value=\""+arrContentTypeValue[i]+"\" onclick=\"clickCheck(this,'2')\">";
+			htmlText1 += "			<i></i>";
+			htmlText1 += "			<span>"+arrContentTypeTitle[i]+"</span>";
+			htmlText1 += "		</label>";
+			htmlText1 += "</li>";
+		}
+	}else if(inputValue == "news"){
+		arrContentTypeTitle = ['새소식','채용'];
+		arrContentTypeValue = ['101','102'];
+		for(var i = 0 ; i < arrContentTypeTitle.length ; i ++){
+			htmlText1 += "<li>";
+			htmlText1 += "		<label class=\"checkbox\">";
+			htmlText1 += "			<input type=\"checkbox\" name=\"ckContentType\" id=\"ckContentType"+i+"\" value=\""+arrContentTypeValue[i]+"\" onclick=\"clickCheck(this,'2')\">";
+			htmlText1 += "			<i></i>";
+			htmlText1 += "			<span>"+arrContentTypeTitle[i]+"</span>";
+			htmlText1 += "		</label>";
+			htmlText1 += "</li>";
+		}
+	}
+	$("#contentTypeList").html(htmlText1);
+	$("#contentDTypeList").html(htmlText2);
+}
+
+function digitalSetDTypeList(val){
+	
+	arrContentDTypeTitle = Array();
+	arrContentDTypeValue = Array();	
+	var htmlText1 = "";
+	var htmlText2 = "";
+	
+	<!-- 미술 분야 -->
+	
+		arrContentDTypeTitle["0"] = "관장이 들려주는 소장품 이야기";
+		arrContentDTypeValue["0"] = "15";
+	
+		arrContentDTypeTitle["1"] = "큐레이터 전시 해설";
+		arrContentDTypeValue["1"] = "08";
+	
+		arrContentDTypeTitle["2"] = "강의 &amp; 학술토론";
+		arrContentDTypeValue["2"] = "09";
+	
+		arrContentDTypeTitle["3"] = "작품 &amp; 작가";
+		arrContentDTypeValue["3"] = "12";
+	
+		arrContentDTypeTitle["4"] = "청소년";
+		arrContentDTypeValue["4"] = "18";
+	
+		arrContentDTypeTitle["5"] = "어린이 미술관";
+		arrContentDTypeValue["5"] = "13";
+	
+		arrContentDTypeTitle["6"] = "수어 해설";
+		arrContentDTypeValue["6"] = "14";
+	
+		arrContentDTypeTitle["7"] = "음성해설";
+		arrContentDTypeValue["7"] = "16";
+	
+		arrContentDTypeTitle["8"] = "MMCA라이브";
+		arrContentDTypeValue["8"] = "17";
+	
+		arrContentDTypeTitle["9"] = "미술관 소식";
+		arrContentDTypeValue["9"] = "11";
+	
+		arrContentDTypeTitle["10"] = "VR";
+		arrContentDTypeValue["10"] = "20";
+	
+		arrContentDTypeTitle["11"] = "MMCA 작가와의 대화";
+		arrContentDTypeValue["11"] = "21";
+	
+		arrContentDTypeTitle["12"] = "도슨트에게 듣다";
+		arrContentDTypeValue["12"] = "22";
+	
+		arrContentDTypeTitle["13"] = "오늘, 이 작품";
+		arrContentDTypeValue["13"] = "23";
+	
+	if(val == '0' || val == '1' || val == '2'){
+		for(var i = 0 ; i < arrContentDTypeTitle.length ; i ++){
+			htmlText2 += "<li>";
+			htmlText2 += "		<label class=\"checkbox\">";
+			htmlText2 += "			<input type=\"checkbox\" name=\"ckContentDType\" id=\"ckContentType"+i+"\" value=\""+arrContentDTypeValue[i]+"\" onclick=\"clickCheck(this,'3')\">";
+			htmlText2 += "			<i></i>";
+			htmlText2 += "			<span>"+arrContentDTypeTitle[i]+"</span>";
+			htmlText2 += "		</label>";
+			htmlText2 += "</li>";
+		}
+	} 
+	
+	$("#contentDTypeList").html(htmlText2);
+}
+
+
+function clickCheck(target, type) { /*onclick="clickCheck(this)"  */
+	
+	if(type == '1'){
+		document.querySelectorAll(`input[name=ckContents]`).forEach(el => el.checked = false);
+	}else if(type == '2'){
+		document.querySelectorAll(`input[name=ckContentType]`).forEach(el => el.checked = false);
+	}else if(type == '3'){
+		document.querySelectorAll(`input[name=ckContentDType]`).forEach(el => el.checked = false);
+	}
+    target.checked = true;
+}
+
+//데이터 조회
+function fn_SmartGetList1(){
+	var paramPay = $("#paramPay").val();
+	var paramWhere = $("#paramWhere").val();
+	var paramWhen = $("#paramWhen").val();
+	var startDate = $("#startDate").val();
+	var endDate = $("#endDate").val();
+	var sort = $("#sort").val();
+
+	var htmlText = "";
+	
+	$("#smartListDiv").empty();
+	$("#smartPageDiv").empty();
+	
+	var param;
+	var pageIndex = document.smartListForm.pageIndex.value; 
+	
+	param = "paramPay=" + paramPay + "&paramWhere=" + paramWhere + "&paramWhen=" + paramWhen  + "&pageIndex=" + pageIndex+ "&sort=" + sort;
+	
+	if(startDate && endDate) {
+		param += "&startDate=" + startDate + "&endDate=" + endDate;
+	}
+	
+	$.ajax({
+				url : "/smartSearchAjax.do",
+				data : param,
+				dataType : 'json',
+				Type : 'post',
+				//contentType : "application/x-www-form-urlencoded;charset=utf-8",
+				success : function(data) {
+					
+					//페이지가 있는경우
+					var paginationInfo = data.paginationInfo;
+					
+					//목록을 가져와서 html에 넣어준다.
+					var exhibitionsList = data.exhibitionsList;
+					
+					/////////////전시구분 html///////////////
+					if (exhibitionsList != "") {
+						htmlText += "<ul>";
+						for ( var i = 0; i < exhibitionsList.length; i++) {
+
+							var exhTitle = exhibitionsList[i].exhTitle;
+							exhTitle = exhTitle.replace(/</gi, "&lt;");
+							exhTitle = exhTitle.replace(/>/gi, "&gt;");
+							
+							var exhStDt = exhibitionsList[i].exhStDt;
+							var exhEdDt = exhibitionsList[i].exhEdDt;
+							
+							htmlText += "<li>";
+							htmlText += "	<a href=\"#\" onclick=\"javascript:fn_SmartDetail('" + exhibitionsList[i].exhId + "', '" + exhibitionsList[i].exhFlag + "')\">";
+							htmlText += "		<figure>";
+							htmlText += "				<img src=\""+exhibitionsList[i].exhThumbImg+"\" alt=\""+exhTitle+"\" />";
+							htmlText += "		</figure>";
+							htmlText += "		<div class='info'>";
+							htmlText += "			<span class='ctg'>" + exhibitionsList[i].exhPlaNm + "</span>";
+							htmlText += "			<p class='tit'>" + exhibitionsList[i].exhTitle + "</p>";
+							htmlText += "			<span class='txt'>" + exhibitionsList[i].exhStDt + "~" + exhibitionsList[i].exhEdDt + "</span>";
+							if( exhibitionsList[i].exhFlag != '3'){
+								htmlText += "			<button type=\"button\" class=\"btn full\" onclick='fn_re();'>예약하기</button>";	
+							}
+							htmlText += "		</div>";
+							htmlText += "	</a>";
+							htmlText += "</li>";
+						}
+						htmlText += "</ul>";
+					}
+					
+					$("#smartListDiv").html(htmlText);
+					 //hidden값 셋팅
+					$("#currentPageNo").val(paginationInfo.currentPageNo);
+					$("#pageSize").val(paginationInfo.pageSize);
+					$("#firstRecordIndex").val(paginationInfo.firstRecordIndex);
+					$("#totalRecordCount").val(paginationInfo.totalRecordCount);
+					fn_SmartGetPage(); 
+					
+				}
+			});
+}
+
+//데이터 조회
+function fn_SmartGetList2(){
+	
+	var paramContents = $("#paramContents").val();
+	var paramContentType = $("#paramContentType").val();
+	var paramContentDType = $("#paramContentDType").val();
+
+	var htmlText = "";
+	
+	$("#smartListDiv").empty();
+	$("#smartPageDiv").empty();
+	
+	var param;
+	var pageIndex = document.smartListForm.pageIndex.value; 
+	
+	param = "paramContents=" + paramContents + "&paramContentType=" + paramContentType + "&paramContentDType=" + paramContentDType  + "&pageIndex=" + pageIndex;
+																	  paramContentType
+	$.ajax({
+				url : "/smartSearchContentsAjax.do",
+				data : param,
+				dataType : 'json',
+				Type : 'post',
+				//contentType : "application/x-www-form-urlencoded;charset=utf-8",
+				success : function(data) {
+					
+					//페이지가 있는경우
+					var paginationInfo = data.paginationInfo;
+					
+					//목록을 가져와서 html에 넣어준다.
+					var resultList = data.resultList;
+					
+					/////////////콘텐츠 html///////////////
+					if (resultList != "") {
+						htmlText += "<ul>";
+						
+						
+						if(paramContents == "digital"){
+							for ( var i = 0; i < resultList.length; i++) {
+								htmlText += "<li>";
+								//arrContentTypeTitle = ['VR','영상','음성','인기콘텐츠','최신콘텐츠','오디오가이드','이용자갤러리'];
+								//arrContentTypeValue = ['01','02','03','04','05','06','07'];
+								if(paramContentType == "06"){ //오디오가이드
+									htmlText += "	<a href=\"#\" onclick=\"javascript:fn_SmartDigitalExhGuideInfo('" + resultList[i].exhId + "')\">";
+									htmlText += "		<figure>";
+									htmlText += "				<img src=\"" + resultList[i].exhThumbImg + "\" alt=\""+resultList[i].exhTitle + "\" />";
+									htmlText += "		</figure>";
+									htmlText += "		<div class='info'>";
+									htmlText += "			<span class='ctg'>" + resultList[i].exhPlaNm  + "</span>";
+									htmlText += "			<p class='tit'>" + resultList[i].exhTitle + "</p>";
+									htmlText += "			<span class='txt'>" + resultList[i].exhStDt + "~" + resultList[i].exhEdDt +"</span>";
+									//htmlText += "			<button type=\"button\" class=\"btn full\" onclick='fn_re();'>예약하기</button>";
+									htmlText += "		</div>";
+									htmlText += "	</a>";
+									htmlText += "</li>";
+								}else if(paramContentType == "07"){ //이용자갤러리
+									htmlText += "	<a href=\"#\" onclick=\"javascript:fn_SmartDigitalCuraInfo('" + resultList[i].dcmId + "')\">";
+									htmlText += "		<figure>";
+									
+									if(resultList[i].dcmThumbImg == undefined){
+										htmlText += '				<img src="/images/common/noimage.png" alt="'+resultList[i].dcmTitle+'">';
+									}else{
+										htmlText += "				<img src=\"" + resultList[i].dcmThumbImg + "\" alt=\""+resultList[i].dcmTitle + "\" />";
+									}
+									
+									htmlText += "		</figure>";
+									htmlText += "		<div class='info'>";
+									htmlText += "			<span class='ctg'>이용자갤러리</span>";
+									htmlText += "			<p class='tit'>" + resultList[i].dcmTitle + "</p>";
+									htmlText += "			<span class='txt'>" + resultList[i].dcmPersonNm + "님 갤러리</span>";
+									//htmlText += "			<button type=\"button\" class=\"btn full\" onclick='fn_re();'>예약하기</button>";
+									htmlText += "		</div>";
+									htmlText += "	</a>";
+									htmlText += "</li>";
+								}else{
+									htmlText += "	<a href=\"#\" onclick=\"javascript:fn_SmartDigitalMovInfo('" + resultList[i].srcId + "')\">";
+									htmlText += "		<figure>";
+									htmlText += "				<img src=\"" + resultList[i].srcThumbImg + "\" alt=\""+resultList[i].srcTitle + "\" />";
+									htmlText += "		</figure>";
+									htmlText += "		<div class='info'>";
+									htmlText += "			<span class='ctg'>동영상</span>";
+									htmlText += "			<p class='tit'>" + resultList[i].srcTitle + "</p>";
+									htmlText += "			<span class='txt'>" + resultList[i].srcRegDt + "</span>";
+									//htmlText += "			<button type=\"button\" class=\"btn full\" onclick='fn_re();'>예약하기</button>";
+									htmlText += "		</div>";
+									htmlText += "	</a>";
+									htmlText += "</li>";
+								}
+							}
+						}
+						if(paramContents == "collection"){
+							for ( var i = 0; i < resultList.length; i++) {
+								htmlText += "<li>";
+								htmlText += "	<a href=\"#\" onclick=\"javascript:fn_SmartInfoPage('" + resultList[i].museumId + "', '" + resultList[i].wrkinfoSeqno + "', '" + resultList[i].artistnm + "', '" + resultList[i].wrkMngNo + "')\">";
+								htmlText += "		<figure>";
+								htmlText += "				<img src=\"" + resultList[i].imageQuaDetB + "\" alt=\""+resultList[i].exhPlaNm+"\" />";
+								htmlText += "		</figure>";
+								htmlText += "		<div class='info'>";
+								htmlText += "			<span class='ctg'>" + resultList[i].artistnm + "</span>";
+								htmlText += "			<p class='tit'>" + resultList[i].wrkNm + "</p>";
+								htmlText += "			<span class='txt'>" + resultList[i].wrkProdTerm + "</span>";
+								//htmlText += "			<button type=\"button\" class=\"btn full\" onclick='fn_re();'>예약하기</button>";
+								htmlText += "		</div>";
+								htmlText += "	</a>";
+								htmlText += "</li>";
+							}
+						}	
+						if(paramContents == "newsletter"){
+							for ( var i = 0; i < resultList.length; i++) {
+								htmlText += "<li>";
+								htmlText += "	<a href=\"#\" onclick=\"javascript:fn_SmartDetailVeiw('" + resultList[i].nlId + "', '" + resultList[i].nlCd + "','1360','02')\">";
+								htmlText += "		<figure>";
+								htmlText += "				<img src=\""+resultList[i].filePath+"\" alt=\""+resultList[i].nlTitle+"\" />";
+								htmlText += "		</figure>";
+								htmlText += "		<div class='info'>";
+								htmlText += "			<span class='ctg'>" + resultList[i].nlCdNm + "</span>";
+								htmlText += "			<p class='tit'>" + resultList[i].nlTitle + "</p>";
+								htmlText += "			<span class='txt'>" + resultList[i].nlRegDt+ "</span>";
+								htmlText += "		</div>";
+								htmlText += "	</a>";
+								htmlText += "</li>";
+							}
+											/* onClick=\"fn_detailVeiw('"+movList.bId+"','"+movList.bCd+"','"+cdId+"','"+bGb+"')\"  */
+						}	
+						if(paramContents == "news"){
+							for ( var i = 0; i < resultList.length; i++) {
+								htmlText += "<li>";
+								htmlText += "	<a href=\"#\" onclick=\"javascript:fn_SmartNewsDetailVeiw('" + resultList[i].bdCId + "', '" + resultList[i].bdCTp + "')\">";
+								//htmlText += "		<figure>";
+								//htmlText += "				<img src=\""+resultList[i].BdCThumbImg+"\" alt=\""+resultList[i].bdCTitle+"\" />";
+								//htmlText += "		</figure>";
+								htmlText += "		<div class='info'>";
+								if(resultList[i].bdPlaNm){
+									htmlText += "			<span class='ctg'>" + resultList[i].bdPlaNm + "</span>";
+								}else{
+									htmlText += "			<span class='ctg'>공통</span>";
+								}
+								htmlText += "			<p class='tit'>" + resultList[i].bdCTitle + "</p>";
+								htmlText += "			<span class='txt'>" + resultList[i].bdCRegDt + "</span>"; 
+								htmlText += "		</div>";
+								htmlText += "	</a>";
+								htmlText += "</li>";
+							}
+						}	
+						if(paramContents == "publication"){
+							for ( var i = 0; i < resultList.length; i++) {
+								htmlText += "<li>";
+								htmlText += "	<a href=\"#\" onclick=\"javascript:fn_SmartPublicationDetail('" + resultList[i].pubId + "')\">";
+								htmlText += "		<figure>";
+								htmlText += "				<img src=\""+resultList[i].pubThumbImg+"\" alt=\""+resultList[i].pubTitle+"\" />";
+								htmlText += "		</figure>";
+								htmlText += "		<div class='info'>";
+								htmlText += "			<span class='ctg'>" + resultList[i].pubNm + "</span>";
+								htmlText += "			<p class='tit'>" + resultList[i].pubTitle + "</p>";
+								htmlText += "			<span class='txt'>" + resultList[i].pubRegDt  + "</span>";
+								htmlText += "		</div>";
+								htmlText += "	</a>";
+								htmlText += "</li>";
+							}			
+						}	
+						htmlText += "</ul>";
+					}
+					
+					$("#smartListDiv").html(htmlText);
+					 //hidden값 셋팅
+					$("#currentPageNo").val(paginationInfo.currentPageNo);
+					$("#pageSize").val(paginationInfo.pageSize);
+					$("#firstRecordIndex").val(paginationInfo.firstRecordIndex);
+					$("#totalRecordCount").val(paginationInfo.totalRecordCount);
+					fn_SmartGetPage(); 
+					
+				}
+			});
+}
+
+function fn_smart_link_page(pageNo){
+	document.smartListForm.target = "_self";
+	document.smartListForm.pageIndex.value = pageNo;
+	var inputValue = $("input[name='raWhat']:checked").val();
+	if(inputValue == "exh"){
+		fn_SmartGetList1();		
+	}else if(inputValue == "con"){
+		fn_SmartGetList2();
+	}
+}
+
+function fn_SmartDetail(exhId, exhFlag) {
+	document.smartListForm.exhId.value = exhId;
+	document.smartListForm.action = "/exhibitions/exhibitionsDetail.do?exhFlag="+exhFlag+"";
+	document.smartListForm.submit();
+}
+
+function fn_SmartDigitalExhGuideInfo(exhId) {
+
+	document.smartListForm.exhId.value = exhId;
+	document.smartListForm.target = "_self";
+	document.smartListForm.action = "/digitals/digitalExhGuideDetail.do";
+	document.smartListForm.submit();
+
+}
+
+function fn_SmartDigitalCuraInfo(dcmId){
+	document.smartListForm.dcmId.value = dcmId;
+	document.smartListForm.target = "_self";
+	document.smartListForm.action = "/digitals/digitalCurasInfo.do";
+   	document.smartListForm.submit();
+}
+
+
+function fn_SmartDigitalMovInfo(srcId){
+	//$("#mbId").val(srcId);
+	document.smartListForm.mbId.value = srcId;
+	document.smartListForm.target = "_self";
+	document.smartListForm.action = "/digitals/digitalMovInfo.do";
+   	document.smartListForm.submit();
+}
+
+function fn_SmartDetailVeiw(nlId, nlCd,cdId, bGb){
+	document.smartListForm.nlId.value = nlId;
+	document.smartListForm.nlCd.value = nlCd;
+	document.smartListForm.cdId.value = cdId;
+	document.smartListForm.bGb.value = bGb;
+	document.smartListForm.target = "_self";
+	document.smartListForm.action = "/artResearch/newsLetterInfo.do";
+   	document.smartListForm.submit();
+   	
+	
+}
+
+function fn_SmartNewsDetailVeiw(bdCId){
+	document.smartListForm.bdCId.value = bdCId;
+	document.smartListForm.action = "/pr/newsDetail.do";
+	document.smartListForm.target = "_self";
+	document.smartListForm.method = "post";
+	document.smartListForm.submit();			
+}
+
+function fn_SmartPublicationDetail(pubId){
+	document.smartListForm.pubId.value = pubId;
+	document.smartListForm.target = "_self";
+	document.smartListForm.action = "/artResearch/publicationInfo.do";
+   	document.smartListForm.submit();
+}
+
+
+function fn_SmartGetPage(){	
+	var currentPage = document.getElementById("currentPageNo").value;
+	var totalPageCount = document.getElementById("totalRecordCount").value;
+	var pageSize = document.getElementById("pageSize").value;
+	
+	var pageCnt = 0;
+	var pageUnit = 0;
+	var gubun = typeof(langCd);
+	if(gubun == "undefined"){
+		var langCd = 1;
+	}
+	if(document.getElementById("pageCnt") == null){
+		pageCnt = 5;
+	
+	}else{
+		pageCnt = document.getElementById("pageCnt").value;
+	}
+	
+	if(document.getElementById("pageUnit") == null){
+		pageUnit = 10;
+	}else{
+		pageUnit = document.getElementById("pageUnit").value;
+	}
+	
+	var pagingString = "";
+
+	var totalCount = totalPageCount;
+	var start = 0;
+	var listSize = pageCnt;
+	
+	if(totalCount % pageUnit == 0) totalPage = parseInt(totalCount / pageUnit);
+	else  totalPage = parseInt(totalCount / pageUnit) + 1;
+	
+	var totalNavi = 1;
+	if(totalPage % pageSize == 0) totalNavi = parseInt(totalPage / listSize);
+	else totalNavi = parseInt(totalPage / listSize) + 1;
+	
+	var currentNavi = 1;
+	currentNavi = Math.ceil(currentPage / listSize);
+
+	var nextNavi = currentNavi + 1;
+	if(nextNavi > totalNavi) nextNavi = 0;
+
+	var prevNavi = currentNavi - 1;
+	if (prevNavi < 0)
+		prevNavi = 0;
+
+	var lastNavi = totalNavi;
+	var startNavi = 1;
+
+	if (startNavi == lastNavi) {
+		startNavi = 0;
+		lastNavi = 0;
+	}
+	pagingString += "<nav class=\"paging\" aria-label=\"page navigation\">";
+	
+	if (startNavi > 0 && totalCount > 0 && currentNavi > 1) {
+		pagingString += "<button  type=\"button\" class=\"first icon\" aria-label=\"처음 페이지\" onclick=\"fn_smart_link_page(1);return false;\"></button>";
+	}
+	if (prevNavi > 0) {
+		if(langCd == "1"){
+			pagingString += "<button  type=\"button\" class=\"prev icon\" aria-label=\"이전 페이지\"  onclick=\"fn_smart_link_page("+eval(((prevNavi - 1) * listSize) + 1)+");return false;\" ></button>";
+		}else{
+			pagingString += "<button  type=\"button\" class=\"prev icon\" aria-label=\"이전 페이지\"  onclick=\"fn_smart_link_page("+eval(((prevNavi - 1) * listSize) + 1)+");return false;\" ></button>";
+		}
+	}
+	var last_page = (((currentNavi - 1) * listSize) + 1) + (listSize - 1);
+	last_page = min(last_page, totalPage);
+
+	var startingNavi = ((currentNavi - 1) * listSize) + 1;
+		
+	for(i = startingNavi ; i<=last_page; i++) {
+	
+		if(prevNavi == 0){
+			if(currentPage == i)  { // BLAH
+				if(i == 1){
+					pagingString += "<strong aria-current=\"page\" tabindex=\"0\">"+i+"</strong>";
+				}else{
+					pagingString += "<strong aria-current=\"page\" tabindex=\"0\">"+i+"</strong>";
+				}	
+			} else {
+				
+				if(i == 1){
+					pagingString += "<a href=\"#none\" onclick=\"fn_smart_link_page("+i+");return false;\">"+i+"</a>";
+				}else{
+					pagingString += "<a href=\"#none\" onclick=\"fn_smart_link_page("+i+");return false;\">"+i+"</a>";
+				}
+			}
+		}else{
+			if(currentPage == i)  { // BLAH
+				pagingString += "<strong aria-current=\"page\" tabindex=\"0\">"+i+"</strong>";
+			} else {
+				pagingString += "<a href=\"#none\" onclick=\"fn_smart_link_page("+i+");return false;\">"+i+"</a>";
+			}
+		}
+	}
+	
+	if (nextNavi > 0) {
+		if(langCd == "1"){
+			pagingString += "<button  type=\"button\" class=\"next icon\" aria-label=\"다음 페이지\"  onclick=\"fn_smart_link_page("+eval(((nextNavi - 1) * listSize) + 1)+");return false;\" ></button>";
+		}else{
+			pagingString += "<button  type=\"button\" class=\"next icon\" aria-label=\"다음 페이지\"  onclick=\"fn_smart_link_page("+eval(((nextNavi - 1) * listSize) + 1)+");return false;\" ></button>";
+		}
+	}
+
+	if (currentNavi < lastNavi) {
+		pagingString += "<button  type=\"button\" class=\"last icon\" aria-label=\"마지막 페이지\"  onclick=\"fn_smart_link_page("+totalPage+");return false;\" ></button>";
+	}
+	pagingString += "</nav>";
+	
+	document.getElementById("smartPageDiv").innerHTML = pagingString;
+	
+}
+
+function min(number1, number2) {
+	var retVal = 0;
+
+	if (number1 < number2)
+		retVal = number1;
+	else
+		retVal = number2;
+
+	return retVal;
+}
+
+function fn_smartSearch(){
+	//$("#pageIndex").val("1");
+	document.smartListForm.pageIndex.value = 1;
+	var inputValue = $("input[name='raWhat']:checked").val();
+	if(inputValue == "exh"){
+		fn_SmartGetList1();		
+	}else if(inputValue == "con"){
+		fn_SmartGetList2();
+	}
+}
+
+function fn_SmartInfoPage(museumId, wrkinfoSeqno, artistnm, wrkMngNo){
+	
+	document.smartListForm.museumId.value = museumId;
+	document.smartListForm.wrkinfoSeqno.value = wrkinfoSeqno;
+	document.smartListForm.artistnm.value = artistnm;
+	document.smartListForm.wrkMngNo.value = wrkMngNo;
+	
+	document.smartListForm.target = "_self";
+   	document.smartListForm.action = "/collections/collectionsDetailPage.do";
+   	document.smartListForm.submit();		
+}
+	
+</script>
+<form name="smartListForm" method="post">
+	<input type="hidden" name="menuId" value="01L001200000000">
+	<input type="hidden" id="exhId" name="exhId">
+	<input type="hidden" id="searchExhPlaCd" name="searchExhPlaCd" value="">
+	<input type="hidden" id="searchExhCd" name="searchExhCd" value="">
+	<input type="hidden" id="exhFlag" name="exhFlag" value="">	    
+	<input type="hidden" id="paramPay" name="paramPay">
+	<input type="hidden" id="paramWhere" name="paramWhere">
+	<input type="hidden" id="paramWhen" name="paramWhen" value="오늘">	    
+	<input type="hidden" id="paramContents" name="paramContents">	  
+	<input type="hidden" id="paramContentType" name="paramContentType">	  
+	<input type="hidden" id="paramContentDType" name="paramContentDType">	  
+	
+	<input type="hidden" id="museumId" name="museumId">	 
+	<input type="hidden" id="wrkinfoSeqno" name="wrkinfoSeqno">	 
+	<input type="hidden" id="artistnm" name="artistnm">	 
+	<input type="hidden" id="wrkMngNo" name="wrkMngNo">	 
+	<input type="hidden" id="mbId" name="mbId">	 
+	<input type="hidden" id="tableTap" name="tableTap" value="">	 
+	<input type="hidden" id="dcmId" name="dcmId">	
+	<input type="hidden" id="nlId" name="nlId">	
+	<input type="hidden" id="nlCd" name="nlCd">	
+	<input type="hidden" id="cdId" name="cdId">	
+	<input type="hidden" id="bGb" name="bGb">	
+	
+	<input type="hidden" id="bdCId" name="bdCId">	
+	<input type="hidden" id="pubId" name="pubId">	
+	
+	
+<!-- dialogSmart -->
+	<div class="dialogWrap dialogSmart">
+		<!-- dialog sizeL -->
+		<section class="dialog sizeL" role="dialog" aria-modal="true" aria-labelledby="title01" aria-describedby="content01" data-align="center">
+			<!-- dialogHead -->
+			<header class="dialogHead">
+				<h2 id="title01" class="title">국립현대미술관 스마트 검색</h2>
+			</header>
+			<!-- //dialogHead -->
+			<!-- dialogBody -->
+			<div id="content01" class="dialogBody">
+				<div class="dialogBodyInner">
+					<!-- formGroup 전시관람 -->
+					<div class="formGroup formGroupCol" id="group1">
+						<!-- fgList -->
+						<div class="fgList">
+							<strong class="subject">무엇이 궁금하세요?</strong>
+							<div class="conInfo">
+								<ul class="formList horizontal">
+									<li>
+										<label class="radio" for="exh">
+											<input type="radio" name="raWhat" id="exh" value="exh" checked="checked">
+											<i></i>
+											<span>전시관람</span>
+										</label>
+									</li>
+									<li>
+										<label class="radio" for="con">
+											<input type="radio" name="raWhat" id="con" value="con">
+											<i></i>
+											<span>콘텐츠 검색</span>
+										</label>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<!-- //fgList -->
+						<!-- fgList -->
+						<div class="fgList" id="group1_1">
+							<strong class="subject">가격은?</strong>
+							<div class="conInfo">
+								<ul class="formList horizontal">
+									<li>
+										<label class="checkbox" for="ckPay01">
+											<input type="checkbox" name="ckPay" id="ckPay01" value="유료">
+											<i></i>
+											<span>유료</span>
+										</label>
+									</li>
+									<li>
+										<label class="checkbox" for="ckPay02">
+											<input type="checkbox" name="ckPay" id="ckPay02" value="무료">
+											<i></i>
+											<span>무료</span>
+										</label>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<!-- //fgList -->
+						<!-- fgList -->
+						<div class="fgList" id="group1_2">
+							<strong class="subject">어디서 관람할까요?</strong>
+							<div class="conInfo">
+								<ul class="formList">
+									<li>
+										<label class="checkbox" for="ckWhere01">
+											<input type="checkbox" name="ckWhere" id="ckWhere01" value="130">
+											<i></i>
+											<span>서울관</span>
+										</label>
+									</li>
+									<li>
+										<label class="checkbox" for="ckWhere02">
+											<input type="checkbox" name="ckWhere" id="ckWhere02" value="120">
+											<i></i>
+											<span>덕수궁관</span>
+										</label>
+									</li>
+									<li>
+										<label class="checkbox" for="ckWhere03">
+											<input type="checkbox" name="ckWhere" id="ckWhere03" value="110">
+											<i></i>
+											<span>과천관</span>
+										</label>
+									</li>
+									<li>
+										<label class="checkbox" for="ckWhere04">
+											<input type="checkbox" name="ckWhere" id="ckWhere04" value="150">
+											<i></i>
+											<span>청주관</span>
+										</label>
+									</li>
+									<li>
+										<label class="checkbox" for="ckWhere05">
+											<input type="checkbox" name="ckWhere" id="ckWhere05" value="140">
+											<i></i>
+											<span>어린이미술관</span>
+										</label>
+									</li>
+									<li>
+										<label class="checkbox" for="ckWhere06">
+											<input type="checkbox" name="ckWhere" id="ckWhere06" value="999">
+											<i></i>
+											<span>기타</span>
+										</label>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<!-- //fgList -->
+						<!-- fgList -->
+						<div class="fgList" id="group1_3">
+							<strong class="subject">언제 가실껀가요?</strong>
+							<div class="conInfo">
+								<!-- formList -->
+								<ul class="formList">
+									<li>
+										<label class="checkbox" for="ckWhen01">
+											<input type="checkbox" name="ckWhen" id="ckWhen01" value="오늘" checked="checked">
+											<i></i>
+											<span>오늘</span>
+										</label>
+									</li>
+									<li>
+										<label class="checkbox" for="chWhen02">
+											<input type="checkbox" name="ckWhen" id="chWhen02" value="이번주">
+											<i></i>
+											<span>이번주</span>
+										</label>
+									</li>
+									<li>
+										<label class="checkbox" for="ckWhen03">
+											<input type="checkbox" name="ckWhen" id="ckWhen03" value="다음주">
+											<i></i>
+											<span>다음주</span>
+										</label>
+									</li>
+									<li>
+										<label class="checkbox" for="ckWhen04">
+											<input type="checkbox" name="ckWhen" id="ckWhen04" value="이번달">
+											<i></i>
+											<span>이번달</span>
+										</label>
+									</li>
+									<li class="checkDate">
+										<label class="checkbox" for="ckWhen05">
+											<input type="checkbox" name="ckWhen" id="ckWhen05" value="날짜선택">
+											<i></i>
+											<span>날짜선택</span>
+										</label>
+										<div class="dateInpWrap">
+											<div class="dateInput">
+												<input type="text" class="input hasDatepicker" title="시작날짜선택" placeholder="YYYY-MM-DD" id="startDate" name="startDate"><img class="ui-datepicker-trigger" src="./국립현대미술관_files/btn_date.png" alt="선택" title="선택">
+											</div>
+											<span class="space">~</span>
+											<div class="dateInput">
+												<input type="text" class="input hasDatepicker" title="종료날짜선택" placeholder="YYYY-MM-DD" id="endDate" name="endDate"><img class="ui-datepicker-trigger" src="./국립현대미술관_files/btn_date.png" alt="선택" title="선택">
+											</div>
+										</div>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<!-- //fgList -->
+						<!-- formGroup 콘텐츠 검색 항목 -->
+						<div class="fgList" id="group2_1" style="display: none;">
+							<strong class="subject">카테고리</strong>
+							<div class="conInfo">
+								<ul class="formList horizontal">
+									<li>
+										<label class="checkbox" for="ckContents01">
+											<input type="checkbox" name="ckContents" id="ckContents01" value="digital" onclick="clickCheck(this,&#39;1&#39;);">
+											<i></i>
+											<span>디지털미술관</span>
+										</label>
+									</li>
+									<li>
+										<label class="checkbox" for="ckContents02">
+											<input type="checkbox" name="ckContents" id="ckContents02" value="collection" onclick="clickCheck(this,&#39;1&#39;);">
+											<i></i>
+											<span>소장품</span>
+										</label>
+									</li>
+									<li>
+										<label class="checkbox" for="ckContents03">
+											<input type="checkbox" name="ckContents" id="ckContents03" value="newsletter" onclick="clickCheck(this,&#39;1&#39;);">
+											<i></i>
+											<span>뉴스레터</span>
+										</label>
+									</li>
+								 	<li>
+										<label class="checkbox" for="ckContents04">
+											<input type="checkbox" name="ckContents" id="ckContents04" value="publication" onclick="clickCheck(this,&#39;1&#39;);">
+											<i></i>
+											<span>소식지</span>
+										</label>
+									</li>
+									<li>
+										<label class="checkbox" for="ckContents05">
+											<input type="checkbox" name="ckContents" id="ckContents05" value="news" onclick="clickCheck(this,&#39;1&#39;);">
+											<i></i>
+											<span>새소식</span>
+										</label>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<div class="fgList" id="group2_2" style="display: none;">
+							<strong class="subject">종류</strong>
+							<div class="conInfo">
+								<ul class="formList" id="contentTypeList">
+									<li>
+										<label class="checkbox" for="ckContentType01">
+											<input type="checkbox" name="ckContentType" id="ckContentType01" value="01" onclick="clickCheck(this,&#39;2&#39;);">
+											<i></i>
+											<span>이미지</span>
+										</label>
+									</li>
+									<li>
+										<label class="checkbox" for="ckContentType02">
+											<input type="checkbox" name="ckContentType" id="ckContentType02" value="02" onclick="clickCheck(this,&#39;2&#39;)">
+											<i></i>
+											<span>출판물</span>
+										</label>
+									</li>
+									<li>
+										<label class="checkbox" for="ckContentType03">
+											<input type="checkbox" name="ckContentType" id="ckContentType03" value="03" onclick="clickCheck(this,&#39;2&#39;)">
+											<i></i>
+											<span>영상</span>
+										</label>
+									</li>
+									<li>
+										<label class="checkbox" for="ckContentType04">
+											<input type="checkbox" name="ckContentType" id="ckContentType04" value="04" onclick="clickCheck(this,&#39;2&#39;)">
+											<i></i>
+											<span>안내</span>
+										</label>
+									</li>
+									<li>
+										<label class="checkbox" for="ckContentType05">
+											<input type="checkbox" name="ckContentType" id="ckContentType05" value="05" onclick="clickCheck(this,&#39;2&#39;)">
+											<i></i>
+											<span>VR</span>
+										</label>
+									</li>
+									<li>
+										<label class="checkbox" for="ckContentType06">
+											<input type="checkbox" name="ckContentType" id="ckContentType06" value="06" onclick="clickCheck(this,&#39;2&#39;)">
+											<i></i>
+											<span>작품</span>
+										</label>
+									</li>
+									<li>
+										<label class="checkbox" for="ckContentType07">
+											<input type="checkbox" name="ckContentType" id="ckContentType07" value="07" onclick="clickCheck(this,&#39;2&#39;)">
+											<i></i>
+											<span>사진자료</span>
+										</label>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<div class="fgList" id="group2_3" style="display: none;">
+							<strong class="subject">상세조건</strong>
+							<div class="conInfo">
+								<ul class="formList" id="contentDTypeList">
+									<li>
+										<label class="checkbox" for="ckContentDType01">
+											<input type="checkbox" name="ckContentDType" id="ckContentDType01" value="WFDKO" onclick="clickCheck(this,&#39;3&#39;)">
+											<i></i>
+											<span>한국화</span>
+										</label>
+									</li>
+									<li>
+										<label class="checkbox" for="ckContentDType02">
+											<input type="checkbox" name="ckContentDType" id="ckContentDType02" value="WFDPA" onclick="clickCheck(this,&#39;3&#39;)">
+											<i></i>
+											<span>회화</span>
+										</label>
+									</li>
+									<li>
+										<label class="checkbox" for="ckContentDType03">
+											<input type="checkbox" name="ckContentDType" id="ckContentDType03" value="WFDSC" onclick="clickCheck(this,&#39;3&#39;)">
+											<i></i>
+											<span>조각</span>
+										</label>
+									</li>
+									<li>
+										<label class="checkbox" for="ckContentDType04">
+											<input type="checkbox" name="ckContentDType" id="ckContentDType04" value="WFDCR" onclick="clickCheck(this,&#39;3&#39;)">
+											<i></i>
+											<span>공예</span>
+										</label>
+									</li>
+									<li>
+										<label class="checkbox" for="ckContentDType05">
+											<input type="checkbox" name="ckContentDType" id="ckContentDType05" value="WFDNM" onclick="clickCheck(this,&#39;3&#39;)">
+											<i></i>
+											<span>뉴미디어</span>
+										</label>
+									</li>
+									<li>
+										<label class="checkbox" for="ckContentDType06">
+											<input type="checkbox" name="ckContentDType" id="ckContentDType06" value="WFDAR" onclick="clickCheck(this,&#39;3&#39;)">
+											<i></i>
+											<span>건축</span>
+										</label>
+									</li>
+									<li>
+										<label class="checkbox" for="ckContentDType07">
+											<input type="checkbox" name="ckContentDType" id="ckContentDType07" value="WFDDE" onclick="clickCheck(this,&#39;3&#39;)">
+											<i></i>
+											<span>디자인</span>
+										</label>
+									</li>
+									<li>
+										<label class="checkbox" for="ckContentDType08">
+											<input type="checkbox" name="ckContentDType" id="ckContentDType08" value="WFDDP" onclick="clickCheck(this,&#39;3&#39;)">
+											<i></i>
+											<span>드로잉판화</span>
+										</label>
+									</li>
+									<li>
+										<label class="checkbox" for="ckContentDType09">
+											<input type="checkbox" name="ckContentDType" id="ckContentDType09" value="WFDPH" onclick="clickCheck(this,&#39;3&#39;)">
+											<i></i>
+											<span>사진</span>
+										</label>
+									</li>
+									<li>
+										<label class="checkbox" for="ckContentDType10">
+											<input type="checkbox" name="ckContentDType" id="ckContentDType10" value="WFDCA" onclick="clickCheck(this,&#39;3&#39;)">
+											<i></i>
+											<span>서예</span>
+										</label>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<!-- //formGroup 전시관람-->
+
+					<!-- smartResult -->
+					<div class="smartResult" id="selResult">
+						<div class="item condition">
+							<p id="firstTxt">전시관람이 궁금하셨군요</p>
+							<ul class="barList" id="selSearch"><li>오늘</li></ul>
+							<em>조건에 맞는 콘텐츠를 찾아드리도록 하겠습니다.</em>
+						</div>
+						<div class="item">
+							<div class="btnWrap">
+								<button type="button" class="btn" onclick="fn_init();fn_raWhatInit();">검색 초기화</button>
+								<button type="button" class="btn bg01" onclick="fn_smartSearch();">적용</button>
+							</div>
+						</div>
+					</div>
+					<!-- //smartResult -->
+
+					<!-- boardType01 전시검색 리스트 -->
+					<div id="smartListDiv" class="boardType01">
+					</div>
+					<!-- //boardType01 전시검색 리스트-->
+
+					<!-- boardType01 콘텐츠 검색 리스트 -->
+					<div class="boardType01 fixHeight02 board-col3" style="display:none;">
+						<ul>
+							<li>
+								<a href="https://www.mmca.go.kr/#">
+									<figure class="media thumb">
+										<img src="./국립현대미술관_files/img_01.jpg" alt="">
+									</figure>
+									<div class="info">
+										<span class="ctg">과천-전시</span>
+										<p class="tit">제목노출영역 제목노출영역 제목노출영역 제목노출영역</p>
+									</div>
+								</a>
+							</li>
+							<li>
+								<a href="https://www.mmca.go.kr/#">
+									<figure class="media thumb">
+										<img src="./국립현대미술관_files/img_01.jpg" alt="">
+									</figure>
+									<div class="info">
+										<span class="ctg">과천-전시</span>
+										<p class="tit">제목노출영역 제목노출영역 제목노출영역 제목노출영역</p>
+									</div>
+								</a>
+							</li>
+							<li>
+								<a href="https://www.mmca.go.kr/#">
+									<figure class="media thumb">
+										<img src="./국립현대미술관_files/img_01.jpg" alt="">
+									</figure>
+									<div class="info">
+										<span class="ctg">과천-전시</span>
+										<p class="tit">제목노출영역 제목노출영역 제목노출영역 제목노출영역</p>
+									</div>
+								</a>
+							</li>
+						</ul>
+					</div>
+					<!-- //boardType01 콘텐츠 검색 리스트-->
+					<!-- pagingWrap -->
+					<div class="pagingWrap" id="smartPageDiv"></div>
+					<input type="hidden" id="pageIndex" name="pageIndex" value="">
+					<input type="hidden" id="currentPageNo" name="currentPageNo" value="">
+					<input type="hidden" id="totalRecordCount" name="totalRecordCount" value="">
+					<input type="hidden" id="pageSize" name="pageSize" value="">
+					<input type="hidden" id="pageUnit" name="pageUnit" value="8">
+					<input type="hidden" id="firstRecordIndex" name="firstRecordIndex" value="">
+					<!-- //pagingWrap -->
+				</div>
+			</div>
+			<!-- //dialogBody -->
+			<button type="button" class="close" aria-label="dialog 닫기"></button>
+		</section>
+		<!-- //dialog -->
+	</div>
+	</form>
+	<!-- //dialogSmart -->		 
+	<!-- smartsearch end -->
+	
+	<!-- COPYRIGHT (C) 2002-2020 BIZSPRING INC. LOGGER(TM) ALL RIGHTS RESERVED. -->
+	<script language="JavaScript">/* LOGGER TRACKING SCRIPT V.31 : 1001 *//*X*//* COPYRIGHT 2002-2020 BIZSPRING INC. *//*X*//* DO NOT MODIFY THIS SCRIPT. *//*X*/var _TRK_DOMAIN="logger.mmca.go.kr";var _trk_bMSIE=(document.all)?true:false;var _trk_bJS12=(window.screen)?true:false;function _trk_escape(_str) { var str, ch; var bEncURI = "N"; eval("try{bEncURI=encodeURI('Y');}catch(_e){ }" ); if( bEncURI == "Y" ) str=encodeURI(_str); else str = escape(_str); str=str.split("+").join("%2B"); str=str.split("/").join("%2F"); str=str.split("&").join("%26"); str=str.split("?").join("%3F"); str=str.split(":").join("%3A"); str=str.split("#").join("%23"); return str;}function _trk_setCookie(name,value,expire) { var today=new Date(); today.setTime(today.getTime()+ expire ); document.cookie=name+"="+value+"; path=/; expires="+today.toGMTString()+";";}function _trk_getCookie(name) { var cookieName=name+"="; var x=0; while(x<=document.cookie.length) { var y=(x+cookieName.length); if(document.cookie.substring(x,y)==cookieName) {  if((endOfCookie=document.cookie.indexOf(";",y))==-1) endOfCookie=document.cookie.length;  return unescape(document.cookie.substring(y,endOfCookie)); } x=document.cookie.indexOf(" ",x)+1; if(x == 0) break; } return "";}function _trk_getParameter(name) { var paraName=name+"="; var URL=""+self.document.location.search; var tURL=""; eval("try{ tURL=top.document.location.search; }catch(_e){}"); URL=URL+"&"+tURL; if(URL.indexOf(paraName)!=-1) { var x=URL.indexOf(paraName)+paraName.length; var y=URL.substr(x).indexOf("&"); if(y!=-1) return URL.substring(x,x+y); else return URL.substr(x); } return "";}function _trk_make_code(_TRK_SERVER,_TRK_U) { var dt=document.title.toString(); dt=dt.substr(0,128); var dr=self.document.referrer; var tdr=""; eval("try{ tdr=top.document.referrer; }catch(_e){}"); var tdu=""; eval("try{ tdu=top.document.location.href; }catch(_e){}"); var bFrm=false; if(dr==tdu) { dr=tdr; bFrm=true; } if(dr=="undefined") dr=""; var du=self.document.location.href; if(du.substr(0,4)=="file") return ""; var adKeyVal = ""; if(bFrm) { adKeyVal=_trk_getParameter("OVKEY"); if(adKeyVal!="" && du.indexOf("OVKEY=")<0) {  if(du.indexOf("?")!=-1) du=du+"&OVKEY="+adKeyVal; else du=du+"?OVKEY="+adKeyVal;  adKeyVal=_trk_getParameter("OVRAW");  if(adKeyVal!="" && du.indexOf("OVRAW=")<0 ) if(du.indexOf("?")!=-1) du=du+"&OVRAW="+adKeyVal; else du=du+"?OVRAW="+adKeyVal; } else {  adKeyVal=_trk_getParameter("netpia");  if(adKeyVal!="" && du.indexOf("netpia=")<0 ) if(du.indexOf("?")!=-1) du=du+"&netpia="+adKeyVal; else du=du+"?netpia="+adKeyVal; } adKeyVal=_trk_getParameter("logger_kw"); if(adKeyVal!="" && du.indexOf("logger_kw=")<0 )  if(du.indexOf("?")!=-1) du=du+"&logger_kw="+adKeyVal; else du=du+"?logger_kw="+adKeyVal; adKeyVal=_trk_getParameter("source"); if(adKeyVal!="" && du.indexOf("source=")<0 )  if(du.indexOf("?")!=-1) du=du+"&source="+adKeyVal; else du=du+"?source="+adKeyVal; adKeyVal=_trk_getParameter("keywd"); if(adKeyVal!="" && du.indexOf("keywd=")<0 )  if(du.indexOf("?")!=-1) du=du+"&keywd="+adKeyVal; else du=du+"?keywd="+adKeyVal; adKeyVal=_trk_getParameter("NVADID"); if(adKeyVal!="" && du.indexOf("NVADID=")<0 )  if(du.indexOf("?")!=-1) du=du+"&NVADID="+adKeyVal; else du=du+"?NVADID="+adKeyVal; adKeyVal=_trk_getParameter("NVAR"); if(adKeyVal!="" && du.indexOf("NVAR=")<0 )  if(du.indexOf("?")!=-1) du=du+"&NVAR="+adKeyVal; else du=du+"?NVAR="+adKeyVal; adKeyVal=_trk_getParameter("NVADKWD");  if(adKeyVal!="" && du.indexOf("NVADKWD=")<0)  if(du.indexOf("?")!=-1) du=du+"&NVADKWD="+adKeyVal; else du=du+"?NVADKWD="+adKeyVal;  adKeyVal=_trk_getParameter("NVKWD");  if(adKeyVal!="" && du.indexOf("NVKWD=")<0 )  if(du.indexOf("?")!=-1) du=du+"&NVKWD="+adKeyVal; else du=du+"?NVKWD="+adKeyVal;   adKeyVal=_trk_getParameter("DWIT");  if(adKeyVal!="" && du.indexOf("DWIT=")<0) if(du.indexOf("?")!=-1) du=du+"&DWIT="+adKeyVal; else du=du+"?DWIT="+adKeyVal;  adKeyVal=_trk_getParameter("DWIC");  if(adKeyVal!="" && du.indexOf("DWIC=")<0 )  if(du.indexOf("?")!=-1) du=du+"&DWIC="+adKeyVal; else du=du+"?DWIC="+adKeyVal;  adKeyVal=_trk_getParameter("gad"); if(adKeyVal!="" && du.indexOf("gad=")<0 )  if(du.indexOf("?")!=-1) du=du+"&gad="+adKeyVal; else du=du+"?gad="+adKeyVal; adKeyVal=_trk_getParameter("gclid"); if(adKeyVal!="" && du.indexOf("gclid=")<0 )  if(du.indexOf("?")!=-1) du=du+"&gclid="+adKeyVal; else du=du+"?gclid="+adKeyVal; adKeyVal=_trk_getParameter("gkw"); if(adKeyVal!="" && du.indexOf("gkw=")<0 )  if(du.indexOf("?")!=-1) du=du+"&gkw="+adKeyVal; else du=du+"?gkw="+adKeyVal; adKeyVal=_trk_getParameter("rcsite"); if(adKeyVal!="" && du.indexOf("rcsite=")<0 )  if(du.indexOf("?")!=-1) du=du+"&rcsite="+adKeyVal; else du=du+"?rcsite="+adKeyVal; adKeyVal=_trk_getParameter("rctype"); if(adKeyVal!="" && du.indexOf("rctype=")<0 )  if(du.indexOf("?")!=-1) du=du+"&rctype="+adKeyVal; else du=du+"?rctype="+adKeyVal; adKeyVal=_trk_getParameter("rc_code"); if(adKeyVal!="" && du.indexOf("rc_code=")<0 )  if(du.indexOf("?")!=-1) du=du+"&rc_code="+adKeyVal; else du=du+"?rc_code="+adKeyVal; adKeyVal=_trk_getParameter("_C_"); if(adKeyVal!="" && du.indexOf("_C_=")<0 )  if(du.indexOf("?")!=-1) du=du+"&_C_="+adKeyVal; else du=du+"?_C_="+adKeyVal; } var ce=navigator.cookieEnabled?"Y":"N"; var je=navigator.javaEnabled()?"Y":"N"; var ss=""; var cd = ""; if(_trk_bJS12) { ss=screen.width+"x"+screen.height; cd=screen.colorDepth; } if(!dt) dt=""; if(!dr) dr=""; if(!du) du=""; if(!ce) ce=""; if(!je) je=""; var t = new Date; var tye=(_trk_bMSIE)?(t.getYear()):(t.getFullYear()); var tmo=t.getMonth()+1; var tda=t.getDate(); var tho=t.getHours(); var tmi=t.getMinutes(); var tse=t.getSeconds(); var tzo=t.getTimezoneOffset(); var tc = ""; var prtcl="https://"; if(prtcl=="https://") _TRK_SERVER=_TRK_DOMAIN; tc=tc+prtcl+_TRK_SERVER; var bPNF=((typeof _TRK_PI)!="undefined" && _TRK_PI=="PNF")?true:false; if(bPNF) tc=tc+"/tracker_click.tsp"; else tc=tc+"/tracker.tsp"; tc=tc+"?u="+_TRK_U+"&XU=&EXEN="+_EXEN; if(bPNF) { tc=tc+"&rnd="+Math.random()+"&CKFL="+_TRK_PI+"&CKDATA="+_trk_escape(du); } else { tc=tc+"&dr="+_trk_escape(dr)+"&XDR="+"&dt="+_trk_escape(dt)+"&du="+_trk_escape(du); if((typeof _TRK_CP)!="undefined" && _TRK_CP!="") tc=tc+"&CP="+_trk_escape(_TRK_CP)+"&XCP="; if((typeof _TRK_PI)!="undefined" && _TRK_PI!="") tc=tc+"&PI="+_TRK_PI; if((typeof _TRK_PN)!="undefined" && _TRK_PN!="") tc=tc+"&PN="+_trk_escape(_TRK_PN); if((typeof _TRK_MF)!="undefined" && _TRK_MF!="") tc=tc+"&MF="+_trk_escape(_TRK_MF); if((typeof _TRK_OA)!="undefined" && _TRK_OA!="") tc=tc+"&OA="+_TRK_OA; if((typeof _TRK_OP)!="undefined" && _TRK_OP!="") tc=tc+"&OP="+_trk_escape(_TRK_OP); if((typeof _TRK_OE)!="undefined" && _TRK_OE!="") tc=tc+"&OE="+_TRK_OE; if((typeof _TRK_CC)!="undefined" && _TRK_CC!="") tc=tc+"&CC="+_TRK_CC; if((typeof _TRK_RK)!="undefined" && _TRK_RK!="") tc=tc+"&RK="+_trk_escape(_TRK_RK); if((typeof _TRK_SX)!="undefined" && _TRK_SX!="") tc=tc+"&SX="+_TRK_SX; if((typeof _TRK_AG)!="undefined" && _TRK_AG!="") tc=tc+"&AG="+_TRK_AG; if((typeof _TRK_IK)!="undefined" && _TRK_IK!="") tc=tc+"&IK="+_trk_escape(_TRK_IK); tc=tc+"&js=Y"+"&ss="+escape(ss)+"&cd="+cd+"&ce="+ce+"&je="+je+"&tzo="+tzo+"&tye="+tye+"&tmo="+tmo+"&tda="+tda+"&tho="+tho+"&tmi="+tmi+"&tse="+tse; } return tc;}var _TRK_LIFE=_trk_getParameter("_L_");if(_TRK_LIFE=="") _TRK_LIFE=14;_TRK_LIFE = parseInt(_TRK_LIFE)*24*60*60*1000;var _TRK_U="";var _TRK_U_P=_trk_getParameter("_U_");var _TRK_U_C= _trk_getCookie("_TRK_U");if(_TRK_U_C!="") _TRK_U=_TRK_U_C;if(_TRK_U_P!="") _TRK_U=_TRK_U_P;if(_TRK_U!="" && _TRK_U_P!="") _trk_setCookie("_TRK_U",_TRK_U,_TRK_LIFE);var _TRK_CC_C=_trk_getCookie("_TRK_CC");var _TRK_CC_P=_trk_getParameter("_C_");if((typeof _TRK_CC)!="undefined" && _TRK_CC!="") _TRK_CC_P=_TRK_CC;if(_TRK_CC_C!="") _TRK_CC=_TRK_CC_C;if(_TRK_CC_P!="") _TRK_CC=_TRK_CC_P;if((typeof _TRK_CC)!="undefined" && _TRK_CC!="" && _TRK_CC_P!="") _trk_setCookie("_TRK_CC",_TRK_CC,_TRK_LIFE);var _TRK_RK_C=_trk_getCookie("_TRK_RK");var _TRK_RK_P=_trk_getParameter("_R_");if((typeof _TRK_RK)!="undefined" && _TRK_RK!="") _TRK_RK_P=_TRK_RK;if(_TRK_RK_C!="") _TRK_RK=_TRK_RK_C;if(_TRK_RK_P!="") _TRK_RK=_TRK_RK_P;if((typeof _TRK_RK)!="undefined" && _TRK_RK!="" && _TRK_RK_P!="") _trk_setCookie("_TRK_RK",_TRK_RK,_TRK_LIFE);var _SS_LIFE = 30*60*1000;var _EXEN = _trk_getCookie("_EXEN");if( _EXEN == "" ) _EXEN = 0; _EXEN ++;_trk_setCookie("_EXEN",_EXEN,_SS_LIFE);var _trk_code_base=_trk_make_code("logger.mmca.go.kr","1001");var _trk_code_chan="";if(_TRK_U!="") _trk_code_chan=_trk_code_base.replace(/\?u=1001&XU=/g,"?u="+_TRK_U+"&XU=");var _trk_img_base=new Image();var _trk_img_chan=new Image();var _trk_img_base_click=new Image();var _trk_img_chan_click=new Image();if(_trk_bJS12==true) { if(_trk_bMSIE) { _trk_img_base.src=_trk_code_base; if(_TRK_U!="") _trk_img_chan.src=_trk_code_chan; } else { setTimeout("_trk_img_base.src=_trk_code_base;",1); if(_TRK_U!="") setTimeout("_trk_img_chan.src=_trk_code_chan;",1); }} else { if(_trk_bMSIE) document.write('<div style=\"display: none\">'); document.write('<img src=\"'+_trk_code_base+'\" height=\"0\" width=\"0\">'); if(_TRK_U!="") document.write('<img src=\"'+_trk_code_chan+'\" height=\"0\" width=\"0\">'); if(_trk_bMSIE) document.write('</div>');}function _trk_flashEnvView(env1,env2,env3,env4,env5,env6,env7,env8,env9,env10,env11,env12){ var _trk_code_flash=_trk_code_base; for (var envCnt=1; envCnt< 13; envCnt++){ if((eval("env"+envCnt) != "") && (typeof eval("env"+envCnt) != "undefined" )){  var trk_str  = eval("env"+envCnt) ;  if(trk_str.indexOf("_TRK_CP")>=0){   var trk_cp = trk_str.split('=');   var _TRK_CP = trk_cp[1];   _trk_code_flash=_trk_code_flash.replace(/&CP=.*&XCP=/g,"&XCP=");   _trk_code_flash=_trk_code_flash.replace(/&dr=.*&XDR=/g,"&XDR=");   _trk_code_flash=_trk_code_flash+"&dr=&CP="+_trk_escape(_TRK_CP)+"&rnd="+Math.random();   if(_TRK_U!="") {    _trk_code_flash=_trk_code_flash.replace(/\?u=1001&XU=/g,"?u="+_TRK_U+"&XU=");   }  }  if((trk_str.indexOf("_TRK_PN")>=0) || (trk_str.indexOf("_TRK_MF")>=0) || (trk_str.indexOf("_TRK_RK")>=0) || (trk_str.indexOf("_TRK_OP")>=0) || (trk_str.indexOf("_TRK_IK")>=0)){   var trk_env = trk_str.split('=');   var _TRK_ENV = _trk_escape(trk_env[1]);   var tkr_env_name = trk_str.substring(trk_str.indexOf('_',1)+1,trk_str.lastIndexOf('='));   var _trk_envs = "&"+tkr_env_name+"="+ _TRK_ENV;   if( _trk_code_flash.indexOf("&"+tkr_env_name+"=") > 0) {    var regVal = "\&"+tkr_env_name+"\=(.*)(\&PN\=|\&MF\=|\&OA\=|\&OP\=|\&OE\=|\&CC\=|\&RK\=|\&SX\=|\&AG\=|\&IK\=|\&js\=)";    var envReg = new RegExp(regVal, 'gi');    var envRst = _trk_code_flash.match(envReg);    var envRst = envRst.toString();    var envArr = envRst.split('&');    var envVar = envArr[1];    _trk_code_flash=_trk_code_flash.replace("&"+envVar+"&", _trk_envs);   }else{    _trk_code_flash = _trk_code_flash+"&"+tkr_env_name+"="+_TRK_ENV;   }  }  if((trk_str.indexOf("_TRK_PI")>=0) || (trk_str.indexOf("_TRK_OA")>=0) || (trk_str.indexOf("_TRK_OE")>=0) || (trk_str.indexOf("_TRK_CC")>=0) || (trk_str.indexOf("_TRK_SX")>=0) || (trk_str.indexOf("_TRK_AG")>=0)){   var trk_env = trk_str.split('=');   var _TRK_ENV = trk_env[1];   var tkr_env_name = trk_str.substring(trk_str.indexOf('_',1)+1,trk_str.lastIndexOf('='));   var _trk_envs = "&"+tkr_env_name+"="+_TRK_ENV+"&";   if( _trk_code_flash.indexOf("&"+tkr_env_name+"=") > 0) {    var regVal = "\&"+tkr_env_name+"\=(.*)(\&PN\=|\&MF\=|\&OA\=|\&OP\=|\&OE\=|\&CC\=|\&RK\=|\&SX\=|\&AG\=|\&IK\=|\&js\=)";    var envReg = new RegExp(regVal, 'gi');    var envRst = _trk_code_flash.match(envReg);    var envRst = envRst.toString();    var envArr = envRst.split('&');    var envVar = envArr[1];    _trk_code_flash=_trk_code_flash.replace("&"+envVar+"&", _trk_envs);   }else{    _trk_code_flash = _trk_code_flash+"&"+tkr_env_name+"="+_TRK_ENV;   }  } } } _trk_img_base_click.src=_trk_code_flash ;}function _trk_flashContentsView(_TRK_PI, _TRK_CP) { var _trk_code_flash=_trk_code_base; var _trk_piv = "&PI="+_TRK_PI+"&"; _trk_code_flash=_trk_code_flash.replace(/&CP=.*&XCP=/g,"&XCP="); _trk_code_flash=_trk_code_flash.replace(/&dr=.*&XDR=/g,"&XDR="); if( _trk_code_flash.indexOf("&PI=") > 0) { var regVal = "\&PI\=(.*)(\&PN\=|\&MF\=|\&OA\=|\&OP\=|\&OE\=|\&CC\=|\&RK\=|\&SX\=|\&AG\=|\&IK\=|\&js\=)"; var envReg = new RegExp(regVal, 'gi'); var envRst = _trk_code_flash.match(envReg); var envRst = envRst.toString(); var envArr = envRst.split('&'); var envVar = envArr[1]; _trk_code_flash=_trk_code_flash.replace("&"+envVar+"&", _trk_piv ); }else{ _trk_code_flash = _trk_code_flash+"&PI="+_TRK_PI; } _trk_img_base_click.src=_trk_code_flash+"&dr=&CP="+_trk_escape(_TRK_CP)+"&rnd="+Math.random(); if(_TRK_U!="") { _trk_code_flash=_trk_code_flash.replace(/\?u=1001&XU=/g,"?u="+_TRK_U+"&XU="); _trk_img_chan_click.src=_trk_code_flash+"&dr=&CP="+_trk_escape(_TRK_CP)+"&rnd="+Math.random(); }}function _trk_clickTrace(_TRK_CKFL,_TRK_CKDATA) { var _trk_code_click=_trk_code_base.substr(0,_trk_code_base.indexOf("tracker.tsp")); _trk_code_click=_trk_code_click+"tracker_click.tsp?rnd="+Math.random()+"&CKFL="+_TRK_CKFL+"&CKDATA="+_trk_escape(_TRK_CKDATA); _trk_img_base_click.src=_trk_code_click+"&u=1001"; if(_TRK_U!="") _trk_img_chan_click.src=_trk_code_click+"&u="+_TRK_U;}function _trk_adClick( adSvr, svcCode, adCode ) { var ac = ""; var prtcl="https://"; if(prtcl=="https://") adSvr=_TRK_DOMAIN; ac=ac+prtcl+adSvr; _trk_img_base_click.src=ac+"/tracker_ad.tsp?u="+svcCode+"&mode=C&adCode="+adCode;}</script>
+	<noscript><img src="http://logger.mmca.go.kr/tracker.tsp?u=1001&js=N" width=0 height=0/></noscript>
+	<!-- END OF LOGGER TRACKING SCRIPT -->
+	
+	 <script type="text/javascript" src="./국립현대미술관_files/1255_Insight_WebAnalytics.js.다운로드"></script>
+	
+
+<!-- dialoSubscribe -->
+<div class="dialogWrap dialoSubscribe">
+	<!-- dialog -->
+	<!--
+		TODO
+		중앙 정렬
+		data-align="center"
+		-->
+	<section class="dialog sizeL" role="dialog" aria-modal="true" aria-labelledby="title01" aria-describedby="content01" data-align="center">
+		<!-- dialogHead -->
+		<header class="dialogHead">
+			<h2 id="title01" class="title">개인정보 수집 및 활용 동의</h2>
+		</header>
+		<!-- //dialogHead -->
+		<!-- dialogBody -->
+		<div id="content01" class="dialogBody">
+			<div class="dialogBodyInner">
+				<div class="privacyBox">
+					<div class="tbox">
+						<ul>
+							<li>
+								1.수집이용목적: 뉴스레터발송
+							</li>
+							<li>
+								2.수집항목: 이메일 주소
+							</li>
+							<li>
+								3.보유 및 이용기간: 2년
+							</li>
+							<li>
+								4.동의거부에 따른 불이익:
+								<span>개인정보 수집 동의를 거부하실 수 있습니다. 다만, 동의하지 않을 경우 뉴스레터를 받으실 수 없습니다.<br>
+									개인정보는 위 수집·이용 목적 이외의 다른 목적으로 사용하지 않습니다.</span>
+							</li>
+						</ul>
+					</div>
+					<div class="chk">
+						<label class="checkbox" for="newsletterAgree">
+							<input type="checkbox" id="newsletterAgree" name="newsletterAgree">
+							<i></i>
+							<p>개인정보 수집 및 활용에 동의합니다.</p>
+						</label>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- //dialogBody -->
+		<!-- floating -->
+		<div class="floating">
+			<button type="button" class="btn close" id="newsLetterClose">취소</button>
+			<button type="button" class="btn bg01" onclick="sendNews();return false;">제출</button>
+		</div>
+		<!-- //floating -->
+		<button type="button" class="close" aria-label="dialog 닫기"></button>
+	</section>
+	<!-- //dialog -->
+</div>
+<!-- //dialoSubscribe -->
+<!-- kakaoChanelPopup -->
+<div class="dialogWrap kakaoChanelPopup" id="popKakao">
+	<!-- dialog -->
+	<!--
+		TODO
+		중앙 정렬
+		data-align="center"
+	 -->
+	<section class="dialog" role="dialog" aria-modal="true" aria-labelledby="title01" aria-describedby="content01" data-align="center">
+		<!-- dialogHead -->
+		<header class="dialogHead">
+			<h2 id="title01" class="title">카카오채널 추가 안내</h2>
+		</header>
+		<!-- //dialogHead -->
+		<!-- dialogBody -->
+		<div id="content01" class="dialogBody">
+			<div class="dialogBodyInner">
+				국립현대미술관 MMCA 뉴스레터 카카오톡 채널을<br>
+				추가하시면 발행소식을 카카오톡으로 편리하게<br>
+				접하실 수 있습니다.<br><br>
+
+				카카오톡 채널 추가하러 가시겠습니까?
+			</div>
+		</div>
+		<!-- //dialogBody -->
+		<!-- floating -->
+		<div class="floating">
+			<button type="button" class="btn bg01" onclick="goChannel();return false;">예</button>
+			<button type="button" class="btn ok" id="kakaoClose">아니요</button>
+		</div>
+		<!-- //floating -->
+		<button type="button" class="close" aria-label="dialog 닫기"></button>
+	</section>
+	<!-- //dialog -->
+</div>
+<!-- // kakaoChanelPopup -->
+
+<!-- footer end -->
+<div id="ui-datepicker-div" class="ui-datepicker ui-widget ui-widget-content ui-helper-clearfix ui-corner-all"></div></body></html>

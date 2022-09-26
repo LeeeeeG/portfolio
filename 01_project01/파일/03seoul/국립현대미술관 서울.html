@@ -1,0 +1,2232 @@
+<!DOCTYPE html>
+<!-- saved from url=(0048)https://www.mmca.go.kr/visitingInfo/seoulInfo.do -->
+<html lang="ko" class="OL mdBrowser pc JS" style=""><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	
+	<title>국립현대미술관 서울</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="viewport" content="width=device-width, viewport-fit=cover">
+	<meta name="author" content="국립현대미술관">
+	<meta name="keyword" content="국립현대미술관">
+	<meta name="description" content="국립현대미술관 홈페이지">
+	<meta name="format-detection" content="telephone=no">
+	<link rel="shortcut icon" href="https://www.mmca.go.kr/assetGwan/images/common/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="./국립현대미술관 서울_files/style.css">
+    
+    <link rel="stylesheet" href="./국립현대미술관 서울_files/content.css"> <!-- MuseumManner 배너 적용 때문에 넣은 스타일. 깨지는부분 있으면 빼야함 -->
+    
+    <!-- jquery -->
+    <script src="./국립현대미술관 서울_files/jquery.min.js.다운로드"></script>
+    <script src="./국립현대미술관 서울_files/jquery-ui.min.js.다운로드"></script>
+    <script src="./국립현대미술관 서울_files/jquery.ui.touch-punch.min.js.다운로드"></script>
+    <script src="./국립현대미술관 서울_files/scrollbar.js.다운로드"></script> 
+    <!-- swiper -->
+    <script src="./국립현대미술관 서울_files/swiper.js.다운로드"></script>
+    <!-- webfont js -->
+    <script src="./국립현대미술관 서울_files/webfont.min.js.다운로드"></script>
+    <!-- common js -->
+    <script defer="" src="./국립현대미술관 서울_files/common.js.다운로드"></script>
+	
+<script type="text/javascript">
+	
+	//document.oncontextmenu = function (e) {return false;}	//우클릭 방지
+
+	//010A00000000000(언어01,1뎁스01,2뎁스001,3뎁스001,4뎁스001, 5뎁스01)
+	/*
+	 * @param 이동URL
+	 * @param 메뉴ID
+	 * @param 메뉴DEPTH
+	*/
+	function fn_menuChange(url, menuId, depth){
+		
+		if(menuId == '0030002150'){
+			alert('코로나 19 상황으로 멤버십 신규 가입이 일시 중단되었습니다.');
+			return;
+		}
+		
+		if(menuId == '0030002130'){
+			alert('코로나 19 상황으로 멤버십 선물하기가 불가합니다.');
+			return;
+		}
+		
+		$.ajax({
+			  url:  '/log/ajaxInsMenuLog.do',
+			  data: 'menuId='+menuId+'&depth='+depth,
+			  type : "POST",
+			  dataType: 'json',
+			  success: function(data) { 
+				  
+					document.headForm.menuId.value = menuId;
+					document.headForm.action = url;
+					document.headForm.target = "_self";
+				   	document.headForm.submit();
+			},
+			error: function(request,status,error){
+			    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			}
+		});
+	}
+	
+	//파일다운로드
+	function downloadFiles(filePath, fileName){
+		
+		document.fileDownloadForm.action = "/common/fileDownFront.do";
+		document.fileDownloadForm.method = "post";
+		document.fileDownloadForm.target = "_self";
+		document.fileDownloadForm.filePath.value = filePath;
+		document.fileDownloadForm.fileName.value = fileName;
+		document.fileDownloadForm.submit();
+	}
+</script><link rel="stylesheet" href="./국립현대미술관 서울_files/spoqa.css" media="all">
+</head>
+<body style="">
+	<form name="headForm" method="post">
+		<input type="hidden" name="menuId">
+	</form>
+	
+	<a href="https://www.mmca.go.kr/visitingInfo/seoulInfo.do#gnb" class="skipToContent">주메뉴 바로가기</a>
+	<a href="https://www.mmca.go.kr/visitingInfo/seoulInfo.do#container" class="skipToContent">본문 바로가기</a>
+	<!-- wrap -->
+	<div id="wrap" class="wrap">
+		<!-- noticeBannerWrap -->
+		<div class="noticeBannerWrap" role="banner">
+			<!-- inner -->
+			<div class="inner">
+				
+				<!-- //noticeBanner -->
+				<button type="button" class="closeBtn" aria-label="공지사항 닫기">
+					<i class="icon"></i>
+				</button>
+			</div>
+			<!-- //inner -->
+		</div>
+		<!-- //noticeBannerWrap -->
+		<!-- header -->
+		<div id="header" class="header">
+			<div class="inner">
+				<!-- logo -->
+				<h1 class="logo">
+					<a href="https://www.mmca.go.kr/">
+						<span class="he">MMCA</span>
+					</a>
+				</h1>
+				<!-- //logo -->
+				<!-- gnb -->
+				<nav id="gnb" class="gnb" aria-label="메인 메뉴">
+					<!-- mobGnbHead -->
+					<!-- <div class="mobGnbHead">
+						<div class="logoImg"><img src="/asset/images/common/bg_logo_full.svg" alt="MMCA 국립현대미술관 National Museum of Modern and Contemporary Art, Korea"></div>
+						<div class="mobHeadUtil">
+							<button type="button" class="btnSearchOpen" aria-haspopup="dialog" aria-label="검색열기"><i class="icon"></i></button>
+							<button type="button" class="btnMobClose" aria-label="메뉴닫기"><i class="icon"></i></button>
+						</div>
+					</div> -->
+					
+<div class="mobGnbHead">
+	<div class="logoImg">
+		<a href="https://www.mmca.go.kr/">
+			<img src="./국립현대미술관 서울_files/bg_logo_full.svg" alt="MMCA 국립현대미술관 National Museum of Modern and Contemporary Art, Korea">
+		</a>
+	</div>
+	<div class="mobHeadUtil">
+		<button type="button" class="btnSearchOpen" aria-haspopup="dialog" aria-label="검색열기"><i class="icon"></i></button>
+		<button type="button" class="btnMobClose" aria-label="메뉴닫기"><i class="icon"></i></button>
+	</div>
+</div>
+
+					<h2 class="he">메인 메뉴</h2>
+					<!-- gnbList -->
+					<ul class="gnbList">
+						<li class="">
+							<a href="javascript:fn_menuChange(&#39;/visitingInfo/seoulInfo.do&#39;, &#39;01A000100000000&#39;, &#39;1&#39;);">관람·참여<i class="icon togglePlus"></i></a>
+							<div class="sub" style="display: none;">
+								<ul>
+									<li><a href="javascript:fn_menuChange(&#39;/visitingInfo/seoulInfo.do&#39;, &#39;01A000101000000&#39;, &#39;2&#39;);">서울</a></li>
+									<li><a href="javascript:fn_menuChange(&#39;/visitingInfo/gwacheonInfo.do&#39;, &#39;01A000102000000&#39;, &#39;2&#39;);">과천</a></li>
+									<li><a href="javascript:fn_menuChange(&#39;/visitingInfo/deoksugungInfo.do&#39;, &#39;01A000103000000&#39;, &#39;2&#39;);">덕수궁</a></li>
+									<li><a href="javascript:fn_menuChange(&#39;/visitingInfo/cheongjuInfo.do&#39;, &#39;01A000104000000&#39;, &#39;2&#39;);">청주</a></li>
+									<li><a href="javascript:fn_menuChange(&#39;/visitingInfo/childArtMuseumInfo.do&#39;, &#39;01A000107000000&#39;, &#39;2&#39;);">어린이미술관</a></li>
+									<li><a href="javascript:fn_menuChange(&#39;/events/eventsList.do&#39;, &#39;01A000110000000&#39;, &#39;2&#39;);">이벤트</a></li>
+									<li><a href="javascript:fn_menuChange(&#39;/visitingInfo/introductionReserve.do&#39;, &#39;01A000108000000&#39;, &#39;2&#39;);">통합예약</a></li>
+									<li><a href="javascript:fn_menuChange(&#39;/visitingInfo/guideTimeTableList.do&#39;, &#39;01A000109000000&#39;, &#39;2&#39;);" class="ft400">전시해설</a></li>
+									<li><a href="javascript:fn_menuChange(&#39;/artStudio/artStudioMain.do&#39;, &#39;01A000105000000&#39;, &#39;2&#39;);" class="ft400">레지던시</a></li>
+									<li><a href="javascript:fn_menuChange(&#39;/about/governmentArtBank.do&#39;, &#39;01A000106000000&#39;, &#39;2&#39;);" class="ft400">미술은행</a></li>
+								</ul>
+							</div>
+						</li>
+						<li class="">
+							<a href="javascript:fn_menuChange(&#39;/exhibitions/progressList.do&#39;, &#39;01B000200000000&#39;, &#39;1&#39;);">전시<i class="icon togglePlus"></i></a>
+							<div class="sub" style="display: none;">
+								<ul>
+									<li><a href="javascript:fn_menuChange(&#39;/exhibitions/progressList.do&#39;, &#39;01B000201000000&#39;, &#39;2&#39;);">현재전시</a></li>
+									<li><a href="javascript:fn_menuChange(&#39;/exhibitions/futureProgressList.do&#39;, &#39;01B000202000000&#39;, &#39;2&#39;);">예정전시</a></li>
+									<li><a href="javascript:fn_menuChange(&#39;/exhibitions/pastProgressList.do&#39;, &#39;01B000203000000&#39;, &#39;2&#39;);">과거전시</a></li>
+								</ul>
+							</div>
+						</li>
+						<li class="">
+							<a href="javascript:fn_menuChange(&#39;/educations/eduIntro.do&#39;, &#39;01C000300000000&#39;, &#39;1&#39;);">교육<i class="icon togglePlus"></i></a>
+							<div class="sub" style="display: none;">
+								<ul>
+									<li><a href="javascript:fn_menuChange(&#39;/educations/eduIntro.do&#39;, &#39;01C000301000000&#39;, &#39;2&#39;);">미술관교육소개</a></li>
+									<li><a href="javascript:fn_menuChange(&#39;/educations/eduChildList.do&#39;, &#39;01C000302000000&#39;, &#39;2&#39;);">어린이</a></li>
+									<li><a href="javascript:fn_menuChange(&#39;/educations/eduYouthList.do&#39;, &#39;01C000303000000&#39;, &#39;2&#39;);">청소년</a></li>
+									<li><a href="javascript:fn_menuChange(&#39;/educations/eduTeacherList.do&#39;, &#39;01C000307000000&#39;, &#39;2&#39;);">교사</a></li>
+									<li><a href="javascript:fn_menuChange(&#39;/educations/eduAdultList.do&#39;, &#39;01C000304000000&#39;, &#39;2&#39;);">성인</a></li>
+									<li><a href="javascript:fn_menuChange(&#39;/educations/eduDataList.do&#39;, &#39;01C000305000000&#39;, &#39;2&#39;);">교육자료실</a></li>
+									<li><a href="javascript:fn_menuChange(&#39;/educations/eduParticipation.do&#39;, &#39;01C000306000000&#39;, &#39;2&#39;);">참여신청</a></li>
+								</ul>
+							</div>
+						</li>
+						<li class="">
+							<a href="javascript:fn_menuChange(&#39;/collections/collectionsList.do&#39;, &#39;01D000400000000&#39;, &#39;1&#39;);">소장품<i class="icon togglePlus"></i></a>
+							<div class="sub" style="display: none;">
+								<ul>
+									<li><a href="javascript:fn_menuChange(&#39;/collections/collectionsList.do&#39;, &#39;01D000401000000&#39;, &#39;2&#39;);">소장품 검색</a></li>
+									<li><a href="javascript:fn_menuChange(&#39;/collections/curationList.do&#39;, &#39;01D000402000000&#39;, &#39;2&#39;);">소장품 탐색</a></li>
+									<li><a href="javascript:fn_menuChange(&#39;/collections/conservation.do&#39;, &#39;01D000403000000&#39;, &#39;2&#39;);">보존과학</a></li>
+								</ul>
+							</div>
+						</li>
+						<li class="">
+							<a href="javascript:fn_menuChange(&#39;/bookArchive/bookArchiveMain.do&#39;, &#39;01E000500000000&#39;, &#39;1&#39;);">미술연구<i class="icon togglePlus"></i></a>
+							<div class="sub" style="display: none;">
+								<ul>
+									<li><a href="javascript:fn_menuChange(&#39;/bookArchive/bookArchiveMain.do&#39;, &#39;01E000501000000&#39;, &#39;2&#39;);">도서와 아카이브</a></li>
+									<li><a href="javascript:fn_menuChange(&#39;/artResearch/researchProList.do&#39;, &#39;01E000503000000&#39;, &#39;2&#39;);">연구</a></li>
+									<li><a href="javascript:fn_menuChange(&#39;/artResearch/publicationList.do&#39;, &#39;01E000502000000&#39;, &#39;2&#39;);">발간자료</a></li>
+								</ul>
+							</div>
+						</li>
+						<li class="">
+							<a href="javascript:fn_menuChange(&#39;/digitals/digitalMain.do&#39;, &#39;01F000600000000&#39;, &#39;1&#39;);">디지털미술관<i class="icon togglePlus"></i></a>
+							<div class="sub" style="display: none;" aria-hidden="true" aria-expanded="false">
+								<ul>
+									<li><a href="javascript:fn_menuChange(&#39;/digitals/digitalMain.do&#39;, &#39;01F000601000000&#39;, &#39;2&#39;);">메인</a></li>
+									<li><a href="javascript:fn_menuChange(&#39;/digitals/digitalMovList.do&#39;, &#39;01F000602000000&#39;, &#39;2&#39;);">맞춤검색</a></li>
+									<li><a href="javascript:fn_menuChange(&#39;/digitals/digitalExhGuideList.do&#39;, &#39;01F000603000000&#39;, &#39;2&#39;)">오디오가이드</a></li>
+									<li><a href="javascript:fn_menuChange(&#39;/digitals/digitalCuraList.do&#39;, &#39;01F000604000000&#39;, &#39;2&#39;);">이용자갤러리</a></li>
+								</ul>
+							</div>
+						</li>
+					</ul>
+					<!-- // gnbList  -->
+				
+					<!-- utilWrap -->
+					<div class="utilWrap moVer">
+						<ul>
+							<li><a href="https://www.mmca.go.kr/artResearch/newsLetterList.do">뉴스레터</a></li>
+							<li><a href="https://www.mmca.go.kr/artResearch/publicationList.do">소식지</a></li>
+							<li><a href="https://www.mmca.go.kr/pr/newsList.do">새소식</a></li>
+							<li><a href="https://www.mmcashop.co.kr/" target="_blank" title="새창">온라인숍</a></li>
+						</ul>
+					</div>
+					<!-- //utilWrap -->
+					
+					<!-- utilWrap -->
+					<div class="utilWrap">
+						<ul>
+						
+							
+								<li class="joinWrap">
+									<a href="https://www.mmca.go.kr/member/memberFourteenOverForm.do" role="button">
+										MMCA<br> 
+										회원가입
+									</a>
+								</li>
+							   <li><a href="https://www.mmca.go.kr/member/loginForm.do">로그인</a></li> &nbsp;
+							
+							
+							
+							
+							<!-- 
+							<li class="selectWrap">
+								<span class="ctg">언어 :</span>
+								<select class="selectBox" title="구분" id="selectLangCd" onchange="window.open(value,'_self');">
+									<option value="/">한국어</option>
+									<option value="/eng">영어</option>
+									<option value="/chn">중국어</option>
+									<option value="/jpn">일본어</option>
+								</select>
+							</li>
+							-->
+							
+						</ul>
+					</div>
+					<!-- //utilWrap -->
+					
+				<div class="gnbBg"></div></nav>
+				<!-- btnUtil -->
+				<div class="btnUtil">
+					<button type="button" class="btnSearchOpen" aria-haspopup="dialog" aria-label="검색열기">
+						<i class="icon"></i>
+					</button>
+					<button type="button" class="btnMobOpen" aria-label="메뉴열기">
+						<i class="icon"></i>
+					</button>
+				</div>
+				<!-- //btnUtil -->
+				<!-- totalSearchWrap -->
+				<div class="totalSearchWrap">
+					<form id="totalSearchForm" name="totalSearchForm" method="post">
+						<input type="hidden" id="selectSection" value="TOTAL">
+						<input type="hidden" id="section" name="section" value="">
+						<div class="inner">
+							<div class="searchLayer">
+								<input type="text" class="input" placeholder="검색어를 입력하세요." id="q" name="q" onkeypress="if(event.keyCode == 13)totalSearch();return;" autocomplete="off" style="ime-mode:active" title="검색어 입력">
+								<button type="submit" class="btn border01" onclick="javascript:totalSearch();">검색</button>
+								<button type="button" class="btnSearchClose" aria-label="검색닫기"><i class="icon"></i></button>
+							</div>
+						</div>
+					</form>
+					<script>
+						//통합검색실행
+						function totalSearch(){
+							mbChk = "PC";
+							
+							var form = document.totalSearchForm;
+							var q = form.q.value;
+							
+							if(($.trim(q) == "*" || $.trim(q).length < 1)){
+								alert("검색어를 입력해 주십시오.");
+								return;
+							}
+							form.action = "/search/totalSearch.do";
+							form.submit();	
+						}
+						
+						//자동완성 키워드선택
+						function autoSearch(autoId){
+							$("#q").val($("#"+autoId).val());
+							
+							if(mbChk == "PC"){
+								totalSearch();
+							}else{
+								mbTotalSearch();
+							}
+						}
+					</script>
+				</div>
+				<!-- //totalSearchWrap -->
+			</div>
+		</div>
+		<!-- //header -->
+
+<!-- header end -->
+
+<script type="text/javaScript" defer="defer">
+
+$(document).ready(function(){
+	fn_searchAjaxListExh();
+	fn_searchAjaxListEdu();
+	fn_searchAjaxListEvent();
+	fn_searchAjaxListNotice();
+
+});	
+
+
+// 전시
+function fn_searchAjaxListExh(){
+	var form = {
+		"searchExhPlaCd" : $("#searchPlaCd").val()
+		,"pageIndex" : $("#pageIndexExh").val()
+		,"sort" : "1"
+	};
+	$("#pageDivExh").empty();
+	var exhList = '';
+	$.ajax({
+		url:  "/visitingInfo/ajaxVisitingInfoExh.do",
+		dataType: 'json',
+		data: form,
+		contentType: "application/x-www-form-urlencoded;charset=utf-8",
+		success: function(data) {
+			//페이지가 있는경우
+			var paginationInfo = data.paginationInfo;
+			var exhibitionList = data.exhibitionList;
+			if(exhibitionList.length > 0){
+				for(var i=0; i<exhibitionList.length; i++){
+					exhList += ' <li class="swiper-slide">';	
+//					exhList += ' 	<a href="javascript:fn_exhDetail('+exhibitionList[i].exhId+');">';	                   
+//					exhList += ' 	<a href="javascript:void(0)" class="parking" aria-haspopup="dialog" onclick="feUI.dialog.__init(\''+'simplePop'+'\',\''+610+'\',\''+this+'\',)">';	
+					exhList += ' 	<a href="javascript:void(0)" class="parking" aria-haspopup="dialog" onclick="fn_infoExhPop(\''+exhibitionList[i].exhId+'\',\''+exhibitionList[i].exhTitle+'\',\''+exhibitionList[i].exhStDt+'\',\''+exhibitionList[i].exhEdDt+'\',\''+exhibitionList[i].exhPlaNm+'\',\''+exhibitionList[i].exhArtist+'\',\''+exhibitionList[i].exhArtCnt+'\',\''+exhibitionList[i].exhAdm+'\',\'' +exhibitionList[i].exhSpon+'\')">';
+//					exhList += ' 		<figure>';	
+					exhList += ' 		<figure style="background:url(\' '+exhibitionList[i].exhThumbImg+'\') no-repeat center/cover">';	
+					exhList += ' 			<img src="'+exhibitionList[i].exhThumbImg+'" alt="'+exhibitionList[i].exhTitle+'">';	
+					exhList += ' 		</figure>';	
+					exhList += ' 		<div class="info">';	
+					exhList += ' 			<div>';	
+					exhList += ' 				<span class="cate">'+exhibitionList[i].exhCd+'</span>';	
+					exhList += ' 				<strong class="tit">'+exhibitionList[i].exhTitle+'</strong>';	
+					exhList += ' 				<span class="date">'+exhibitionList[i].exhStDt+' ~ '+exhibitionList[i].exhEdDt+'</span>';	
+					exhList += ' 			</div>';	
+					exhList += ' 		</div>';	
+					exhList += ' 	</a>';	
+					exhList += ' </li>';	
+				}
+			}else{
+					exhList += '<h3>전시</h3>';	
+					exhList += '<div class="noContents" style="height:300px">';	
+					exhList += '	<p>현재 진행 중인 전시가 없습니다.</p>';	
+					exhList += '</div>';	
+					
+					$("#exhArea").html(exhList);
+			}
+			$("#exhList").html(exhList);
+			
+			$("#currentPageNoExh").val(paginationInfo.currentPageNo);
+			$("#pageSizeExh").val(paginationInfo.pageSize);
+			$("#firstRecordIndexExh").val(paginationInfo.firstRecordIndex);
+			$("#totalRecordCountExh").val(paginationInfo.totalRecordCount);
+			fn_getPage('pageDivExh', 'Exh');
+		}
+	})
+}
+
+// 전시 팝업
+function fn_infoExhPop(exhId,exhTitle, exhStDt, exhEdDt, exhPlaNm, exhArtist, exhArtCnt, exhAdm, exhSpon){
+	
+	var htmlText="";
+	htmlText += "<header class='dialogHead'>";
+	htmlText += "		<h2 id='dialogTit' class='title'>" +exhTitle + "</h2>" ;
+	htmlText += "</header>" ;
+	htmlText += "	<div id='dialogCont' class='dialogBody'>";
+	htmlText += "		<div class='dialogBodyInner'>";
+	htmlText += "			<div class='details'>";
+	htmlText += "				<div class='detailBody'>";
+	htmlText += "					<div class='bodySection detailCont'>";
+	htmlText += "						<div class='btnWrap right'>";
+	htmlText += "							<button type='button' class='btn' onclick='fn_exhDetail("+ exhId + ")'>상세정보 더보기</button>";
+	htmlText += "							<button type='button' class='btn bg01' onclick='fn_reserve()'>예약하기</button>";  
+	htmlText += "						</div>";
+	htmlText += "						<div>";
+	htmlText += "							<dl>";
+	htmlText += "								<dt>기간</dt>";
+	htmlText += "								<dd><span>"+ exhStDt + " ~ " + exhEdDt + "</span></dd>";
+	htmlText += "							</dl>";
+	htmlText += "							<dl>";
+	htmlText += "								<dt>장소</dt>";
+	htmlText += "								<dd><span>"+ exhPlaNm + "</span></dd>";
+	htmlText += "							</dl>";
+	htmlText += "							<dl>";
+	htmlText += "								<dt>작가</dt>";
+	htmlText += "								<dd><span>"+ exhArtist + "</span></dd>";
+	htmlText += "							</dl>";
+	htmlText += "							<dl>";
+	htmlText += "								<dt>작품수</dt>";
+	htmlText += "								<dd><span>"+ exhArtCnt + "</span></dd>";
+	htmlText += "							</dl>";
+	htmlText += "							<dl>";
+	htmlText += "								<dt>관람료</dt>";
+	htmlText += "								<dd><span>"+ exhAdm + "</span></dd>";
+	htmlText += "							</dl>";
+	htmlText += "							<dl>";
+	htmlText += "								<dt>주최/후원</dt>";
+	htmlText += "								<dd><span>"+ exhSpon + "</span></dd>";
+	htmlText += "							</dl>";
+	htmlText += "						</div>";
+	htmlText += "					</div>";
+	htmlText += "				</div>";
+	htmlText += "			</div>";
+	htmlText += "		</div>";
+	htmlText += "	</div>";
+	htmlText += "	<button type='button' class='close' aria-label='dialog 닫기'></button>";
+	
+	document.getElementById("exhPop").innerHTML= htmlText;
+	
+	feUI.dialog.__init('simplePop', 610, this);
+}
+
+// 교육
+function fn_searchAjaxListEdu(){
+	var form = {
+			"searchEduPlaCd" : $("#searchPlaCd").val()
+			,"searchSttCd" : "1"
+			,"searchEduTicket" : "1"
+			,"pageIndex" : $("#pageIndexEdu").val()
+			,"eduTp" : "06"
+	};
+	$("#pageDivEdu").empty();
+	var eduList = '';
+	$.ajax({
+		url:  "/visitingInfo/ajaxVisitingInfoEdu.do",
+		dataType: 'json',
+		data: form,
+		contentType: "application/x-www-form-urlencoded;charset=utf-8",
+		success: function(data) {
+			//페이지가 있는경우
+			var paginationInfo = data.paginationInfo;
+			var educationList = data.educationList;
+			if(educationList.length > 0){
+				for(var i=0; i<educationList.length; i++){
+					eduList += ' <li class="swiper-slide">';
+			//		eduList += ' 	<a href="javascript:fn_eduDetail('+educationList[i].eduId+');">';	
+			//		eduList += ' 	<a href="javascript:void(0)" class="parking" aria-haspopup="dialog" onclick="feUI.dialog.__init(\''+'simplePop2'+'\',\''+610+'\',\''+this+'\',)">';
+					eduList += ' 	<a href="javascript:void(0)" class="parking" aria-haspopup="dialog" onclick="fn_infoEduPop(\''+educationList[i].eduId+'\')">';
+		//			eduList += ' 		<figure>';	
+					eduList += ' 		<figure style="background:url(\''+educationList[i].eduThumbImg+'\') no-repeat center/cover">';	
+					eduList += ' 			<img src="'+educationList[i].eduThumbImg+'" alt="'+educationList[i].eduTitle+'">';	
+					eduList += ' 		</figure>';	
+					eduList += ' 		<div class="info">';	
+					eduList += ' 			<div>';	
+					//eduList += ' 				<ul class="breadcrumb">';	
+					//eduList += ' 					<li>서울</li>';	
+					//eduList += ' 					<li>'+educationList[i].eduTarget+'</li>';	/* 20220110 */
+					//eduList += ' 				</ul>';	
+					eduList += ' 				<span class="cate">'+educationList[i].eduBigNm+'</span>';	
+					eduList += ' 				<strong class="tit">'+educationList[i].eduTitle+'</strong>';	
+					eduList += ' 				<span class="date">'+educationList[i].eduStDt+' ~ '+educationList[i].eduEdDt+'</span>';	
+					eduList += ' 			</div>';	
+					eduList += ' 		</div>';	
+					eduList += ' 	</a>';	
+					eduList += ' </li>';	
+				}
+			}else{
+					eduList += '<h3>교육</h3>';	
+					eduList += '<div class="noContents" style="height:300px">';	
+					eduList += '	<p>현재 진행 중인 교육이 없습니다.</p>';	
+					eduList += '</div>';	
+		
+					$("#eduArea").html(eduList);
+			}
+			$("#eduList").html(eduList);
+			
+			$("#currentPageNoEdu").val(paginationInfo.currentPageNo);
+			$("#pageSizeEdu").val(paginationInfo.pageSize);
+			$("#firstRecordIndexEdu").val(paginationInfo.firstRecordIndex);
+			$("#totalRecordCountEdu").val(paginationInfo.totalRecordCount);
+			fn_getPage('pageDivEdu', 'Edu');
+		}
+	})
+}
+
+//교육 팝업
+function fn_infoEduPop(eduId, pop){
+	
+	var popup ="";
+	if(pop == 'edu'){
+		popup ="eduPop"
+	}else{
+		popup ="eventPop"
+	}
+	
+	var form = {
+			"eduId" : eduId
+	};
+	var htmlText="";
+	$.ajax({
+		url:  "/educations/ajaxEducationsDetail.do",
+		dataType: 'json',
+		data: form,
+		contentType: "application/x-www-form-urlencoded;charset=utf-8",
+		success: function(data) {
+			var eduInfo = data.eduInfo
+			
+			$("#eduTicketYn").val(eduInfo.eduTicketYn);
+			$("#eduTicketNo").val(eduInfo.eduTicketNo);
+			$("#eduCourseid").val(eduInfo.eduCourseid);
+			$("#status").val(data.status);
+			$("#eduOfflineRecYn").val(eduInfo.eduOfflineRecYn);
+			$("#eduOfflineRecMsg").val(eduInfo.eduOfflineRecMsg);
+			$("#eduOutHomepageYn").val(eduInfo.eduOutHomepageYn);
+			$("#eduOutHomepageMsg").val(eduInfo.eduOutHomepageMsg);
+			$("#eduMemGrade").val(eduInfo.eduMemGrade);
+			
+			$("#membershipId").val(data.membershipId);
+			$("#lectureListCnt").val(data.lectureListCnt);
+			
+			//페이지가 있는경우
+			htmlText += "<header class='dialogHead'>";
+			htmlText += "		<h2 id='dialogTit' class='title'>" +eduInfo.eduTitle + "</h2>" ;
+			htmlText += "</header>" ;
+			htmlText += "	<div id='dialogCont' class='dialogBody'>";
+			htmlText += "		<div class='dialogBodyInner'>";
+			htmlText += "			<div class='details'>";
+			htmlText += "				<div class='detailBody'>";
+			htmlText += "					<div class='bodySection detailCont'>";
+			htmlText += "						<div class='btnWrap right'>";
+			htmlText += "							<button type='button' class='btn' onclick='fn_eduDetail("+ eduInfo.eduId + ")'>상세정보 더보기</button>";
+			if(eduInfo.eduCourseid){
+				if(data.status == '1'){
+					htmlText += "							<button type='button' class='btn bg01' onclick='fn_check(\"Y\",\"edu\")'>신청기간이 아닙니다.</button>";
+				}else if (data.status == '2' || data.status == '3') {
+					htmlText += "							<button type='button' class='btn bg01' onclick='fn_check(\"Y\",\"edu\")'>예약하기</button>";
+				}else if (data.status == '4' || data.status == '4') {
+					htmlText += "							<button type='button' class='btn bg01' onclick='fn_check(\"Y\",\"edu\")'>예약이 마감되었습니다.</button>";
+				}else{
+					htmlText += "							<button type='button' class='btn bg01' onclick='fn_check(\"Y\",\"edu\")'>신청기간이 아닙니다.</button>";
+				}
+			}else{
+				if(eduInfo.eduTicketYn == '1'){
+					htmlText += "							<button type='button' class='btn bg01' onclick='fn_check(\"N\",\"edu\")'>신청기간이 아닙니다.</button>";
+				}else if(eduInfo.eduTicketYn == '2'){
+					htmlText += "							<button type='button' class='btn bg01' onclick='fn_check(\"N\",\"edu\")'>교육프로그램 신청하기	</button>";
+				}else if(eduInfo.eduTicketYn == '3'){
+					htmlText += "							<button type='button' class='btn bg01' onclick='fn_check(\"N\",\"edu\")'>예약이 마감되었습니다.</button>";
+				}else if(eduInfo.eduTicketYn == '4'){
+					htmlText += "							<button type='button' class='btn bg01' onclick='fn_check(\"N\",\"edu\")'>현장 참여 가능</button>";
+				}
+			}
+			htmlText += "						</div>";
+			htmlText += "						<div>";
+			htmlText += "							<dl>";
+			htmlText += "								<dt>기간</dt>";
+			htmlText += "								<dd><span>"+ eduInfo.eduTerm + "</span></dd>";
+			htmlText += "							</dl>";
+			htmlText += "							<dl>";
+			htmlText += "								<dt>장소</dt>";
+			htmlText += "								<dd><span>"+ eduInfo.eduPlaDtl + "</span></dd>";
+			htmlText += "							</dl>";
+			htmlText += "						</div>";
+			htmlText += "					</div>";
+			htmlText += "				</div>";
+			htmlText += "			</div>";
+			htmlText += "		</div>";
+			htmlText += "	</div>";
+			htmlText += "	<button type='button' class='close' aria-label='dialog 닫기' onclick='fn_close(\"simplePop2\")'></button>";
+			document.getElementById("eduPop").innerHTML= htmlText;
+			feUI.dialog.__init('simplePop2', 610, this);
+		}
+	})
+	
+}
+
+// 이벤트
+function fn_searchAjaxListEvent(){
+	var form = {
+			"searchEduPlaCd" : $("#searchPlaCd").val()
+			,"searchSttCd" : "1"
+			,"searchEduTicket" : "1"
+			,"pageIndex" : $("#pageIndexEvent").val()
+			,"eduTp" : "50"
+	};
+	$("#pageDivEvent").empty();
+	var eduList = '';
+	$.ajax({
+		url:  "/visitingInfo/ajaxVisitingInfoEdu.do",
+		dataType: 'json',
+		data: form,
+		contentType: "application/x-www-form-urlencoded;charset=utf-8",
+		success: function(data) {
+			//페이지가 있는경우
+			var paginationInfo = data.paginationInfo;
+			var educationList = data.educationList;
+			if(educationList.length > 0){
+				for(var i=0; i<educationList.length; i++){
+					eduList += ' <li class="swiper-slide">';	
+		//			eduList += ' 	<a href="javascript:fn_eduDetail('+educationList[i].eduId+');">';	
+		//			eduList += ' 	<a href="javascript:void(0)" class="parking" aria-haspopup="dialog" onclick="feUI.dialog.__init(\''+'simplePop3'+'\',\''+610+'\',\''+this+'\',)">';
+					eduList += ' 	<a href="javascript:void(0)" class="parking" aria-haspopup="dialog" onclick="fn_infoEventPop(\''+educationList[i].eduId+'\')">';
+		//			eduList += ' 		<figure>';	
+					eduList += ' 		<figure style="background:url(\''+educationList[i].eduThumbImg+'\') no-repeat center/cover">';	
+					eduList += ' 			<img src="'+educationList[i].eduThumbImg+'" alt="'+educationList[i].eduTitle+'">';	
+					eduList += ' 		</figure>';	
+					eduList += ' 		<div class="info">';	
+					eduList += ' 			<div>';	
+					//eduList += ' 				<ul class="breadcrumb">';	
+					//eduList += ' 					<li>서울</li>';	
+					//eduList += ' 					<li>'+educationList[i].eduTarget+'</li>';	/* 20220110 */
+					//eduList += ' 				</ul>';	
+					eduList += ' 				<span class="cate">'+educationList[i].eduBigNm+'</span>';	
+					eduList += ' 				<strong class="tit">'+educationList[i].eduTitle+'</strong>';	
+					eduList += ' 				<span class="date">'+educationList[i].eduStDt+' ~ '+educationList[i].eduEdDt+'</span>';	
+					eduList += ' 			</div>';	
+					eduList += ' 		</div>';	
+					eduList += ' 	</a>';	
+					eduList += ' </li>';	
+				}
+			}else{
+					eduList += '<h3>이벤트</h3>';	
+					eduList += '<div class="noContents" style="height:300px">';	
+					eduList += '	<p>현재 진행 중인 이벤트가 없습니다.</p>';	
+					eduList += '</div>';	
+					
+					$("#eventArea").html(eduList);
+			}
+			$("#eventList").html(eduList);
+			
+			$("#currentPageNoEvent").val(paginationInfo.currentPageNo);
+			$("#pageSizeEvent").val(paginationInfo.pageSize);
+			$("#firstRecordIndexEvent").val(paginationInfo.firstRecordIndex);
+			$("#totalRecordCountEvent").val(paginationInfo.totalRecordCount);
+			fn_getPage('pageDivEvent', 'Event');
+		}
+	})
+}
+
+//이벤트 팝업
+/* 220110 */
+function fn_infoEventPop(eduId, pop){
+	
+	var popup ="";
+	if(pop == 'edu'){
+		popup ="eduPop"
+	}else{
+		popup ="eventPop"
+	}
+	
+	var form = {
+			"eduId" : eduId
+	};
+	var htmlText="";
+	$.ajax({
+		url:  "/educations/ajaxEducationsDetail.do",
+		dataType: 'json',
+		data: form,
+		contentType: "application/x-www-form-urlencoded;charset=utf-8",
+		success: function(data) {
+			var eduInfo = data.eduInfo
+			
+			$("#eduTicketYn").val(eduInfo.eduTicketYn);
+			$("#eduTicketNo").val(eduInfo.eduTicketNo);
+			$("#eduCourseid").val(eduInfo.eduCourseid);
+			$("#status").val(data.status);
+			$("#eduOfflineRecYn").val(eduInfo.eduOfflineRecYn);
+			$("#eduOfflineRecMsg").val(eduInfo.eduOfflineRecMsg);
+			$("#eduOutHomepageYn").val(eduInfo.eduOutHomepageYn);
+			$("#eduOutHomepageMsg").val(eduInfo.eduOutHomepageMsg);
+			$("#eduMemGrade").val(eduInfo.eduMemGrade);
+			
+			$("#membershipId").val(data.membershipId);
+			$("#lectureListCnt").val(data.lectureListCnt);
+			
+			//페이지가 있는경우
+			htmlText += "<header class='dialogHead'>";
+			htmlText += "		<h2 id='dialogTit' class='title'>" +eduInfo.eduTitle + "</h2>" ;
+			htmlText += "</header>" ;
+			htmlText += "	<div id='dialogCont' class='dialogBody'>";
+			htmlText += "		<div class='dialogBodyInner'>";
+			htmlText += "			<div class='details'>";
+			htmlText += "				<div class='detailBody'>";
+			htmlText += "					<div class='bodySection detailCont'>";
+			htmlText += "						<div class='btnWrap right'>";
+			htmlText += "							<button type='button' class='btn' onclick='fn_eventDetail("+ eduInfo.eduId + ")'>상세정보 더보기</button>";
+			if(eduInfo.eduCourseid){
+				if(data.status == '1'){
+					htmlText += "							<button type='button' class='btn bg01' onclick='fn_check(\"Y\",\"event\")'>신청기간이 아닙니다.</button>";
+				}else if (data.status == '2' || data.status == '3') {
+					htmlText += "							<button type='button' class='btn bg01' onclick='fn_check(\"Y\",\"event\")'>예약하기</button>";
+				}else if (data.status == '4' || data.status == '4') {
+					htmlText += "							<button type='button' class='btn bg01' onclick='fn_check(\"Y\",\"event\")'>예약이 마감되었습니다.</button>";
+				}else{
+					htmlText += "							<button type='button' class='btn bg01' onclick='fn_check(\"Y\",\"event\")'>신청기간이 아닙니다.</button>";
+				}
+			}else{
+				if(eduInfo.eduTicketYn == '1'){
+					htmlText += "							<button type='button' class='btn bg01' onclick='fn_check(\"N\",\"event\")'>신청기간이 아닙니다.</button>";
+				}else if(eduInfo.eduTicketYn == '2'){
+					htmlText += "							<button type='button' class='btn bg01' onclick='fn_check(\"N\",\"event\")'>교육프로그램 신청하기	</button>";
+				}else if(eduInfo.eduTicketYn == '3'){
+					htmlText += "							<button type='button' class='btn bg01' onclick='fn_check(\"N\",\"event\")'>예약이 마감되었습니다.</button>";
+				}else if(eduInfo.eduTicketYn == '4'){
+					htmlText += "							<button type='button' class='btn bg01' onclick='fn_check(\"N\",\"event\")'>현장 참여 가능</button>";
+				}
+			}
+			htmlText += "						</div>";
+			htmlText += "						<div>";
+			htmlText += "							<dl>";
+			htmlText += "								<dt>기간</dt>";
+			htmlText += "								<dd><span>"+ eduInfo.eduTerm + "</span></dd>";
+			htmlText += "							</dl>";
+			htmlText += "							<dl>";
+			htmlText += "								<dt>장소</dt>";
+			htmlText += "								<dd><span>"+ eduInfo.eduPlaDtl + "</span></dd>";
+			htmlText += "							</dl>";
+			htmlText += "						</div>";
+			htmlText += "					</div>";
+			htmlText += "				</div>";
+			htmlText += "			</div>";
+			htmlText += "		</div>";
+			htmlText += "	</div>";
+			htmlText += "	<button type='button' class='close' aria-label='dialog 닫기' onclick='fn_close(\"simplePop3\")'></button>";
+			document.getElementById("eventPop").innerHTML= htmlText;
+		}
+	})
+	
+	document.getElementById("eventPop").innerHTML= htmlText;
+	feUI.dialog.__init('simplePop3', 610, this);
+}
+
+function fn_searchAjaxListNotice(){
+	var form = {
+		"searchBdCTp" :"101",
+		"searchCcdId" : $("#searchPlaCd").val()
+	};
+	var noticeList = '';
+	$.ajax({
+		url:  "/visitingInfo/ajaxVisitingInfoNotice.do",
+		dataType: 'json',
+		data: form,
+		contentType: "application/x-www-form-urlencoded;charset=utf-8",
+		success: function(data) {
+			//페이지가 있는경우
+			var returnNoticeList = data.noticeList;
+			
+			if(returnNoticeList.length > 0){
+					noticeList += '<div class="swiperWrap">';	
+					noticeList += '	<div class="swiper topInfoSwiper">';	
+					noticeList += '		<div class="swiper-wrapper">';	
+				for(var i=0; i<returnNoticeList.length; i++){
+					noticeList += '			<div class="swiper-slide">';	
+					noticeList += ' 				<p class="tit">'+returnNoticeList[i].bdCTitle+'</p>';	
+					noticeList += ' 				<p class="sub date">'+returnNoticeList[i].bdCRegDt+'</p>';	
+					noticeList += ' 				<div class="sameHeight">';	
+					noticeList += ' 					<p>';	
+					noticeList += 						returnNoticeList[i].bdCContents;	
+					noticeList += ' 					</p>';	
+					noticeList += ' 			</div>';	
+					noticeList += ' 			<a href="#" onclick="fn_newsDetail(\''+returnNoticeList[i].bdCId+'\')" class="viewMore">바로가기</a>';	
+				}
+					noticeList += '		</div>';	
+					noticeList += '	</div>';	
+					noticeList += '</div>';	
+			}else{
+				$("#noticeList").hide();
+			}
+			$("#noticeList").html(noticeList);
+		}
+	})
+}
+/* 220110 */
+function fn_egov_link_page(pageNo, form){
+	if(form == 'Exh'){
+		document.listFormExh.target = "_self";
+		document.listFormExh.pageIndexExh.value = pageNo;
+		fn_searchAjaxListExh();
+	}else if(form == 'Edu'){
+		document.listFormEdu.target = "_self";
+		document.listFormEdu.pageIndexEdu.value = pageNo;
+		fn_searchAjaxListEdu();
+	}else if(form == 'Event'){
+		document.listFormEvent.target = "_self";
+		document.listFormEvent.pageIndexEvent.value = pageNo;
+		fn_searchAjaxListEvent();
+	}
+}
+
+/* 220110 */
+function fn_newsDetail(bdCId){
+	$("#bdCId").val(bdCId);
+	document.listForm.action = "/pr/newsDetail.do";
+	document.listForm.target = "_self";
+	document.listForm.method = "post";
+	document.listForm.submit();			
+}
+
+/* 220110 */
+function fn_exhDetail(exhId){
+	$("#exhId").val(exhId);
+	document.listForm.action = "/exhibitions/exhibitionsDetail.do?exhFlag=1";
+	document.listForm.target = "_self";
+	document.listForm.method = "post";
+	document.listForm.submit();	
+}
+/* 220110 */
+function fn_eduDetail(eduId){
+	$("#eduId").val(eduId);
+	document.listForm.action = "/educations/educationsDetail.do?flag=05";
+	document.listForm.target = "_self";
+	document.listForm.method = "post";
+	document.listForm.submit();			
+}
+/* 220110 */
+function fn_eventDetail(eduId){
+	$("#eduId").val(eduId);
+	document.listForm.action = "/events/eventsDetail.do";
+	document.listForm.target = "_self";
+	document.listForm.method = "post";
+	document.listForm.submit();			
+}
+
+
+/* 220110 */
+function fn_getPage(pagingDivId, form){	
+	var currentPage = $("#currentPageNo"+form).val();
+	var totalPageCount = $("#totalRecordCount"+form).val();
+	var pageSize = $("#pageSize"+form).val();
+	
+	var pageCnt = 0;
+	var pageUnit = 0;
+	var gubun = typeof(langCd);
+	if(gubun == "undefined"){
+		var langCd = 1;
+	}
+	if(document.getElementById("pageCnt"+form) == null){
+		pageCnt = 5;
+	
+	}else{
+		pageCnt = document.getElementById("pageCnt"+form).value;
+	}
+	
+	if(document.getElementById("pageUnit"+form) == null){
+		pageUnit = 10;
+	}else{
+		pageUnit = document.getElementById("pageUnit"+form).value;
+	}
+	
+	var pagingString = "";
+
+	var totalCount = totalPageCount;
+	var start = 0;
+	var listSize = pageCnt;
+	
+	if(totalCount % pageUnit == 0) totalPage = parseInt(totalCount / pageUnit);
+	else  totalPage = parseInt(totalCount / pageUnit) + 1;
+	
+	var totalNavi = 1;
+	if(totalPage % pageSize == 0) totalNavi = parseInt(totalPage / listSize);
+	else totalNavi = parseInt(totalPage / listSize) + 1;
+	
+	var currentNavi = 1;
+	currentNavi = Math.ceil(currentPage / listSize);
+
+	var nextNavi = currentNavi + 1;
+	if(nextNavi > totalNavi) nextNavi = 0;
+
+	var prevNavi = currentNavi - 1;
+	if (prevNavi < 0)
+		prevNavi = 0;
+
+	var lastNavi = totalNavi;
+	var startNavi = 1;
+
+	if (startNavi == lastNavi) {
+		startNavi = 0;
+		lastNavi = 0;
+	}
+	pagingString += "<nav class=\"paging\" aria-label=\"page navigation\">";
+	
+	if (startNavi > 0 && totalCount > 0 && currentNavi > 1) {
+		pagingString += "<button  type=\"button\" class=\"first icon\" aria-label=\"처음 페이지\" onclick=\"fn_egov_link_page(1,'"+form+"');return false;\"></button>";
+	}
+	if (prevNavi > 0) {
+		if(langCd == "1"){
+			pagingString += "<button  type=\"button\" class=\"prev icon\" aria-label=\"이전 페이지\"  onclick=\"fn_egov_link_page("+eval(((prevNavi - 1) * listSize) + 1)+",'"+form+"');return false;\" ></button>";
+		}else{
+			pagingString += "<button  type=\"button\" class=\"prev icon\" aria-label=\"이전 페이지\"  onclick=\"fn_egov_link_page("+eval(((prevNavi - 1) * listSize) + 1)+",'"+form+"');return false;\" ></button>";
+		}
+	}
+	var last_page = (((currentNavi - 1) * listSize) + 1) + (listSize - 1);
+	last_page = min(last_page, totalPage);
+
+	var startingNavi = ((currentNavi - 1) * listSize) + 1;
+		
+	for(i = startingNavi ; i<=last_page; i++) {
+	
+		if(prevNavi == 0){
+			if(currentPage == i)  { // BLAH
+				if(i == 1){
+					pagingString += "<strong aria-current=\"page\">"+i+"</strong>";
+				}else{
+					pagingString += "<strong aria-current=\"page\">"+i+"</strong>";
+				}	
+			} else {
+				
+				if(i == 1){
+					pagingString += "<a href=\"#none\" onclick=\"fn_egov_link_page("+i+",'"+form+"');return false;\">"+i+"</a>";
+				}else{
+					pagingString += "<a href=\"#none\" onclick=\"fn_egov_link_page("+i+",'"+form+"');return false;\">"+i+"</a>";
+				}
+			}
+		}else{
+			if(currentPage == i)  { // BLAH
+				pagingString += "<strong aria-current=\"page\">"+i+"</strong>";
+			} else {
+				pagingString += "<a href=\"#none\" onclick=\"fn_egov_link_page("+i+",'"+form+"');return false;\">"+i+"</a>";
+			}
+		}
+	}
+	
+	if (nextNavi > 0) {
+		if(langCd == "1"){
+			pagingString += "<button  type=\"button\" class=\"next icon\" aria-label=\"다음 페이지\"  onclick=\"fn_egov_link_page("+eval(((nextNavi - 1) * listSize) + 1)+",'"+form+"');return false;\" ></button>";
+		}else{
+			pagingString += "<button  type=\"button\" class=\"next icon\" aria-label=\"다음 페이지\"  onclick=\"fn_egov_link_page("+eval(((nextNavi - 1) * listSize) + 1)+",'"+form+"');return false;\" ></button>";
+		}
+	}
+
+	if (currentNavi < lastNavi) {
+		pagingString += "<button  type=\"button\" class=\"last icon\" aria-label=\"마지막 페이지\"  onclick=\"fn_egov_link_page("+totalPage+",'"+form+"');return false;\" ></button>";
+	}
+	pagingString += "</nav>";
+	
+	
+	if(!pagingDivId){
+		pagingDivId = "pageDiv";	
+	}
+	
+	$("#"+pagingDivId).html(pagingString);
+	
+}
+
+function min(number1, number2) {
+	var retVal = 0;
+
+	if (number1 < number2)
+		retVal = number1;
+	else
+		retVal = number2;
+
+	return retVal;
+}
+
+// 전시 예약하기
+function fn_reserve(){
+	location.href="https://www.kguide.kr/mmca001/";
+}
+
+// 이벤트 예약하기
+/* 220110 */
+function fn_check(courseYn){
+	
+	var htmlText="";
+	htmlText += "<header class='dialogHead'>";
+	htmlText += "		<h2 id='dialogTit' class='title' style='color:red;'>코로나-19 확산 방지를 위한 사전 확인 사항</h2>" ;
+	htmlText += "</header>" ;
+	htmlText += "	<p><strong>반드시 1개 항목 체크를 하신 분에 한하여, 예약이 가능합니다.</strong></p>";
+	htmlText += "	<br></br>";
+	htmlText += "	<div style='display:flex'>";
+	htmlText += "		<input type='checkbox' data-group='cg1' id='check1' name='check'>";
+	htmlText += "		<label for='check1' style='margin-top: -0.3rem; margin-left: 0.3rem;'>";
+	htmlText += "			<p>① 확진자 접촉 후, 14일 이내 발열·호흡기 증상 해당 없음</p>";
+	htmlText += "			<p>② 해외에서 귀국 후, 14일 이내 발열·호흡기 증상 해당 없음</p>";
+	htmlText += "		</label>";
+	htmlText += "</div>";
+	htmlText += "	<br>";
+	htmlText += "	<div style='display:flex'>";
+	htmlText += "		<input type='checkbox' data-group='cg1' id='check2' name='check'>";
+	htmlText += "		<label for='check2' style='margin-top: -0.3rem; margin-left: 0.3rem;'>";
+	htmlText += "			<p>① ~ ② 사례에 해당되나, 자가격리 후 해제 통보</p>";
+	htmlText += "		</label>";
+	htmlText += "	</div>";
+	htmlText += "	<br>";
+	htmlText += "	<div style='display:flex'>";
+	htmlText += "		<input type='checkbox' data-group='cg1' id='check3' name='check'>";
+	htmlText += "		<label for='check3' style='margin-top: -0.3rem; margin-left: 0.3rem;'>";
+	htmlText += "			<p>해당사항 없음</p>";
+	htmlText += "		</label>";
+	htmlText += "	</div>";
+	htmlText += "	<br>";
+	htmlText += "	<div style='display: flex; justify-content: center;'>";
+	htmlText += "	<button class='btn' onclick='fn_covidCheck(\""+courseYn+"\")'>확인</button>";
+	htmlText += "	<button class='btn ok'>취소</button>";
+	htmlText += "	</div>";
+	htmlText += "	<button type='button' class='close' aria-label='dialog 닫기'></button>";
+	
+	
+	document.getElementById("covidPop").innerHTML= htmlText;
+	
+	feUI.dialog.__init('simplePop4', 610, this);
+	
+	// 체크박스 하나만 선택되도록
+	$('input[type="checkbox"][data-group="cg1"]').click(function(){
+		 
+		  if($(this).prop('checked')){
+		     $('input[type="checkbox"][data-group="cg1"]').prop('checked',false);
+		     $(this).prop('checked',true);
+	    }
+	});
+
+}
+
+function fn_close(popup){
+	$("html").removeClass("LS");
+	$("#"+popup).hide();
+}
+
+//코로나 팝업 확인 버튼
+/* 220110 */
+function fn_covidCheck(courseYn){
+	//하나라도 체크가 되어있을 경우
+	if($('#check1').is(':checked') || $('#check2').is(':checked') || $('#check3').is(':checked')){
+		if(courseYn == "Y"){
+			fn_Lean()
+		}else if(courseYn =="N" ){
+			fn_LeanJoin()
+		}
+	}
+	else {
+		alert("코로나19 확산 방지 내용을 확인하세요.");
+	}
+}
+/* 220110 */
+function fn_LeanJoin(){
+	var val = $("#eduTicketYn").val()
+	var eduTicketNo = $("#eduTicketNo").val()
+	if( val == "1"){
+		alert("예약신청 기간이 아닙니다.");
+	} else if(val == "2"){
+		
+		if("" == null || "" == "" || "" == undefined){
+			alert('로그인 후 이용 해주세요.');
+			
+			fn_menuChange('/member/loginForm.do','0010000000');
+			return;
+		}
+		
+		var eduOfflineRecYn = $("#eduOfflineRecYn").val();
+		var eduOfflineRecMsg = $("#eduOfflineRecMsg").val();
+		if( eduOfflineRecYn == "Y" && eduOfflineRecMsg != ""){
+			alert(eduOfflineRecMsg);
+			//return;
+		}
+		
+		var eduOutHomepageYn = $("#eduOutHomepageYn").val();
+		var eduOutHomepageMsg = $("#eduOutHomepageMsg").val();
+		if( eduOutHomepageYn == "Y" && eduOutHomepageMsg != ""){
+			var openNewWindow = window.open("about:blank");
+			
+			if(eduOutHomepageMsg.indexOf("http://") != -1){
+				openNewWindow.location.href = eduOutHomepageMsg;
+				
+			}else if(eduOutHomepageMsg.indexOf("https://") != -1){
+				openNewWindow.location.href = eduOutHomepageMsg;
+			}else{				
+				openNewWindow.location.href = "http://"+eduOutHomepageMsg;
+			}
+		}
+		
+		
+		var memberGrade = $("#eduMemGrade").val();
+		var memType = "";
+		if(  memberGrade == '7'){
+			if( memType != "MMCA41"){
+				alert("일반,특별회원만 예약가능합니다.");
+				return;
+			}
+		}else if(  memberGrade == '6'){
+			if( memType != "MMCA41" && memType != "MMCA42"){
+				alert("일반,특별회원만 예약가능합니다.");
+				return;
+			}
+		}else if(  memberGrade == '5'){
+			if( memType != "MMCA41" && memType != "MMCA42" && memType != "MMCA43"){
+				alert("일반,특별회원만 예약가능합니다.");
+				return;
+			}
+		}else if(  memberGrade == '3'){
+			if( memType != "MMCA41" && memType != "MMCA42" && memType != "MMCA43" && memType != "MMCA12"){
+				alert("일반,특별회원만 예약가능합니다.");
+				return;
+			}
+		}else if(  memberGrade == '2'){
+			if( memType != "MMCA41" && memType != "MMCA42" && memType != "MMCA43" && memType != "MMCA11" && memType != "MMCA12"){
+				alert("일반,특별회원만 예약가능합니다.");
+				return;
+			}
+		}
+	} else if( val == "3"){
+		alert("예약이 마감되었습니다.");
+	} else if( val == "4"){
+		alert("현장 참여 가능");
+	} else{
+		alert("신청 할 수 없습니다.");
+	}
+}
+/* 220110 */
+function cookieCheck(){
+	var allCookies = document.cookie;
+	//alert("All Cookies : "+allCookies);
+	
+	cookieArray = allCookies.split(";");
+	
+	for(var i=0; i<cookieArray.length; i++){
+		var name = cookieArray[i].split("=")[0];
+		var value = cookieArray[i].split("=")[1];
+		//alert("Key is1 : "+name+" and Value is : "+value);
+		if(name.trim() == "CID"){
+			return name.trim();
+		}
+	}
+}
+/* 220110 */
+function fn_Lean(){
+	var checkVal = cookieCheck();
+	var eduCourseid = $("#eduCourseid").val()
+	if(checkVal == "CID"){//쿠키값중에 CID있을때
+		var url = window.document.URL;
+		var incodingUrl = btoa(url);//base64 인코딩
+		var status = $("#status").val();
+		var ticketLinkUrl = "https://ticket.mmca.go.kr:9446";
+		//준비중 = 1
+		//접수중 = 2
+		//대기접수중 = 3
+		//마감 = 4
+		//종료 = 5
+		//취소 = 6
+		if( status == "1"){
+			alert("준비 중입니다.");
+		} else if(status == "2" || status == "3"){
+			var eduOfflineRecYn = $("#eduOfflineRecYn").val();
+			var eduOfflineRecMsg = $("#eduOfflineRecMsg").val();
+			if( eduOfflineRecYn == "Y" && eduOfflineRecMsg != ""){
+				alert(eduOfflineRecMsg);
+				return;
+			}
+			
+			var eduOutHomepageYn = $("#eduOutHomepageYn").val();
+			var eduOutHomepageMsg = $("#eduOutHomepageMsg").val()
+			if( eduOutHomepageYn == "Y" && eduOutHomepageMsg != ""){
+				var newWindow = window.open("about:blank");
+				newWindow.location.href = eduOutHomepageMsg;
+				return;
+			}
+			
+			if("" == null || "" == "" || "" == undefined){
+				alert('로그인 후 이용 해주세요.');
+				fn_menuChange('/member/loginForm.do','0010000000');
+				return;
+			}
+			
+			//var memberGrade = '';
+			var memType = "";
+			var membershipId = $("#membershipId").val();
+			var lectureListCnt = $("#lectureListCnt").val();
+			/*	memType
+			기존					변경
+			MMCA12	특별회원		17772
+			MMCA21	기증드림패스		17874
+			MMCA41	단체-특별		17886
+			MMCA42	단체-일반		17885
+			MMCA43	단체-전시		17884
+			MMCA01	웹회원			113
+			MMCA11	일반회원		17771
+			MMCA31	전시회원		17770
+					비회원			727
+			*/
+			/*	memberGrade
+			기존			
+			1	웹회원		
+			2	일반회원	
+			3	특별회원	
+			4	전시회원	
+			5	단체전시	
+			6	단체일반	
+			7	단체특별	
+			*/
+	
+			if(lectureListCnt == 0){
+				//alert("서비스 준비중입니다.");
+				alert("서비스 준비중 입니다.");
+				return;
+			}
+			
+			var url = "";
+			var compare = "not";
+			if(membershipId != null){
+				var stringVal = membershipId;
+				var splitVal = membershipId.split(',');
+				for (var i in splitVal){
+					if(splitVal[i] == "0"){
+						compare = "ok";
+					}
+					if(splitVal[i] == memType){
+						compare = "ok";
+					}
+				}
+			}
+			if(compare == "ok"){
+				url = ticketLinkUrl+"/Academy/Register/Register?courseId="+eduCourseid+"&returnUrl="+incodingUrl;
+				frm = document.listForm;
+				document.listForm.action = url;
+				document.listForm.submit();
+			}else{
+				if(membershipId == null || membershipId == ""){
+					//alert("서비스 준비중입니다.");
+					alert("서비스 준비중 입니다.");
+					return;
+				}else{
+					//alert("해당 회원등급에서는 신청할수 없습니다.");
+					alert("해당 회원등급에서는 신청 할 수 없습니다.");
+					return;
+				}
+			}	
+		} else if( status == "4"){
+			alert("예약이 마감되었습니다.");
+		} else if( status == "5"){
+			alert("예약이 종료되었습니다.");
+		} else {
+			alert("신청 할 수 없습니다.");
+		}
+	}else{//쿠키값중에 CID 없을때
+		if("" == null || "" == "" || "" == undefined){
+			alert('로그인 후 이용 해주세요.');
+			fn_menuChange('/member/loginForm.do','0010000000');
+			return;
+		}
+	}
+	
+}
+$(function(){
+	$("title").text("국립현대미술관 서울");
+})
+</script>
+<form name="listForm" method="post">
+	<input type="hidden" name="menuId" value="01A000101000000">
+	<input type="hidden" id="eduId" name="eduId" value="">
+	<input type="hidden" id="exhId" name="exhId" value="">
+	<input type="hidden" id="bdCId" name="bdCId" value="">
+	<input type="hidden" id="searchPlaCd" name="searchPlaCd" value="130">
+	
+	<!-- 교육/이벤트 디테일 관련 히든 220110-->
+	<input type="hidden" id="eduTicketYn" name="eduTicketYn" value="">
+	<input type="hidden" id="eduTicketNo" name="eduTicketNo" value="">
+	<input type="hidden" id="eduCourseid" name="eduCourseid" value="">
+	<input type="hidden" id="status" name="status" value="">
+	<input type="hidden" id="eduOfflineRecYn" name="eduOfflineRecYn" value="">
+	<input type="hidden" id="eduOfflineRecMsg" name="eduOfflineRecMsg" value="">
+	<input type="hidden" id="eduOutHomepageYn" name="eduOutHomepageYn" value="">
+	<input type="hidden" id="eduOutHomepageMsg" name="eduOutHomepageMsg" value="">
+	<input type="hidden" id="eduMemGrade" name="eduMemGrade" value="">
+	<input type="hidden" id="membershipId" name="membershipId" value="">
+	<input type="hidden" id="lectureListCnt" name="lectureListCnt" value="">
+</form>
+
+<form name="fileDownloadForm">
+	<input type="hidden" name="menuId" value="01A000101000000">
+	<input type="hidden" id="filePath" name="filePath" value="">
+	<input type="hidden" id="fileName" name="fileName" value="">
+</form>
+	<!-- container -->
+	<div id="container">
+		<!-- breadcrumb start -->	
+		
+		<!-- breadcrumb end -->
+		<div class="mainContents">
+			<!-- 상단비주얼 -->
+			<div id="one" class="mainCont visual seoul day"><!-- 낮,밤 day,night 클래스로 구분 -->
+				<div class="inner">
+					<div class="title">
+						<p>도시와 역사와 동시대미술이 호흡하는<br>열린 미술관</p>
+						<strong>국립현대미술관 서울</strong>
+					</div>
+				</div>
+				<div class="infoWrap">
+					<div>
+						<div class="timeInfo">
+							<p class="tit">관람 시간</p>
+							<div class="time sameHeight">
+								<p>
+									<span>월, 화, 목, 금, 일요일</span>
+									10:00-18:00
+								</p>
+								<p>
+									<span>수,토요일</span>
+									10:00-21:00
+									<span class="fontB mHide">(18:00-21:00 야간개장)</span>
+									<span class="fontB mHide">※ 휴관일: 1월1일, 설날, 추석</span>
+								</p>
+							</div>
+						</div>
+						<div class="comInfo" id="noticeList"><div class="swiperWrap">	<div class="swiper topInfoSwiper">		<div class="swiper-wrapper">			<div class="swiper-slide"> 				<p class="tit">[예매 안내]  MMCA 스테이지 x 정재형</p> 				<p class="sub date">2022-06-03</p> 				<div class="sameHeight"> 					<p></p><p style="line-height: 1.8;"><span style="font-size: 16px;">2년만에 열리는 자선 문화행사 MMCA 스테이지</span><br></p><p style="line-height: 1.8;"><span style="font-size: 16px;">첫 주인공은 음악가 정재형입니다.</span></p><p style="line-height: 1.8;"><span style="font-size: 16px;"><br></span></p><p style="line-height: 1.8;"><span style="font-size: 16px;">'기억'을 주제로 한 전시 서울관 </span><span style="font-size: 16px;">«생의 찬미»</span><span style="font-size: 16px;"> 연계하여 펼쳐지는</span></p><p style="line-height: 1.8;"><span style="font-size: 16px;">정재형의 피아노 현과 전자음악이 결합된 깊은 울림의 무대 기대해 주세요.</span></p><p style="line-height: 1.8;"><span style="font-size: 16px;"><br></span></p><p style="line-height: 1.8;"><span style="font-size: 16px;"><b>[공연 개요]</b></span></p><p style="line-height: 1.8;"><span style="font-size: 16px;">일시: 2022.6.15(수), 19시(60분 예정)</span></p><p style="line-height: 1.8;"><span style="font-size: 16px;">장소: 국립현대미술관 서울, 멀티 프로젝트홀</span></p><p style="line-height: 1.8;"><span style="font-size: 16px;">출연: 정재형(피아노), 변준형(DJ)</span></p><p style="line-height: 1.8;"><span style="font-size: 16px;">대상: 사전 예약자(선착순 200명)</span></p><p style="line-height: 1.8;"><span style="font-size: 16px;">혜택: 공연 좌석권, 서울관 기획전시 관람권(당일)</span></p><p style="line-height: 1.8;"><span style="font-size: 16px;"><br></span></p><p style="line-height: 1.8;"><span style="font-size: 16px;"><b>[예약 방법]</b></span></p><p style="line-height: 1.8;"><span style="font-size: 16px;">예매권: 1인 1만원(전액 국내 시설보호아동 미술심리치료비 기부)</span></p><p style="line-height: 1.8;"><span style="font-size: 16px;">예매일: 2022년 6월 8일 오후 2시 오픈 (최대 1인 2매까지 예매 가능)</span></p><p style="line-height: 1.8;"><span style="font-size: 16px;">예매처: <a href="https://my.worldvision.or.kr/hope/MMCA_onestopselect.asp?moti=24215" target="_self"><b>예매하기</b></a></span></p><p style="line-height: 1.8;"><span style="font-size: 16px;">*공연의 관한 자세한 내용은<a href="https://my.worldvision.or.kr/hope/MMCA_onestopselect.asp?moti=24215" target="_self"><b> MMCA 스테이지 바로가기(클릭)</b></a><b> </b>에서 확인해 주세요.</span></p><div><br></div> 					<p></p> 			</div> 			<a href="https://www.mmca.go.kr/visitingInfo/seoulInfo.do#" onclick="fn_newsDetail(&#39;202206030008277&#39;)" class="viewMore">바로가기</a>		</div>	</div></div></div></div>
+						<a href="https://www.mmca.go.kr/visitingInfo/seoulInfo.do#" class="notiOpenBtn on">공지사항 닫기</a><!-- 2022-04-13 -->
+					</div>
+				</div> <!-- //infoWrap -->
+				<span class="authorName">©박정훈</span>
+			</div>
+			<!--// 상단비주얼 -->
+			<!-- 전시 -->
+			<div id="two" class="mainCont exhibition v2">
+				<!-- sectionMenu -->
+				<div class="secMenu" style="position: fixed;">
+					<div>
+						<div class="secMenuSwiper swiper-container">
+							<ul class="swiper-wrapper">
+							<li class="swiper-slide"><a href="https://www.mmca.go.kr/visitingInfo/seoulInfo.do#one" class="">메인</a></li>
+							<li class="swiper-slide"><a href="https://www.mmca.go.kr/visitingInfo/seoulInfo.do#two" class="curr">전시</a></li>
+							<li class="swiper-slide"><a href="https://www.mmca.go.kr/visitingInfo/seoulInfo.do#three" class="">교육</a></li>
+							<li class="swiper-slide"><a href="https://www.mmca.go.kr/visitingInfo/seoulInfo.do#four" class="">이벤트</a></li>
+							<li class="swiper-slide"><a href="https://www.mmca.go.kr/visitingInfo/seoulInfo.do#five" class="">관람정보</a></li>
+							<li class="swiper-slide"><a href="https://www.mmca.go.kr/visitingInfo/seoulInfo.do#six" class="">층별안내</a></li>
+							<li class="swiper-slide"><a href="https://www.mmca.go.kr/visitingInfo/seoulInfo.do#seven" class="">편의시설</a></li>
+							<li class="swiper-slide"><a href="https://www.mmca.go.kr/visitingInfo/seoulInfo.do#eight" class="">문화시설</a></li>
+							<li class="swiper-slide"><a href="https://www.mmca.go.kr/visitingInfo/seoulInfo.do#nine" class="">오시는길</a></li>
+							<!-- <li class="swiper-slide"><a href="#ten">뮤지엄매너</a></li> -->
+							</ul>
+						</div>
+					</div>	
+				</div>
+				<!--// sectionMenu -->				
+				<!-- inner -->
+				<div class="inner">
+					<div class="centerCon">
+							<!-- listArea -->
+							<div class="listArea" id="exhArea">
+								<h3>전시</h3>
+								<!-- 전시 있을때 -->
+								<div class="boardType01 boardSwiper swiper-container">
+										<ul class="swiper-wrapper" id="exhList"> <li class="swiper-slide"> 	<a href="javascript:void(0)" class="parking" aria-haspopup="dialog" onclick="fn_infoExhPop(&#39;202204210001502&#39;,&#39;기록과 픽션 : ‘히토 슈타이얼-데이터의 바다’ 전시 연계 특별상영&#39;,&#39;2022-05-27&#39;,&#39;2022-07-17&#39;,&#39;서울&#39;,&#39;히토 슈타이얼&#39;,&#39;7&#39;,&#39;서울관 통합권 4000원&#39;,&#39;국립현대미술관&#39;)"> 		<figure style="background: url(&quot; /upload/exhibition/2022/04/2022042902493599715156.png&quot;) center center / cover no-repeat; min-height: 396.149px;"> 			<img src="./국립현대미술관 서울_files/2022042902493599715156.png" alt="기록과 픽션 : ‘히토 슈타이얼-데이터의 바다’ 전시 연계 특별상영"> 		</figure> 		<div class="info"> 			<div> 				<span class="cate">필름앤비디오</span> 				<strong class="tit">기록과 픽션 : ‘히토 슈타이얼-데이터의 바다’ 전시 연계 특별상영</strong> 				<span class="date">2022-05-27 ~ 2022-07-17</span> 			</div> 		</div> 	</a> </li> <li class="swiper-slide"> 	<a href="javascript:void(0)" class="parking" aria-haspopup="dialog" onclick="fn_infoExhPop(&#39;202202140001485&#39;,&#39;히토 슈타이얼 - 데이터의 바다&#39;,&#39;2022-04-29&#39;,&#39;2022-09-18&#39;,&#39;서울&#39;,&#39;히토 슈타이얼&#39;,&#39;미디어, 영상 설치, 오브제 등 23점&#39;,&#39;서울관통합권 4,000원&#39;,&#39;국립현대미술관&#39;)"> 		<figure style="background: url(&quot; /upload/exhibition/2022/04/2022042609440866011807.png&quot;) center center / cover no-repeat; min-height: 396.149px;"> 			<img src="./국립현대미술관 서울_files/2022042609440866011807.png" alt="히토 슈타이얼 - 데이터의 바다"> 		</figure> 		<div class="info"> 			<div> 				<span class="cate">전시</span> 				<strong class="tit">히토 슈타이얼 - 데이터의 바다</strong> 				<span class="date">2022-04-29 ~ 2022-09-18</span> 			</div> 		</div> 	</a> </li> <li class="swiper-slide"> 	<a href="javascript:void(0)" class="parking" aria-haspopup="dialog" onclick="fn_infoExhPop(&#39;202202160001494&#39;,&#39;나너의 기억&#39;,&#39;2022-04-08&#39;,&#39;2022-08-07&#39;,&#39;서울&#39;,&#39;루이즈 부르주아, 뮌, 박혜수, 세실리아 비쿠냐, 송주원, 시프리앙 가이야르, 아크람 자타리, 안리 살라, 앤디 워홀, 양정욱, 임윤경, 허만 콜겐, 홍순명 총 13명(팀)&#39;,&#39;13점&#39;,&#39;서울관통합권 4,000원&#39;,&#39;국립현대미술관&#39;)"> 		<figure style="background: url(&quot; /upload/exhibition/2022/03/2022032102450757019915.png&quot;) center center / cover no-repeat; min-height: 396.149px;"> 			<img src="./국립현대미술관 서울_files/2022032102450757019915.png" alt="나너의 기억"> 		</figure> 		<div class="info"> 			<div> 				<span class="cate">전시</span> 				<strong class="tit">나너의 기억</strong> 				<span class="date">2022-04-08 ~ 2022-08-07</span> 			</div> 		</div> 	</a> </li> <li class="swiper-slide"> 	<a href="javascript:void(0)" class="parking" aria-haspopup="dialog" onclick="fn_infoExhPop(&#39;202107060001450&#39;,&#39;MMCA 이건희컬렉션 특별전: 한국미술명작&#39;,&#39;2021-07-21&#39;,&#39;2022-06-06&#39;,&#39;서울&#39;,&#39;권옥연, 권진규, 김경, 김기창, 김은호, 김종영, 김종태, 김중현, 김환기, 김흥수, 나혜석, 남관, 류경채, 문신, 박래현, 박상옥, 박생광, 박수근, 박항섭, 백남순, 변관식, 유영국, 윤효중, 이대원, 이도영, 이상범, 이성자, 이응노, 이인성, 이종우, 이중섭, 장욱진, 채용신, 천경자&#39;,&#39;57점&#39;,&#39;0&#39;,&#39;국립현대미술관&#39;)"> 		<figure style="background: url(&quot; /upload/exhibition/2022/04/2022041204391741615161.jpg&quot;) center center / cover no-repeat; min-height: 396.149px;"> 			<img src="./국립현대미술관 서울_files/2022041204391741615161.jpg" alt="MMCA 이건희컬렉션 특별전: 한국미술명작"> 		</figure> 		<div class="info"> 			<div> 				<span class="cate">전시</span> 				<strong class="tit">MMCA 이건희컬렉션 특별전: 한국미술명작</strong> 				<span class="date">2021-07-21 ~ 2022-06-06</span> 			</div> 		</div> 	</a> </li></ul>
+								</div>
+								<!--// 전시 있을때 -->
+								<!-- 전시 없을때 -->
+								<div class="noContents" style="display:none;">
+									<p>현재 진행 중인 전시가 없습니다.</p>
+								</div>
+								<!--// 전시 없을때 -->
+							</div>
+							<!--// listArea -->
+							<!-- pagingWrap -->
+							<form name="listFormExh" method="post">
+							<div class="pagingWrap" id="pageDivExh"><nav class="paging" aria-label="page navigation"><strong aria-current="page">1</strong></nav></div>
+							<input type="hidden" id="pageIndexExh" name="pageIndexExh" value="">
+							<input type="hidden" id="currentPageNoExh" name="currentPageNoExh" value="1">
+							<input type="hidden" id="totalRecordCountExh" name="totalRecordCountExh" value="4">
+							<input type="hidden" id="pageSizeExh" name="pageSizeExh" value="10">
+							<input type="hidden" id="pageUnitExh" name="pageUnitExh" value="8">
+							<input type="hidden" id="firstRecordIndexExh" name="firstRecordIndexExh" value="0">
+							
+							<!-- //pagingWrap -->
+							</form>
+					</div>
+					<!-- // centerCon-->
+				</div>
+				<!--// inner -->
+			</div>
+			<!--// 전시 -->
+			
+			<!-- 교육 -->
+			<div id="three" class="mainCont education"> 
+				<!-- inner -->
+				<div class="inner">
+					<div class="centerCon">
+						<!-- listArea -->
+						<div class="listArea" id="eduArea">
+							<h3>교육</h3>
+							<!-- 교육 있을때 -->
+							<div class="boardType01 boardSwiper swiper-container">
+								<ul class="swiper-wrapper" id="eduList"> <li class="swiper-slide"> 	<a href="javascript:void(0)" class="parking" aria-haspopup="dialog" onclick="fn_infoEduPop(&#39;202204070000054&#39;)"> 		<figure style="background: url(&quot;/upload/education/2022/04/2022040704065559911361_thumb.png&quot;) center center / cover no-repeat; min-height: 288px;"> 			<img src="./국립현대미술관 서울_files/2022040704065559911361_thumb.png" alt="[서울] 전시감상 교육: 미술이 문학을 만났을 때"> 		</figure> 		<div class="info"> 			<div> 				<span class="cate">청소년</span> 				<strong class="tit">[서울] 전시감상 교육: 미술이 문학을 만났을 때</strong> 				<span class="date">2022.04.08 ~ 2022.12.30</span> 			</div> 		</div> 	</a> </li> <li class="swiper-slide"> 	<a href="javascript:void(0)" class="parking" aria-haspopup="dialog" onclick="fn_infoEduPop(&#39;202204070000052&#39;)"> 		<figure style="background: url(&quot;/upload/education/2022/04/202204070405309141352_thumb.png&quot;) center center / cover no-repeat; min-height: 288px;"> 			<img src="./국립현대미술관 서울_files/202204070405309141352_thumb.png" alt="[서울] 작품감상 교육: 장욱진"> 		</figure> 		<div class="info"> 			<div> 				<span class="cate">청소년</span> 				<strong class="tit">[서울] 작품감상 교육: 장욱진</strong> 				<span class="date">2022.04.08 ~ 2022.12.30</span> 			</div> 		</div> 	</a> </li> <li class="swiper-slide"> 	<a href="javascript:void(0)" class="parking" aria-haspopup="dialog" onclick="fn_infoEduPop(&#39;202204070000051&#39;)"> 		<figure style="background: url(&quot;/upload/education/2022/04/2022040704025444817417_thumb.png&quot;) center center / cover no-repeat; min-height: 288px;"> 			<img src="./국립현대미술관 서울_files/2022040704025444817417_thumb.png" alt="[서울] 작품감상 교육: 권진규"> 		</figure> 		<div class="info"> 			<div> 				<span class="cate">청소년</span> 				<strong class="tit">[서울] 작품감상 교육: 권진규</strong> 				<span class="date">2022.04.08 ~ 2022.12.30</span> 			</div> 		</div> 	</a> </li> <li class="swiper-slide"> 	<a href="javascript:void(0)" class="parking" aria-haspopup="dialog" onclick="fn_infoEduPop(&#39;202204070000050&#39;)"> 		<figure style="background: url(&quot;/upload/education/2022/04/2022040704000136219272_thumb.png&quot;) center center / cover no-repeat; min-height: 288px;"> 			<img src="./국립현대미술관 서울_files/2022040704000136219272_thumb.png" alt="[서울] 작품감상 교육: 고희동"> 		</figure> 		<div class="info"> 			<div> 				<span class="cate">청소년</span> 				<strong class="tit">[서울] 작품감상 교육: 고희동</strong> 				<span class="date">2022.04.08 ~ 2022.12.30</span> 			</div> 		</div> 	</a> </li> <li class="swiper-slide"> 	<a href="javascript:void(0)" class="parking" aria-haspopup="dialog" onclick="fn_infoEduPop(&#39;202204070000049&#39;)"> 		<figure style="background: url(&quot;/upload/education/2022/04/2022040703584768213930_thumb.png&quot;) center center / cover no-repeat; min-height: 288px;"> 			<img src="./국립현대미술관 서울_files/2022040703584768213930_thumb.png" alt="[서울] 작품감상 교육: 박생광"> 		</figure> 		<div class="info"> 			<div> 				<span class="cate">청소년</span> 				<strong class="tit">[서울] 작품감상 교육: 박생광</strong> 				<span class="date">2022.04.08 ~ 2022.12.30</span> 			</div> 		</div> 	</a> </li> <li class="swiper-slide"> 	<a href="javascript:void(0)" class="parking" aria-haspopup="dialog" onclick="fn_infoEduPop(&#39;202204070000048&#39;)"> 		<figure style="background: url(&quot;/upload/education/2022/04/2022040703570703119260_thumb.png&quot;) center center / cover no-repeat; min-height: 288px;"> 			<img src="./국립현대미술관 서울_files/2022040703570703119260_thumb.png" alt="[서울] 작품감상 교육: 박래현"> 		</figure> 		<div class="info"> 			<div> 				<span class="cate">청소년</span> 				<strong class="tit">[서울] 작품감상 교육: 박래현</strong> 				<span class="date">2022.04.08 ~ 2022.12.30</span> 			</div> 		</div> 	</a> </li> <li class="swiper-slide"> 	<a href="javascript:void(0)" class="parking" aria-haspopup="dialog" onclick="fn_infoEduPop(&#39;202204070000047&#39;)"> 		<figure style="background: url(&quot;/upload/education/2022/04/2022040703543590315369_thumb.png&quot;) center center / cover no-repeat; min-height: 288px;"> 			<img src="./국립현대미술관 서울_files/2022040703543590315369_thumb.png" alt="[서울] 작품감상 교육: 이중섭"> 		</figure> 		<div class="info"> 			<div> 				<span class="cate">청소년</span> 				<strong class="tit">[서울] 작품감상 교육: 이중섭</strong> 				<span class="date">2022.04.08 ~ 2022.12.30</span> 			</div> 		</div> 	</a> </li> <li class="swiper-slide"> 	<a href="javascript:void(0)" class="parking" aria-haspopup="dialog" onclick="fn_infoEduPop(&#39;202204070000046&#39;)"> 		<figure style="background: url(&quot;/upload/education/2022/04/2022040703524357419652_thumb.png&quot;) center center / cover no-repeat; min-height: 288px;"> 			<img src="./국립현대미술관 서울_files/2022040703524357419652_thumb.png" alt="[서울] 작품감상 교육: 박수근"> 		</figure> 		<div class="info"> 			<div> 				<span class="cate">청소년</span> 				<strong class="tit">[서울] 작품감상 교육: 박수근</strong> 				<span class="date">2022.04.08 ~ 2022.12.30</span> 			</div> 		</div> 	</a> </li></ul>
+							</div>
+							<!-- 교육 없을 때 -->
+<!-- 							<div class="noContents" id="noContents">
+								<p>현재 진행 중인 교육이 없습니다.</p>
+							</div> -->
+							<!--// 교육 없을 때 -->
+							<!-- pagingWrap -->
+							<form name="listFormEdu" method="post">
+								<div class="pagingWrap" id="pageDivEdu"><nav class="paging" aria-label="page navigation"><strong aria-current="page">1</strong><a href="https://www.mmca.go.kr/visitingInfo/seoulInfo.do#none" onclick="fn_egov_link_page(2,&#39;Edu&#39;);return false;">2</a></nav></div>
+								<input type="hidden" id="pageIndexEdu" name="pageIndexEdu" value="">
+								<input type="hidden" id="currentPageNoEdu" name="currentPageNoEdu" value="1">
+								<input type="hidden" id="totalRecordCountEdu" name="totalRecordCountEdu" value="16">
+								<input type="hidden" id="pageSizeEdu" name="pageSizeEdu" value="10">
+								<input type="hidden" id="pageUnitEdu" name="pageUnitEdu" value="8">
+								<input type="hidden" id="firstRecordIndexEdu" name="firstRecordIndexEdu" value="0">
+								
+								<!-- //pagingWrap -->
+							</form>
+						</div>
+						<!--// 교육 있을 때 -->
+
+						</div>
+						<!--// listArea -->
+					</div>
+				</div>
+				<!--// inner -->
+			</div>
+			<!--// 교육 -->
+			
+			<!-- 이벤트 -->
+			<div id="four" class="mainCont event">
+				<!-- inner -->
+				<div class="inner">
+					<div class="centerCon">
+						<!-- listArea -->
+						<div class="listArea" id="eventArea">
+							<h3>이벤트</h3>
+							<div class="boardType01 boardSwiper swiper-container">
+								<ul class="swiper-wrapper" id="eventList"> <li class="swiper-slide"> 	<a href="javascript:void(0)" class="parking" aria-haspopup="dialog" onclick="fn_infoEventPop(&#39;202205310000096&#39;)"> 		<figure style="background: url(&quot;/upload/education/2022/06/2022060205283198418243.png&quot;) center center / cover no-repeat; min-height: 288px;"> 			<img src="./국립현대미술관 서울_files/2022060205283198418243.png" alt="국립현대미술관 레지던시 세미나 04. 서소형, 05. 이은희"> 		</figure> 		<div class="info"> 			<div> 				<span class="cate">레지던시</span> 				<strong class="tit">국립현대미술관 레지던시 세미나 04. 서소형, 05. 이은희</strong> 				<span class="date">2022.06.08 ~ 2022.06.08</span> 			</div> 		</div> 	</a> </li></ul>
+							</div>
+							<!-- pagingWrap -->
+							<form name="listFormEvent" method="post">
+								<div class="pagingWrap" id="pageDivEvent"><nav class="paging" aria-label="page navigation"><strong aria-current="page">1</strong></nav></div>
+								<input type="hidden" id="pageIndexEvent" name="pageIndexEvent" value="">
+								<input type="hidden" id="currentPageNoEvent" name="currentPageNoEvent" value="1">
+								<input type="hidden" id="totalRecordCountEvent" name="totalRecordCountEvent" value="1">
+								<input type="hidden" id="pageSizeEvent" name="pageSizeEvent" value="10">
+								<input type="hidden" id="pageUnitEvent" name="pageUnitEvent" value="8">
+								<input type="hidden" id="firstRecordIndexEvent" name="firstRecordIndexEvent" value="0">
+								
+								<!-- //pagingWrap -->
+							</form>
+						</div>
+						<!--// listArea -->
+					</div>
+				</div>
+				<!--// inner -->
+			</div>
+			<!--// 이벤트 -->
+			
+			<!-- 관람정보 -->
+			<div class="mainCont previewInfo">
+				<!-- inner -->
+				<div class="inner">
+					<div class="centerCon">
+						<h3>관람정보</h3>
+						<div class="table">
+							<table>
+								<caption>할인대상, 관람료 책정 기준 항목으로 구성된 관람정보 표</caption>
+								<colgroup>
+									<col style="width:220px;">
+									<col style="width:auto">
+									<col style="width:auto">
+									<col style="width:350px">
+								</colgroup>
+								<thead>
+									<tr>
+										<th scope="col">할인대상</th>
+										<th scope="col" colspan="3">관람료 책정 기준</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td class="bgGray">통합관람권(기획전)</td>
+										<td colspan="3" class="alignL bgGray">
+											- 4,000원<br>
+											- 수,토 야간개장 시 무료관람입니다(오후 6시~9시)<br>
+											- 무료관람일은 매월 마지막 수요일 문화가 있는 날입니다.
+										</td>
+									</tr>
+									<tr>
+										<td>할인대상</td>
+										<td>제휴사</td>
+										<td class="alignL color03">
+											<ul>
+												<li>- 아시아나클럽 일반회원 20% (카드제시자에 한함)</li>
+												<li>- 다둥이카드 소지자 20%</li>
+												<li>- LG 유플러스 멤버스 앱 회원 50% 할인(앱 쿠폰 인증 회원)</li>
+											</ul>
+										</td>
+										<td>
+											<ul>
+												<li>※ 아시아나클럽 회원의 할인 및 무료관람은<br> '15.1.1'부터 '22.12.31'까지 적용합니다.</li>
+												<br>
+												<li>※ LG 유플러스 멤버스 앱 회원의 할인은 <br>'22.5.3'부터 '23.4.30'까지 적용합니다.</li>
+											</ul>
+										</td>
+									</tr>
+									<tr>
+										<td rowspan="2">무료대상</td>
+										<td>일반</td>
+										<td class="alignL color03">
+											<div>
+												<ul>
+													<li>- 만 24세 이하, 만 65세 이상</li>
+													<li>- 대학생(학부생)</li>
+													<li>- 국가유공자·독립유공자(유공자증 소지시 본인 및 가족)</li>
+													<li>- 의상자증 소지자 및 동행 활동보조자</li>
+													<li>- 의사자 유족증 소지자</li>
+													<li>- 장애인 및 동행보호자</li>
+													<li>- 문화누리카드 소지자</li>
+													<li>- 미술관에 미술작품 등의 자료 기증자(기증자 카드 소지시 본인 및 동반가족)</li>
+													<li>- 박물관·미술관 학예사 자격 취득자(자격증 소지)</li>
+													<li>- 예술인패스 소지자</li>
+													<li>- ICOM(국제박물관협의회)카드 소지자</li>
+													<li>- CIMAM(국제근현대미술관위원회)카드 소지자</li>
+													<li>- 패트론/파트너 카드 소지자</li>
+													<li>- 학부모 On누리 사이트 내 학교폭력 대응 관련 과정 이수증 소지자</li>
+													<li>※ 문 의: 02-3701-9500</li>
+												</ul>
+											</div>
+										</td>
+										<td>※ 신분증 또는 증명서류 제시자에 한함.</td>
+									</tr>
+									<tr>
+										<td>제휴사</td>
+										<td colspan="2" class="alignL color03">
+											<ul>
+												<li>- 아시아나클럽 우수회원 카드(카드제시자에 한함)</li>
+											</ul>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				<!--// inner -->
+			</div>
+			<!--// 관람정보 -->
+			
+			<!-- 층별안내 -->
+			<div id="six" class="mainCont floorInfo">
+				<!-- inner -->
+				<div class="inner">
+					<div class="centerCon">
+						<h3>층별안내</h3>
+						<!-- tabWrap -->
+						<div class="tabWrap tabFunc">
+							<ul class="tabBtn">
+								<li class="curr"><a href="https://www.mmca.go.kr/visitingInfo/seoulInfo.do#">3F<span class="he">선택됨</span></a></li>
+								<li><a href="https://www.mmca.go.kr/visitingInfo/seoulInfo.do#">2F</a></li>
+								<li><a href="https://www.mmca.go.kr/visitingInfo/seoulInfo.do#">1F</a></li>
+								<li><a href="https://www.mmca.go.kr/visitingInfo/seoulInfo.do#">B1F</a></li>
+							</ul>
+							<div class="tabBox">
+								<!-- 3F -->
+								<div>
+									<h4 class="he">3F</h4>
+									<div>
+										<p>
+											<img src="./국립현대미술관 서울_files/3f_img_pc.png" alt="3층에는 세미나실1,2,3, 멤버십라운지, 디지털아카이브, 2작업실, 경복궁마당이 있습니다. 3층의 건물 가장 왼쪽에 세미나실 1~3 이 있으며, 바로 옆에는 디지털아카이브가 있습니다. 세미나실과 디지털아카이브 사이에 화장실이 있으며, 디지털아카이브 내부에 비상계단과 엘리베이터가 있습니다. 세미나실 맞은편에 멤버십라운지가 있습니다. 멤버십라운지 맞은편에 경복궁마당이 있으며, 멤버십과 경복궁마당 사이에 비상계단과, 엘리베이터가 있으며, 경복궁마당 왼편으로 2작업실(아트팹랩)이 있습니다. 맞은편 건물은 사무동으로 활용되고 있습니다.">
+										</p>
+										<p>
+											<img src="./국립현대미술관 서울_files/3f_text_pc.png" alt="화장실, 엘리베이터, 비상계단에 대한 인포그래픽 설명이 있습니다. 3층에 있는 시설안내로 디지털아카이브, 멤버십라운지, 사무동, 세미나실, 2작업실(아트팹랩), 경복궁마당에 대해서 설명하고 있습니다.">
+										</p>
+									</div>
+								</div>
+								<!--// 3F -->
+								<!-- 2F -->
+								<div>
+									<h4 class="he">2F</h4>
+									<div>
+										<p>
+											<img src="./국립현대미술관 서울_files/2f_img_pc.png" alt="2층에는 디지털도서관, 티하우스, 라운지, 1강의실, 교육동로비, 1작업실, 아트팹랩, 2강의실, 3강의실, 8전시실, 종친부가 있습니다. 
+											2층은 주로 교육동을 활용되고 있으며 건물 가장 왼쪽에 1강의실이 있으며, 1강의실 위쪽으로 티하우스, 아래쪽으로 교육동 로비가 있습니다. 1강의실과 교육동로비 사이에 엘리베이터와 화장실이 있습니다. 교육동로비 아래쪽으로 2강의실과 3강의실이 나란히 있으며, 3강의실 오른쪽으로 1작업실(아트팹랩)이 있습니다. 1작업실과 3강의실 사이에는 비상계단이 있습니다. 1강의실 위쪽에 있는 티하우스 앞에는 화상실과 비상계단이 있으며, 티하우스 오른쪽으로 디지털도서관과 라운지 DAL이 있습니다. 디지털도서관 내부에는 화장실, 엘리베이터, 매표소, 물품보관실, 비상계단이 있습니다. 건물밖에는 종친부가 있으며, 오른쪽 건물에 8전시실이 있습니다. 8전시실 안에는 비상계단, 엘리베이터가 있습니다.">
+										</p>
+										<p>
+											<img src="./국립현대미술관 서울_files/2f_text_pc.png" alt="매표소, 엘리베이터, 비상계단, 화장실, 물품보관실 인포그래픽 설명이 있습니다. 2층에 있는 시설안내로 교육동로비, 디지털도서관, 라운지DAL, 티하우스, 1작업실(아트랩랩), 1강의실, 2강의실, 3강의실, 8전시실, 종친부에 대해서 설명하고 있습니다.">
+										</p>
+									</div>
+								</div>
+								<!--// 2F -->
+								<!-- 1F -->
+								<div>
+									<h4 class="he">1F</h4>
+									<div>
+										<p>
+											<img src="./국립현대미술관 서울_files/1f_img_pc.png" alt="1층에는 1전시실, 로비, 아트존, 서울박스, 카페테리아, 미술관마당, 푸드코드, 열린마당이 있습니다. 입구에 들어오면 바로 물품보관소와 화장실이 보이며 왼편을 들어가면 코트룸과 수유실 의무실과 아트존이 있습니다. 다시 입구에서 정면으로 이동하면 로비가 보이며 로비에는 매표소, 엘리베이터, 비상계단이 있습니다. 로비에서 오른쪽으로 이동하면 오른편에 1전시실과 앞쪽에 서울박스가 보입니다. 1전시실에는 엘리베이트와 비상계단이 있습니다. 서울박스 오른편에는 지하1층과 지상2층으로 이동할 수 있는 에스켈리이터가 있습니다. 서울박스 맞은편에는 카페테리와와 엘리베이터가 있으며, 카페테리아를 지나 왼쪽으로 이동하면 화장실이 있습니다. 화장실을 지나 조금 더 앞으로 가면 왼편에 미술관마당이 있으며, 맞은편에는 푸드코트와 열린마당이 있습니다. 열린마당 안에는 비상계단이 있으며, 밖에는 엘리베이터와 비상계단이 있습니다. ">
+										</p>
+										<p>
+											<img src="./국립현대미술관 서울_files/1f_text_pc.png" alt="매표소, 엘리베이터, 비상계단, 에스컬레이터, 화장실, 코트룸, 물품보관실, 수유실, 의무실에 대한 인포그래픽 설명이 있습니다. 1층에 있는 시설안내로 1전시실, 로비, 아트존, 서울박스, 카페테리아, 미술관마당, 푸드코드, 열린마당에 대해서 설명하고 있습니다.">
+										</p>
+									</div>
+								</div>
+								<!--// 1F -->
+								<!-- B1F -->
+								<div>
+									<h4 class="he">B1F</h4>
+									<div>
+										<p>
+											<img src="./국립현대미술관 서울_files/b1f_img_pc.png" alt="지하1층에는 MMCA필름앤비디오, 멀티프로젝트홀, 2~7 전시실, 미디어랩, 전시마당, 서울박스가 있습니다. 지하1층 오른쪽에 2전시실이 있으며 2전시실 기준으로 시계 반대방향으로 3전시실, 4전시실, 5전시실이 있습니다. 5전시실 왼쪽에는 멀티프로젝트홀, 맞은편에는 6전시실이 있습니다. 6전시실 왼쪽으로 전시마당이 있으며, 전시마당을 기준으로 왼쪽에는 MMCA필름앤비디오전시실, 맞은편에 7전시실과 미디어랩이 있습니다. 안내데스크는 멀티프로젝트홀과 6전시실앞에 2곳이 있으며, 엘리베이터는 5전시실, 6전시실, 전시마당 옆, 2전시실 안에 있습니다. 화장실은 MMCA필름앤비디오 옆과, 미디어랩 옆에 2곳이 있습니다. 에스컬레이터는 2전시실 앞에 1개가 운영되고 있습니다.">
+										</p>
+										<p>
+											<img src="./국립현대미술관 서울_files/b1f_text_pc.png" alt="안내데스크, 비상계단, 화장실, 엘리베이터, 에스컬레이터 인포그래픽 설명이 있습니다. 지하 1층에 있는 시설안내로 멀리프로젝트홀, 미디어랩,서울박스, MMCA필름앤비디오, 전시마당, 2~7전시실에 설명하고 있습니다.">
+										</p>
+									</div>
+								</div>
+								<!--// B1F -->
+							</div>
+						</div>
+						<!-- //tabWrap -->
+					</div>
+				</div>
+				<!--// inner -->
+			</div>
+			<!--// 층별안내 -->
+			
+			<!-- 편의시설 -->
+			<div id="seven" class="mainCont v6 facilities">
+				<!-- inner -->
+				<div class="inner">
+					<!--nav class="breadcrumb" aria-label="Breadcrumb"><h2 class="he">breadcrumb</h2>
+						<ol>
+							<li><a href="#" title="홈">홈</a></li>
+							<li><a href="#" title="편의시설">편의시설</a></li>
+							<li><a href="#" title="서울">서울</a></li>
+						</ol>
+					</nav-->
+					<div class="centerCon">
+						<!-- slideArea -->
+						<div class="slideArea">
+							<h3>편의시설</h3>
+							<!-- Swiper -->
+							<div class="swiperWrap">
+								<div class="swiper facilitiesswiper swiper-container-initialized swiper-container-horizontal">
+									<div class="swiper-wrapper" style="transform: translate3d(0px, 0px, 0px);">
+										<div class="swiper-slide swiper-slide-active" style="width: 432px; margin-right: 48px;">
+											<figure style="background: url(&quot;/assetGwan/images/contents/seoul/artzone_img.png&quot;) center center / cover no-repeat;">
+												<img src="./국립현대미술관 서울_files/artzone_img.png" alt="아트존(ART ZONE)">
+											</figure>
+											<div class="info">
+												<div>
+													<strong class="tit">아트존(ART ZONE)</strong>
+													<p>서울 뮤지엄숍의 정체성을 보여주며 MI, 전시, 교육 등과 <br>연계된 다양한 아트상품을 선보입니다.</p>
+													<ul>
+														<li>위치 : 로비 1층 3개 구역</li>
+														<li>문의전화 : 02-3701-9870~1</li>
+													</ul>
+													<p>아트존, 미술책방은 현대자동차가 함께합니다.</p>
+												</div>
+											</div>
+										</div>
+										<div class="swiper-slide swiper-slide-next" style="width: 432px; margin-right: 48px;">
+											<figure style="background: url(&quot;/assetGwan/images/contents/seoul/artbook_img.png&quot;) center center / cover no-repeat;">
+												<img src="./국립현대미술관 서울_files/artbook_img.png" alt="미술책방(Art Book)">
+											</figure>
+											<div class="info">
+												<div>
+													<strong class="tit">미술책방(Art Book)</strong>
+													<p>각종 전시도록을 포함한 국립현대미술관 출판물과 <br>국내/외 다양한 예술서적을 만나볼 수 있는 공간입니다.</p>
+													<ul>
+														<li>위치 : 로비 1층 1개 구역</li>
+														<li>문의전화 : 02-3701-9872</li>
+													</ul>
+												</div>
+											</div>
+										</div>
+										<div class="swiper-slide" style="width: 432px; margin-right: 48px;">
+											<figure style="background: url(&quot;/assetGwan/images/contents/seoul/teahouse_img.png&quot;) center center / cover no-repeat;">
+												<img src="./국립현대미술관 서울_files/teahouse_img.png" alt="티하우스 오설록 (Tea House OSULLOC)">
+											</figure>
+											<div class="info">
+												<div>
+													<strong class="tit">티하우스 오설록 (Tea House OSULLOC)</strong>
+													<p>티하우스 오설록(Tea HouseOSULLOC)은 <br>미술관 외부마당과 아름다운 삼청동길이 훤히 보이는 <br>탁 트인 전망을 자랑하는 복합 차 문화 공간입니다</p>
+													<ul>
+														<li>문의전화 : 02-739-9293</li>
+													</ul>
+												</div>
+											</div>
+										</div>
+										<div class="swiper-slide" style="width: 432px; margin-right: 48px;">
+											<figure style="background: url(&quot;/assetGwan/images/contents/seoul/terarosa_img.png&quot;) center center / cover no-repeat;">
+												<img src="./국립현대미술관 서울_files/terarosa_img.png" alt="카페테리아 (TERAROSA COFFEE)">
+											</figure>
+											<div class="info">
+												<div>
+													<strong class="tit">카페테리아 (TERAROSA COFFEE)</strong>
+													<p>테라로사의 공간에서는 일상 속 여유를 즐기러 온 이들에게 <br>편안한 휴식을 제공합니다. 산지 별 드립 커피, 에스프레소 <br>베리에이션, 하우스 음료와 제빵류를 즐기실 수 있습니다.</p>
+													<ul>
+														<li>위치 : 전시동 1층 로비 옆</li>
+														<li>문의전화 : 033-648-2760</li>
+													</ul>
+												</div>
+											</div>
+										</div>
+										<div class="swiper-slide" style="width: 432px; margin-right: 48px;">
+											<figure style="background: url(&quot;/assetGwan/images/contents/seoul/doore_img.png&quot;) center center / cover no-repeat;">
+												<img src="./국립현대미술관 서울_files/doore_img.png" alt="두레(DOORE)">
+											</figure>
+											<div class="info">
+												<div>
+													<strong class="tit">두레(DOORE)</strong>
+													<p>한식의 맛과 전통이 있는 두레는 가벼운 식사메뉴부터 일품요리, <br>코스메뉴까지 즐길수 있는 공간 입니다.</p>
+													<ul>
+														<li>위치 : 교육동 1층</li>
+														<li>문의전화 : 02-732-2919</li>
+													</ul>
+												</div>
+											</div>
+										</div>
+									</div>
+								<span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span></div>
+								<div class="swiper-button-prev button-prev3 swiper-button-disabled" tabindex="0" role="button" aria-label="Previous slide" aria-disabled="true"></div>
+								<div class="swiper-button-next button-next3" tabindex="0" role="button" aria-label="Next slide" aria-disabled="false"></div>
+							</div>
+						</div>
+						<!--// slideArea -->
+					</div>
+				</div>
+				<!--// inner -->
+			</div>
+			<!--// 편의시설 -->
+			
+			<!-- 문화시설 -->
+			<div id="eight" class="mainCont v7 culture">
+				<!-- inner -->
+				<div class="inner">
+					<!--nav class="breadcrumb" aria-label="Breadcrumb"><h2 class="he">breadcrumb</h2>
+						<ol>
+							<li><a href="#" title="홈">홈</a></li>
+							<li><a href="#" title="문화시설">문화시설</a></li>
+							<li><a href="#" title="서울">서울</a></li>
+						</ol>
+					</nav-->
+					<div class="centerCon">
+						<!-- slideArea -->
+						<div class="slideArea">
+							<h3>문화시설</h3>
+							<!-- Swiper -->
+							<div class="swiperWrap">
+								<div class="swiper cultureswiper swiper-container-initialized swiper-container-horizontal">
+									<div class="swiper-wrapper" style="transform: translate3d(-1422px, 0px, 0px); transition-duration: 0ms;"><div class="swiper-slide swiper-slide-duplicate swiper-slide-duplicate-active" data-swiper-slide-index="0" style="width: 681px; margin-right: 30px;">
+											<div>
+												<figure style="background: url(&quot;/assetGwan/images/contents/seoul/multi_projecthall_img.png&quot;) center center / cover no-repeat;">
+													<img src="./국립현대미술관 서울_files/multi_projecthall_img.png" alt="멀티프로젝트홀 (Multi-project Hall)">
+												</figure>
+												<div class="info">
+													<div>
+														<strong class="tit">멀티프로젝트홀<br>(Multi-project Hall)</strong>
+														<p>
+															전시동 지하 1층에 위치한 멀티 프로젝트홀은 다원예술, 전시,퍼포먼스, 교육 등 다채로운 문화예술 행사가 펼쳐지는 공간입니다. 여러 장르가 
+															융복합 되는현대미술의 다양한 예술적 표현이 가능하도록 하였습니다.
+														</p>
+													</div>
+												</div>
+											</div>
+										</div><div class="swiper-slide swiper-slide-duplicate swiper-slide-prev swiper-slide-duplicate-next" data-swiper-slide-index="1" style="width: 681px; margin-right: 30px;">
+											<div>
+												<figure style="background: url(&quot;/assetGwan/images/contents/seoul/mmca_filmandvideo_img.png&quot;) center center / cover no-repeat;">
+													<img src="./국립현대미술관 서울_files/mmca_filmandvideo_img.png" alt="MMCA필름앤비디오 (MMCA Film and Video)">
+												</figure>
+												<div class="info">
+													<div>
+														<strong class="tit">MMCA필름앤비디오<br>(MMCA Film and Video)</strong>
+														<p>전시동 지하 1층에 위치한 국립현대미술관 서울 MMCA필름 앤비디오에서는 예술영화, 실험영화, 국제영화제 등 다양한 프로그램이 진행되고 있습니다.</p>
+														<ul>
+															<li>주요설비</li>
+															<li>- 총 122석(2명 장애인석 포함)</li>
+															<li>- 영사 : 3D HD급 DLP <br> Projector로 2K 상영</li>
+															<li>- 영사막 : 실버스크린, 1.85:1</li>
+															<li>- 오디오 : DOLBY, DTS 5.1</li>
+														</ul>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="swiper-slide swiper-slide-active" data-swiper-slide-index="0" style="width: 681px; margin-right: 30px;">
+											<div>
+												<figure style="background: url(&quot;/assetGwan/images/contents/seoul/multi_projecthall_img.png&quot;) center center / cover no-repeat;">
+													<img src="./국립현대미술관 서울_files/multi_projecthall_img.png" alt="멀티프로젝트홀 (Multi-project Hall)">
+												</figure>
+												<div class="info">
+													<div>
+														<strong class="tit">멀티프로젝트홀<br>(Multi-project Hall)</strong>
+														<p>
+															전시동 지하 1층에 위치한 멀티 프로젝트홀은 다원예술, 전시,퍼포먼스, 교육 등 다채로운 문화예술 행사가 펼쳐지는 공간입니다. 여러 장르가 
+															융복합 되는현대미술의 다양한 예술적 표현이 가능하도록 하였습니다.
+														</p>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="swiper-slide swiper-slide-next swiper-slide-duplicate-prev" data-swiper-slide-index="1" style="width: 681px; margin-right: 30px;">
+											<div>
+												<figure style="background: url(&quot;/assetGwan/images/contents/seoul/mmca_filmandvideo_img.png&quot;) center center / cover no-repeat;">
+													<img src="./국립현대미술관 서울_files/mmca_filmandvideo_img.png" alt="MMCA필름앤비디오 (MMCA Film and Video)">
+												</figure>
+												<div class="info">
+													<div>
+														<strong class="tit">MMCA필름앤비디오<br>(MMCA Film and Video)</strong>
+														<p>전시동 지하 1층에 위치한 국립현대미술관 서울 MMCA필름 앤비디오에서는 예술영화, 실험영화, 국제영화제 등 다양한 프로그램이 진행되고 있습니다.</p>
+														<ul>
+															<li>주요설비</li>
+															<li>- 총 122석(2명 장애인석 포함)</li>
+															<li>- 영사 : 3D HD급 DLP <br> Projector로 2K 상영</li>
+															<li>- 영사막 : 실버스크린, 1.85:1</li>
+															<li>- 오디오 : DOLBY, DTS 5.1</li>
+														</ul>
+													</div>
+												</div>
+											</div>
+										</div>
+									<div class="swiper-slide swiper-slide-duplicate swiper-slide-duplicate-active" data-swiper-slide-index="0" style="width: 681px; margin-right: 30px;">
+											<div>
+												<figure style="background: url(&quot;/assetGwan/images/contents/seoul/multi_projecthall_img.png&quot;) center center / cover no-repeat;">
+													<img src="./국립현대미술관 서울_files/multi_projecthall_img.png" alt="멀티프로젝트홀 (Multi-project Hall)">
+												</figure>
+												<div class="info">
+													<div>
+														<strong class="tit">멀티프로젝트홀<br>(Multi-project Hall)</strong>
+														<p>
+															전시동 지하 1층에 위치한 멀티 프로젝트홀은 다원예술, 전시,퍼포먼스, 교육 등 다채로운 문화예술 행사가 펼쳐지는 공간입니다. 여러 장르가 
+															융복합 되는현대미술의 다양한 예술적 표현이 가능하도록 하였습니다.
+														</p>
+													</div>
+												</div>
+											</div>
+										</div><div class="swiper-slide swiper-slide-duplicate swiper-slide-duplicate-next" data-swiper-slide-index="1" style="width: 681px; margin-right: 30px;">
+											<div>
+												<figure style="background: url(&quot;/assetGwan/images/contents/seoul/mmca_filmandvideo_img.png&quot;) center center / cover no-repeat;">
+													<img src="./국립현대미술관 서울_files/mmca_filmandvideo_img.png" alt="MMCA필름앤비디오 (MMCA Film and Video)">
+												</figure>
+												<div class="info">
+													<div>
+														<strong class="tit">MMCA필름앤비디오<br>(MMCA Film and Video)</strong>
+														<p>전시동 지하 1층에 위치한 국립현대미술관 서울 MMCA필름 앤비디오에서는 예술영화, 실험영화, 국제영화제 등 다양한 프로그램이 진행되고 있습니다.</p>
+														<ul>
+															<li>주요설비</li>
+															<li>- 총 122석(2명 장애인석 포함)</li>
+															<li>- 영사 : 3D HD급 DLP <br> Projector로 2K 상영</li>
+															<li>- 영사막 : 실버스크린, 1.85:1</li>
+															<li>- 오디오 : DOLBY, DTS 5.1</li>
+														</ul>
+													</div>
+												</div>
+											</div>
+										</div></div>
+								<span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span></div>
+								<div class="swiper-button-prev button-prev4" tabindex="0" role="button" aria-label="Previous slide"></div>
+								<div class="swiper-button-next button-next4" tabindex="0" role="button" aria-label="Next slide"></div>
+							</div>
+						</div>
+						<!--// slideArea -->
+					</div>
+				</div>
+				<!--// inner -->
+			</div>
+			<!--// 문화시설 -->
+			
+			<!-- 오시는 길 -->
+			<div id="nine" class="mainCont v8 map">
+				<!-- inner -->
+				<div class="inner">
+					<!--nav class="breadcrumb" aria-label="Breadcrumb"><h2 class="he">breadcrumb</h2>
+						<ol>
+							<li><a href="#" title="홈">홈</a></li>
+							<li><a href="#" title="오시는 길">오시는 길</a></li>
+							<li><a href="#" title="서울">서울</a></li>
+						</ol>
+					</nav-->
+					<div class="centerCon">
+						<h3>오시는 길</h3>
+						<address>서울시 종로구 삼청로 30(소격동) (우)03062<br>TEL : 02-3701-9500 </address>
+						<div>
+							<!-- tabWrap -->
+							<div class="tabWrap tabFunc">
+								<div class="tabBtnArea">
+									<ul class="tabBtn">
+										<li class="curr"><a href="javascript:void(0);"><span class="three">3호선 안국역 1번출구</span><span class="he">선택됨</span></a></li>
+										<li><a href="javascript:void(0);"><span class="three">3호선 경복궁역 6번 출구</span></a></li>
+										<li><a href="javascript:void(0);"><span class="five">5호선 광화문역 2번 출구</span></a></li>
+										<li><a href="javascript:void(0);"><span class="bus">버스</span></a></li>
+									</ul>
+								</div>
+								<div class="tabBox">
+									<!-- 3호선 안국역 1번출구 -->
+									<div>
+										<h4 class="he">3호선 안국역 1번출구</h4>
+										<img src="./국립현대미술관 서울_files/map_anguk_pc.png" alt="지하철 3호선 안국역에서 하차하여 1번출구로 나와 오른쪽으로 500m정도 직진을 합니다. 500m 정도 직진하시다보면 동십자각이 보이며, 우측으로 꺾어 다시 500m를 직진하시면 우측에 국립현대미술관이 있습니다.">
+									</div>
+									<!--// 3호선 안국역 1번출구 -->
+									<!-- 3호선 경복궁역 6번 출구 -->
+									<div>
+										<h4 class="he">3호선 경복궁역 6번 출구</h4>
+										<img src="./국립현대미술관 서울_files/map_gyeongbokgung_pc.png" alt="지하철 3호선 경복궁역에서 하차한 후 6번출구로 나와 오른쪽으로 광화문삼거리까지 300m정도 직진을 합니다. 광화문삼거리에서 왼쪽편 광화문쪽 횡단보도를 건넙니다. 횡단보도를 건넌 후 안국역방향으로 약 300m 정도 직진하다보면 동십자각이 보이며, 좌측으로 꺽어서 다시 500m 정도 직진을 하시다보면 횡단보다 맞은편 우측에 국립현대미술관이 있습니다.">
+									</div>
+									<!--// 3호선 경복궁역 6번 출구 -->
+									<!-- 5호선 광화문역 2번 출구 -->
+									<div>
+										<h4 class="he">5호선 광화문역 2번 출구</h4>
+										<img src="./국립현대미술관 서울_files/map_gwanghwamun_pc.png" alt="지하철 5호선 광화문역에서 하차 후 2번출구로 나와 500m 직진을 하다보면 횡단보도가 있습니다. 횡단보도를 건너 후 안국역방향으로 약 300m 정도 직진하다보면 동십자각이 보이며, 좌측으로 꺽어서 다시 500m 정도 직진을 하시다보면 횡단보다 맞은편 우측에 국립현대미술관이 있습니다.">
+									</div>
+									<!--// 5호선 광화문역 2번 출구 -->
+									<!-- 버스 -->
+									<div>
+										<h4 class="he">버스</h4>
+										<img src="./국립현대미술관 서울_files/map_bus_pc.png" alt="안국역 / 조계사 / 광화문 / 세종문화회관 버스 하차">
+									</div>
+									<!--// 버스 -->
+								</div>
+
+							</div>
+							<!-- //tabWrap -->
+							<div class="alignR">
+								<ul class="popupList">
+									<li><a href="https://goo.gl/maps/sNQJ7vfjrChG3qrb8" class="googleMap" target="_blank">구글지도</a></li>
+									<li><a href="http://naver.me/GCRaNMo5" class="naverMap" target="_blank">네이버지도</a></li>
+									<li><a href="http://kko.to/pRMhnXh4H" class="kakaoMap" target="_blank">카카오맵</a></li>
+									<li><a href="javascript:void(0)" class="parking" aria-haspopup="dialog" onclick="feUI.dialog.__init(&#39;parkingInfo&#39;, 850, this)">주차장안내</a></li>
+									<li><a href="javascript:void(0)" class="artShuttle" aria-haspopup="dialog" onclick="feUI.dialog.__init(&#39;artShuttleInfo&#39;, 850, this)">아트셔틀</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					
+<div class="emphasisBox v2 tips bottom center sh">
+	<div class="item">
+		<strong class="color00">※ 국립현대미술관은 미술관 관람문화 개선을 위한 “뮤지엄 매너 (MUSEUM MANNER) 캠페인”을 연중 추진하고 있습니다.</strong>
+	</div>
+	<div class="item">
+		<a href="https://www.mmca.go.kr/visitingInfo/seoulInfo.do#" role="button" class="btn type02 sizeXS" onclick="javascript:downloadFiles(&#39;/upload/MuseumManner.zip&#39;,&#39;MuseumManner.zip&#39;); return false;">뮤지엄매너 다운로드</a>
+	</div>
+</div>
+				</div>
+				<!--// inner -->
+			</div>
+			<!--// 오시는 길 -->
+			
+ 			<!-- 뮤지엄 매너 -->
+<!--			<div id="ten" class="mainCont muManner">
+				inner
+				<div class="inner">
+					<div class="centerCon">
+						<h3>뮤지엄 매너</h3>
+						<div class="conList">
+							<div>
+								<figure>
+									<img src="../../assetGwan/images/contents/seoul/manner_img01.png" alt="">
+								</figure>
+								<strong>1. 살금살금 걸어주세요</strong>
+								<p>천천히 걸으며 감상하면 작품이 말을 걸어올 때가 있습니다. 작품과 눈을 맞추고 마음을 열어 이야기를 들어보세요.</p>
+							</div>
+							<div>
+								<figure>
+									<img src="../../assetGwan/images/contents/seoul/manner_img02.png" alt="">
+								</figure>
+								<strong>2. 작품은 손대신 눈으로 느껴요</strong>
+								<p>모든 작품은 온도와 습도에 민감합니다. <br>
+									손으로 만지다가 작품이 부러지거나 찢어질 수 있어요. 더 많은 사람들이 함께 느낄 수 있도록 작품은 눈에 가득 담아주세요.</p>
+							</div>
+							<div>
+								<figure>
+									<img src="../../assetGwan/images/contents/seoul/manner_img03.png" alt="">
+								</figure>
+								<strong>3. 한 발짝 뒤에서 봐요</strong>
+								<p>작품을 볼 때 너무 가까이 다가가면, 작품이 다칠 수도 있고 다른 분들에게 방해가 될 수 있어요. 앞 사람과도 적당한 거리를 유지해야 서로의 감상이 편안해져요.</p>
+							</div>
+							<div>
+								<figure>
+									<img src="../../assetGwan/images/contents/seoul/manner_img04.png" alt="">
+								</figure>
+								<strong>4. 플래시를 터뜨리면 작품이 다쳐요</strong>
+								<p>카메라 플래시를 터뜨리면 옆 사람들의 눈이 부셔서 제대로 볼 수가 없어요. 순간적으로 강한 빛이 나오기 때문에 작품이 손상되기도 하지요.</p>
+							</div>
+							<div>
+								<figure>
+									<img src="../../assetGwan/images/contents/seoul/manner_img05.png" alt="">
+								</figure>
+								<strong>5. 휴대폰은 진동으로 해주세요</strong>
+								<p>어디선가 울리는 휴대폰 벨소리, 다른 관객들이 깜짝 놀라게 돼요. 급한 전화는 진동으로, 통화는 전시관밖에서 해주세요. 아름다운 작품을 만날 땐 잠시 꺼두셔도 좋습니다.</p>
+							</div>
+							<div>
+								<figure>
+									<img src="../../assetGwan/images/contents/seoul/manner_img06.png" alt="">
+								</figure>
+								<strong>6. 아이의 손을 꼭 잡아주세요</strong>
+								<p>넓은 전시공간은 아이들에게 유혹적이죠. <br>뛰다가 다치는 아이들이 많답니다. 아이의 손을 꼭 잡고 천천히 감상하는 방법을 알려주세요.</p>
+							</div>
+							<div>
+								<figure>
+									<img src="../../assetGwan/images/contents/seoul/manner_img07.png" alt="">
+								</figure>
+								<strong>7. 몸이 불편한 분들을 배려해요</strong>
+								<p>장애인, 임산부 등 몸이 불편한 분들과 함께 작품을 감상할 때, 여러분의 배려가 필요해요. 천천히 여유있게 함께 감상해요.</p>
+							</div>
+							<div>
+								<figure>
+									<img src="../../assetGwan/images/contents/seoul/manner_img08.png" alt="">
+								</figure>
+								<strong>8. 음식물은 두고 오세요</strong>
+								<p>작품 관람은 미각보다 풍부한 시각을 이용해 주세요. 풍성한 색채와 아름다운 선이 여러분의 마음을 배부르게 한답니다.</p>
+							</div>
+							<div>
+								<figure>
+									<img src="../../assetGwan/images/contents/seoul/manner_img09.png" alt="">
+								</figure>
+								<strong>9. 우산을 맡기면 편해요</strong>
+								<p>우산에서 물이 뚝뚝, 작품은 눈물이 뚝뚝. 작품은 습도에 민감해요. 긴 우산에 다른 사람의 발이 걸려 넘어지기도 하고요. 우산은 코트룸에 맡기고 편안하게 관람하세요</p>
+							</div>
+							<div>
+								<figure>
+									<img src="../../assetGwan/images/contents/seoul/manner_img10.png" alt="">
+								</figure>
+								<strong>10. 소근소근 속삭여주세요</strong>
+								<p>작품을 보고 느낀 생각을 옆 사람과 나누고 싶을때는 귓속말로 소근소근 속삭여주세요. 누군가 조용히 작품과 대화중일테니까요.</p>
+							</div>
+							<div>
+								<figure>
+									<img src="../../assetGwan/images/contents/seoul/manner_img11.png" alt="">
+								</figure>
+								<strong>11. 뽀뽀해도 괜찮아요</strong>
+								<p>클림트의 ‘키스’처럼, 로댕의 ‘키스’처럼 사랑이 샘솟는 커플들의 애정 표현은 언제나 지지합니다. 다른 분들이 불쾌하지 않게 선만 지켜주세요.</p>
+							</div>
+							<div>
+								<figure>
+									<img src="../../assetGwan/images/contents/seoul/manner_img12.png" alt="">
+								</figure>
+								<strong>12. 무엇이든 물어보세요</strong>
+								<p>도대체 이 작품은 뭘 그린 걸까, 무슨 의미일까 궁금해지는 건 당연해요. 큐레이터가 여러분의 궁금증을 해결해 줄 거예요. 마음 편히 물어보세요.</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				// inner
+			</div>
+			// 뮤지엄 매너 -->
+		</div>
+	<div class="dimmedLayer" style="display: none;"></div></div>
+	<!-- //container -->
+	<!-- 2022-01-14 top버튼 추가 -->
+	<button type="button" class="btnTop" aria-label="상단으로" style="display: block;"></button>	
+	
+<!-- 주차안내 팝업 -->
+<div class="dialogWrap parkingInfo">
+	<!-- dialog -->
+	<section class="dialog" role="dialog" aria-modal="true" aria-labelledby="dialogTit" aria-describedby="dialogCont" data-align="center">
+		<!-- dialogHead -->
+		<header class="dialogHead">
+			<h2 id="dialogTit" class="title">주차안내</h2>
+		</header>
+		<!-- //dialogHead -->
+		<!-- dialogBody -->
+		<div id="dialogCont" class="dialogBody">
+			<div class="dialogBodyInner">
+				<div class="details">
+					<!-- detailBody -->
+					<div class="detailBody">
+						<!-- bodySection -->
+						<div class="bodySection detailCont">
+							<div>
+								<p class="tit">주차요금</p>
+								<ul>
+									<li>최초 1시간 : 3000원<br class="mView">(초과요금 10분당 500원, 1일 최대요금 20,000원)</li>
+									<li>운영시간 : 08:00 ~ 23:00</li>
+									<li>주차가능대수 : 384대 (지하 2, 3층 주차장)</li>
+								</ul>
+								<p class="noti icon">※ 15인승 이하의 승용차만 주차 가능</p>
+								<p class="noti icon">※ 작업차량 외 지상 주차장 주차불가(대형 차량은 경복궁 주차장을 이용해주시기 바랍니다.)</p>
+								<p class="noti icon">※ 주차장 이동방법 : 관람종료시간 이후에는 두레가 있는 교육동 엘리베이터 이용</p>
+								<p class="noti icon">※ 자전거 거치대는 오설록 맞은편에 있습니다.</p>
+							</div>
+							<div>
+								<p class="tit">주차요금 할인제도</p>
+								<div class="cirCon">
+									<div>
+										<span><strong>50%</strong>할인</span>
+										<ul class="icon">
+											<li>- 국가유공자 및 유족</li>
+											<li>- 장애인</li>
+											<li>- 1,000cc 이하 경차</li>
+											<li>- 하이브리드 차량</li>
+											<li>- 저공해 차량</li>
+										</ul>
+									</div>
+									<div>
+										<span><strong>1시간</strong>할인</span>
+										<ul class="icon">
+											<li>- 전시, 공연, 문화시설 이용 시 (무료 이용시는 제외)</li>
+											<li>- 기타 아트숍,<br class="mView"> 편의시설 이용 시<br class="mView"> (1만원이상 이용 시)</li>
+											<li>- 미술관 유료회원</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- //bodySection -->
+					</div>
+					<!-- //detailBody -->
+				</div>
+			</div>
+		</div>
+		<!-- //dialogBody -->
+		<button type="button" class="close" aria-label="dialog 닫기"></button>
+	</section>
+	<!-- //dialog -->
+</div>
+<!-- //주차안내 팝업 -->
+
+<!-- 아트셔틀 팝업 -->
+<div class="dialogWrap artShuttleInfo">
+	<!-- dialog -->
+	<section class="dialog" role="dialog" aria-modal="true" aria-labelledby="dialogTit" aria-describedby="dialogCont" data-align="center">
+		<!-- dialogHead -->
+		<header class="dialogHead">
+			<h2 id="dialogTit" class="title">아트셔틀버스 안내</h2>
+		</header>
+		<!-- //dialogHead -->
+		<!-- dialogBody -->
+		<div id="dialogCont" class="dialogBody">
+			<div class="dialogBodyInner">
+				<div class="details">
+					<!-- detailBody -->
+					<div class="detailBody">
+						<!-- bodySection -->
+						<div class="bodySection detailCont">
+							<p class="topInfoTxt">국립현대미술관 3개 관을 모두 관람하고자 하는 관람객의 편의를 위하여 무료 아트셔틀버스를 1일 4회 운영하고 있습니다.</p>
+							<div>
+								<p class="tit">1.탑승위치</p>
+								<ul class="icon">
+									<li>- 과천 : 과천 솔바람뜰 옆 정류장</li>
+									<li>- 서울 : 서울 셔틀버스 정류장</li>
+									<li>- 덕수궁 : 더플라자호텔 후문 정거장</li>
+								</ul>
+							</div>
+							<div>
+								<p class="tit">2.운행일자</p>
+								<ul class="icon">
+									<li>- 화요일~금요일(월요일, 주말, 공휴일 운행없음)</li>
+								</ul>
+								<p class="noti noP icon">※ [서울, 과천 중 1개관 또는 전관 휴관 및 임시 휴관일 운행없음]</p>
+							</div>
+							<div class="table noScroll">
+								<table>
+									<caption>운행경로, 출발시각 항목으로 구성된 현대미술관 서울관 아트셔틀버스 운행일자 리스트 입니다.</caption>
+									<colgroup>
+										<col>
+										<col>
+										<col>
+										<col>
+										<col>
+									</colgroup>
+									<thead>
+										<tr>
+											<th scope="col">운행경로</th>
+											<th scope="col" colspan="4">출발시각</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>서울 → 덕수궁 → 과천</td>
+											<td rowspan="2">10:00</td>
+											<td rowspan="2">12:00</td>
+											<td rowspan="2">14:00</td>
+											<td rowspan="2">16:00</td>
+										</tr>
+										<tr>
+											<td>과천 → 덕수궁 → 서울</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<!-- //bodySection -->
+					</div>
+					<!-- //detailBody -->
+				</div>
+			</div>
+		</div>
+		<!-- //dialogBody -->
+		<button type="button" class="close" aria-label="dialog 닫기"></button>
+	</section>
+	<!-- //dialog -->
+</div>
+<!-- //아트셔틀 팝업 -->	
+
+<!-- 전시팝업 -->	<!-- 220110 -->
+<div class="dialogWrap simplePop" id="simplePop">
+	<!-- dialog -->
+	<section class="dialog" role="dialog" aria-modal="true" aria-labelledby="dialogTit" aria-describedby="dialogCont" data-align="center" id="exhPop">
+
+	</section>
+	<!-- //dialog -->
+</div>
+<!-- // 전시팝업 -->
+
+<!-- 교육 팝업 -->	<!-- 220110 -->
+<div class="dialogWrap simplePop2" id="simplePop2">
+	<!-- dialog -->
+	<section class="dialog" role="dialog" aria-modal="true" aria-labelledby="dialogTit" aria-describedby="dialogCont" data-align="center" id="eduPop">
+	
+	</section>
+	<!-- //dialog -->
+</div>
+<!-- //교육 팝업 -->
+
+<!-- 이벤트팝업 -->	<!-- 220110 -->
+<div class="dialogWrap simplePop3" id="simplePop3">
+	<!-- dialog -->
+	<section class="dialog" role="dialog" aria-modal="true" aria-labelledby="dialogTit" aria-describedby="dialogCont" data-align="center" id="eventPop">
+	
+	</section>
+	<!-- //dialog -->
+</div>
+<!-- //이벤트팝업 -->
+
+<!-- 코로나 팝업 -->
+<div class="dialogWrap simplePop4">
+	<!-- dialog -->
+	<section class="dialog" role="dialog" aria-modal="true" aria-labelledby="dialogTit" aria-describedby="dialogCont" data-align="center" id="covidPop">
+	
+	</section>
+	<!-- //dialog -->
+</div>
+<!-- //코로나 팝업 --></body></html>

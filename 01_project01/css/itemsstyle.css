@@ -1,0 +1,80 @@
+@charset "utf-8";
+@import url(./reset.css);
+
+/* 공통속성 */
+.container{width: 1600px; height: inherit; margin: 0 auto; border-bottom: 1px solid #000; box-sizing: border-box;}
+.container, a{color: #000;}
+.pad{padding: 40px 0 99px; box-sizing: border-box;}
+
+/* 레이아웃 */
+#header{width: 100%; height: 137px;}
+#nav{width: 100%; height: 80px;}
+#main1{width: 100%; height: 380px;}
+#main2{width: 100%; height: 1335px;}
+#aside4{width: 100%; height: 476px;}
+#footer{width: 100%; height: 300px;}
+
+/*헤더영역*/
+.logo{width: 310px; float: left; margin: 30px 0 29px 0;}
+.header_bar{float: right; margin: 23px 0;}
+.header_bar li{float: left; margin-right: 7.5px;}
+.header_bar .center{margin-top: 35px;}
+.join{display: block; width: 90px; height: 90px; background: #000; border-radius: 50px; color: #fff; text-align: center; font-weight: bold; justify-content: center; white-space: pre-wrap; box-sizing: border-box; padding: 23px 0; font-size: 15px;}
+.login{display: inline-block;}
+.language{display: inline-block; border: none;}
+.move_btn1{float: right; border: 1px solid #000; border-radius: 25px; width: 50px; text-align: center;}
+#header .container{border-bottom:none;}
+
+/*내비영역*/
+.nav_bar{line-height: 80px;}
+.nav_bar>ul>li{position: relative;}
+.nav_bar>ul>li>a{display: block; float: left; font-size: 28px; font-weight: bold; padding: 0 23px;}
+.nav_bar>ul>li>a:first-child{padding-left: 0;}
+.nav_bar>ul>li:hover>ul{display: block;}
+.nav_bar>ul>li>ul{width: 100%; height: 65px; position: absolute; top: 81px; left: 0; line-height: 65px; border-bottom: 1px solid #000; box-sizing: border-box; display: none; background: #fff;}
+.nav_bar>ul>li>ul>li>a{display: block; float: left; font-size: 28px; font-weight: bold; margin-right: 30px;}
+.nav_search{float: right; margin: 25px 10px;}
+.search_bar{width: 1600px; height: 67px; position: absolute; background: #fff; top: 216px; left: 160px; box-sizing: border-box; border-bottom: 1px solid #000; display: none;}
+.search_bar button{display: block; float: right; background: #fff; width: 180px; height: 48px; border: 1px solid #000; border-radius: 25px; margin: 9px 20px; font-weight: bold; font-size: 15px;}
+.search_box{display: block; float: left; border: none; width:500px; height:65px; font-size: 20px;}
+
+/*main1영역*/
+.item_search{width: 100%; height: 300px; padding: 40px 0;}
+.item_search>h2{font-size: 40px; font-weight: bold; margin-bottom: 30px;}
+.item_search>input{width: 479px; height: 48px; border: none; border-radius: 50px; background: #eee; padding: 0 13px;}
+.item_search>button{width: 180px; height: 48px; padding: 0 30px; border-radius: 50px; font-weight: bold; font-size: 15px;}
+.item_search .btn01{background: #000; color: #fff;}
+.item_search .btn02{background: #666; color: #fff;}
+.item_search .btn03{background: #fff; color: #000; border: 1px solid #000;}
+.item_category > ul{display: flex; margin-top: 10px;}
+.item_category > ul > li >a{display: block; width: 80px; border: 1px solid #000; text-align: center;}
+
+/*main2영역*/
+
+
+/*aside4영역*/
+.a4_con{width: 100%; height: 337px;}
+.a4_left{width: 50%; height: 337px; float: left;}
+.a4_left>p{font-weight: bold; font-size: 28px; margin-bottom: 20px;}
+.a4_left>input{background: #fff; border: none; border-bottom: 1px solid #000; display: inline-block; width: 313px; height: 45px; font-size: 15px;}
+.a4_left>button{background: #fff; border: none; border: 1px solid #000; border-radius: 25px; display: inline-block; width: 180px; height: 48px; font-size: 15px; font-weight: bold;}
+.a4_left>ul{margin-top: 40px;}
+.a4_left>ul>li{margin-bottom: 11px;}
+.a4_left>ul>li:last-child{margin-bottom: 0;}
+.a4_left>ul>li>a{font-size: 28px; font-weight: bold;}
+.a4_right{width: 50%; height: 337px; float: left;}
+.a4_right>ul{float: right;}
+.a4_right>ul>li{margin-right: 70px;}
+.a4_right>ul>li:last-child{margin-right: 0;}
+.a4_right>ul>li>a{font-size: 15px; font-weight: bold;}
+
+/*footer영역*/
+#footer>.container{border-bottom: none;}
+.foot_con{width: 100%; height: 180px; position: relative;}
+.foot_con>ul{float: left;}
+.foot_con>a>img{width: 90px; height: 62px; float: right; filter: grayscale(100%);}
+.foot_con>.foot_logo{clear: both; margin-top: 10px;}
+.foot_con>.foot_logo>img{width: 240px; height: 56px; position: absolute; top: 123px; left: 0;}
+
+/*button영역*/
+.btn_fix{position: fixed; top: 0; right: 0;}

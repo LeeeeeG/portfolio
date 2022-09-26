@@ -1,0 +1,49 @@
+@charset "utf-8";
+*{margin: 0; padding: 0; list-style: none; text-decoration: none;}
+body{background: #fff;}
+.container{width: 100%;}
+.bx-wrapper{border: none; box-shadow: none;}
+
+
+/*header*/
+.header-bar{width: 100%; height: 60px; background: #042844; display: flex; justify-content: space-between;}
+.header-logo>a>img{width: 100px; height: 25px; display: block; margin-top: 17px; margin-left: 10px;}
+.header-right{display: flex; margin-right: 10px;}
+.header-search>a>img{width: 25px; height: 25px; display: block; margin-top: 17px; margin-right: 10px;}
+.header-basket>a>img{width: 29px; height: 29px; display: block; margin-top: 14px;}
+
+/*nav-top*/
+.nav-top{margin: 20px 0;}
+.nav-top ul{display: flex; justify-content: space-between; margin: 0 20px;}
+.nav-top ul li{width: 50px; overflow: hidden; box-sizing: border-box; align-items: center; text-align: center; padding: 10px 0;}
+.nav-top ul li:first-child{border-bottom: 3px solid #042844;}
+.nav-top ul li a{color: #000;}
+
+/*main01*/
+
+
+/*main02*/
+.main02{margin: 10px 20px;}
+.main02 h2{margin: 10px 0;}
+.main02-slider{margin: 10px 20px;}
+.main02-slider>div{display: flex; justify-content: space-between; width: 100%;}
+.main02-slider>div>a{width: 40%; height: 230px; color: #000;}
+.main02-slider>div>a>h3{font-size: 14px; font-weight: normal;}
+.main02-slider>div>a>p{font-size: 12px;}
+
+/*main03*/
+.main03{margin: 10px 20px;}
+.main03 h2{margin: 10px 0;}
+.main03-slider{margin: 10px 20px;}
+.main03-slider>div{display: flex; justify-content: space-between; width: 100%;}
+.main03-slider>div>a{width: 40%; height: 230px; color: #000;}
+.main03-slider>div>a>h3{font-size: 14px; font-weight: normal;}
+.main03-slider>div>a>p{font-size: 12px; text-align: right;}
+
+/*footer*/
+.footer{position: fixed; bottom: 0; left: 0; width: 100%; height: 70px; background: #fff;}
+.footer ul{display: flex; justify-content: space-around;}
+.footer ul li{display: flex; text-align: center; width: 70px; align-items: center;}
+.footer ul li a{font-size: 13px; display: block; margin-top: 5px; color: #000;}
+.footer ul li a.select{color: #003784;}
+.footer ul li a img{display: block; width: 30px; height: 30px;}

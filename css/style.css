@@ -1,0 +1,77 @@
+@font-face {
+    font-family: "tway-fly";
+    src: url("../tway_fly.ttf") format("truetype");
+    font-weight: normal;
+  }
+
+*{margin:0; padding:0; border:0; box-sizing: border-box;}
+.cf:after{content:""; display:block; clear:both;}
+.cb{clear:both;}
+.fl{float:left;}
+.fr{float:right;}
+li{list-style:none;}
+a{text-decoration:none;}
+html, body{width:100%; height:100%;} 
+#wrap{width:100%; height:100%;}
+
+
+.section{position: relative; width: 100%; height: 1030px; color: #1A374d; font-weight: bold;}
+
+
+/* #1A374D / #406882 / #6998AB / #B1D0E0 */
+
+/*SECTION1*/
+.top{width: 100%; height: 60%; position: relative; overflow: hidden; font-family: 'Racing Sans One', cursive;}
+.top-line{width: 100%; height: 10px; background: #1A374D; position: absolute; bottom: 0; left: -100%;}
+.name-line{width: 10px; height: 100%; background: #1A374D; position: absolute; left: 30%; top: -100%;}
+.name{width: 30%; height: 100%; padding: 75px 50px; text-transform: uppercase;}
+.name>h1{font-weight: bold; font-size: 100px; margin-bottom: 40px;}
+.name>h1>a{color: #1A374D; transition: .3s;}
+.name>h1>a:hover{color: #6998AB;}
+.name>h2{font-size: 30px; margin-left: 10px;}
+.right>p>a{color: #1A374D; transition: .3s;}
+.right>p>a:hover{color: #6998AB;}
+
+.bottom{display: flex; justify-content: space-between; font-family: 'Racing Sans One', cursive; display: flex; width: 100%; height: 40%;}
+.left{width: 60%; height: 100%;}
+.right{width: 40%; height: 100%; padding: 50px;}
+.right>p{font-size: 100px; font-weight: bold; text-align: right;}
+
+
+/*SECTION2*/
+.nav{width: 100%; height: 10%; padding: 33px; position: relative; font-family: 'Racing Sans One', cursive;}
+.nav ul{display: flex; float: right;}
+.nav ul li a{font-size: 30px; color: #406882; display: block; padding: 0 20px;}
+.nav ul li a.on{font-size: 30px; color: #1A374D;}
+.nav-right{width: 80%; height: 5px; background: #1A374D; position: absolute; top: 100%; right: 0;}
+
+.contents{font-family: 'tway-fly', serif; width: 80%; height: 70%; margin: 75px auto; display: flex; justify-content: space-around;}
+.picture{width: 30%; height: 100%;}
+.picture>img{width: 100%;}
+.texts{height: 100%; font-size: 35px; padding: 120px 0; margin-left: 130px;}
+.texts>ul{width: 100%; height: 50%;}
+.texts>ul>li{padding: 10px;}
+.texts>ul>li>img{position: relative; top: 5px;}
+
+/*section3*/
+.skills{font-family: 'Racing Sans One', cursive; width: 75%; height: 80%; margin: 75px auto; padding: 50px 0 0 50px;}
+.skills-name{position: absolute; font-size: 30px;}
+.progress-bar{width: 1000px; height: 40px; margin: 3em auto; border: none; position: relative;}
+.progress-bar .bar{position: absolute; left: 30px; top: 0; right: 0; bottom: 0; width: 0; background: #1A374D;}
+.progress-bar .num{position: absolute; top: 0; right: -150px; bottom: 0; font-size: 30px; color: #1A374D; line-height: 40px;}
+
+
+/*section4*/
+.portfolio{font-family: 'tway-fly', serif; width: 90%; height: 70%; margin: 75px auto; display: flex;}
+.capture{width: 70%; height: 100%;}
+.capture img{height: 100%; display: block; margin: 0 auto;}
+.capture img.img-w{width: 100%;}
+.script{height: 50%; margin: auto;}
+.script h2{margin-bottom: 30px; font-weight: bold; text-align: center;}
+.script p{line-height: 30px; margin: 30px;}
+.script a{color: #1A374D; transition: .3s; display: block; float: right; padding: 10px 20px; text-align: center; border: 1px solid #1A374D;}
+.script a:hover{color: #406882;}
+
+/*section7*/
+.contact{font-family: 'tway-fly', serif; width: 80%; height: 70%; margin: 75px auto;}
+.contact p{width: 50%; height: 30%; text-align: center; margin: 0 auto; font-size: 35px; line-height: 70px; padding-top: 200px;}
